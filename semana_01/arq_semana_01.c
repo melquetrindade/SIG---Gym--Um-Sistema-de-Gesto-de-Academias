@@ -17,6 +17,8 @@ void tela_sobre_o_tema(void);
 void tela_equipe(void);
 
 void menu_principal(){
+    setlocale(LC_ALL,"Portuguese");
+    
     printf("================================================\n");
     printf("|                MENU PRINCIPAL                |\n");
     printf("================================================\n");
@@ -35,6 +37,8 @@ void menu_principal(){
 };
 
 void tela_sobre_o_tema(){
+    setlocale(LC_ALL,"Portuguese");
+    
     printf("=============================================================\n");
     printf("|                                                           |\n");
     printf("|     Universidade Federal do Rio Grande do Norte           |\n");
@@ -52,7 +56,7 @@ void tela_sobre_o_tema(){
     printf("|  equipe de instrutores e gestão financeira. O presente    |\n");
     printf("|  projeto tem como objetivo propor um programa de          |\n");
     printf("|  computador que implementa funcionalidades básicas        |\n");
-    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	|\n");
+    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	    |\n");
     printf("|  incluindo dados dos clientes, de horários de acesso,     |\n");
     printf("|  pagamento dos suas mensalidades, controle de pagamentos  |\n");
     printf("|  dos funcionários e demais receitas e despesas.           |\n");
@@ -60,6 +64,8 @@ void tela_sobre_o_tema(){
 };
 
 void tela_equipe(){
+    setlocale(LC_ALL,"Portuguese");
+    
     printf(" --------------------------------------------------------------------\n");
     printf("|                                                                    |\n");
     printf("|  UFRN CERES - CAICÓ                                                |\n");
@@ -79,8 +85,6 @@ void tela_equipe(){
 };
 
 int main(void){
-
-    setlocale(LC_ALL,"");
 
     menu_principal();
     tela_sobre_o_tema();
