@@ -52,7 +52,7 @@ void tela_sobre_o_tema(){
     printf("|  equipe de instrutores e gestão financeira. O presente    |\n");
     printf("|  projeto tem como objetivo propor um programa de          |\n");
     printf("|  computador que implementa funcionalidades básicas        |\n");
-    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	    |\n");
+    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	|\n");
     printf("|  incluindo dados dos clientes, de horários de acesso,     |\n");
     printf("|  pagamento dos suas mensalidades, controle de pagamentos  |\n");
     printf("|  dos funcionários e demais receitas e despesas.           |\n");
@@ -80,7 +80,7 @@ void tela_equipe(){
 
 int main(void){
 
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     menu_principal();
     tela_sobre_o_tema();
