@@ -3,7 +3,7 @@
 #include <locale.h>
 
 int menu_principal(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     int op;
 
@@ -29,7 +29,7 @@ int menu_principal(){
 };
 
 void clientes(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("--------------------------------------------------------\n");
     printf("|                       MENU CLIENTES                  |\n");
@@ -48,7 +48,7 @@ void clientes(){
 };
 
 void funcionarios(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("--------------------------------------------------------\n");
     printf("|                   MENU FUNCIONÁRIOS                  |\n");
@@ -66,7 +66,7 @@ void funcionarios(){
 };
 
 void pagamentos(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("--------------------------------------------------------\n");
     printf("|                    MENU PAGAMENTOS                   |\n");
@@ -84,7 +84,7 @@ void pagamentos(){
 };
 
 void mensalidades(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("--------------------------------------------------------\n");
     printf("|                  MENU MENSALIDADES                   |\n");
@@ -102,7 +102,7 @@ void mensalidades(){
 };
 
 void registrar_acesso(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("--------------------------------------------------------\n");
     printf("|                 MENU REGISTRAR ACESSO                |\n");
@@ -120,7 +120,7 @@ void registrar_acesso(){
 };
 
 void tela_sobre_o_tema(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf("=============================================================\n");
     printf("|                                                           |\n");
@@ -139,7 +139,7 @@ void tela_sobre_o_tema(){
     printf("|  equipe de instrutores e gestão financeira. O presente    |\n");
     printf("|  projeto tem como objetivo propor um programa de          |\n");
     printf("|  computador que implementa funcionalidades básicas        |\n");
-    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	    |\n");
+    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	|\n");
     printf("|  incluindo dados dos clientes, de horários de acesso,     |\n");
     printf("|  pagamento dos suas mensalidades, controle de pagamentos  |\n");
     printf("|  dos funcionários e demais receitas e despesas.           |\n");
@@ -147,7 +147,7 @@ void tela_sobre_o_tema(){
 };
 
 void tela_equipe(){
-	setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"");
 
     printf(" --------------------------------------------------------------------\n");
     printf("|                                                                    |\n");
