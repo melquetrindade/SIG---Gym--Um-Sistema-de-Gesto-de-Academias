@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 ///             Universidade Federal do Rio Grande do Norte                 ///
@@ -34,24 +35,28 @@ void menu_principal(){
 };
 
 void tela_sobre_o_tema(){
-    printf("===========================================================\n");
-    printf("|                                                         |\n");
-    printf("|     Universidade Federal do Rio Grande do Norte         |\n");
-    printf("|        Centro de Ensino Superior do Seridó              |\n");
-    printf("|       Departamento de Computação e Tecnologia           |\n");
-    printf("|          Disciplina DCT1106 -- Programação              |\n");
-    printf("|          Projeto Sistema de Gestão Escolar              |\n");
-    printf("|                                                         |\n");
-    printf("===========================================================\n");
-    printf("|      > > >  Sistema de Gestão de Academias  < < <       |\n");
-    printf("|---------------------------------------------------------|\n");
-    printf("|                                                         |\n");
-    printf("|  O presente projeto tem como objetivo desenvolver um    |\n");
-    printf("|  programa de computador que simule um sistema de gestão |\n");
-    printf("|  de academias. O mesmo possui 4 módluos principais:     |\n");
-    printf("|  clientes, funcionários, mensalidades e pagamentos.     |\n");
-    printf("|                                                         |\n");
-    printf("===========================================================\n");
+    printf("=============================================================\n");
+    printf("|                                                           |\n");
+    printf("|     Universidade Federal do Rio Grande do Norte           |\n");
+    printf("|        Centro de Ensino Superior do Seridó                |\n");
+    printf("|       Departamento de Computação  e Tecnologia            |\n");
+    printf("|          Disciplina DCT1106 -- Programação                |\n");
+    printf("|          Projeto Sistema de Gestão de Academias           |\n");
+    printf("|                                                           |\n");
+    printf("=============================================================\n");
+    printf("|      > > >  Sistema de Gestão de Academias  < < <         |\n");
+    printf("|-----------------------------------------------------------|\n");
+    printf("|                                                           |\n");
+    printf("|  As academias utilizam sistemas de gestão para controlar  |\n");
+    printf("|  dados e informções sobre seus clientes, funcionários,    |\n");
+    printf("|  equipe de instrutores e gestão financeira. O presente    |\n");
+    printf("|  projeto tem como objetivo propor um programa de          |\n");
+    printf("|  computador que implementa funcionalidades básicas        |\n");
+    printf("|  relacionadas à gestão de pessoas de uma acdemias, 	    |\n");
+    printf("|  incluindo dados dos clientes, de horários de acesso,     |\n");
+    printf("|  pagamento dos suas mensalidades, controle de pagamentos  |\n");
+    printf("|  dos funcionários e demais receitas e despesas.           |\n");
+    printf("=============================================================\n");
 };
 
 void tela_equipe(){
@@ -65,7 +70,7 @@ void tela_equipe(){
     printf("|                                                                    |\n");
     printf("|  Curso:                                                            |\n");
     printf("|    Bacharelado em Sistemas de Informação                           |\n");
-    printf("|    Período 1 - 2022.1                                              |\n");
+    printf("|    Período 2 - 2022.2                                              |\n");
     printf("|                                                                    |\n");
     printf("|  Discentes:                                                        |\n");
     printf("|    Melque Rodrigues da Trindade Santos - 20220039190               |\n");
@@ -73,7 +78,9 @@ void tela_equipe(){
     printf(" --------------------------------------------------------------------\n");
 };
 
-int main(){
+int main(void){
+
+	setlocale(LC_ALL,"");
 
     menu_principal();
     tela_sobre_o_tema();
