@@ -18,7 +18,7 @@ int op_menu_principal;
 
 int main(void){
     
-    setlocale(LC_ALL,"");
+    setlocale(LC_ALL,"Portuguese");
     #define true 1
     #define false 0
     entrada = true;
