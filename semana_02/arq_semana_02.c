@@ -47,12 +47,40 @@ int main(){
                 printf("Voltando para o menu principal...\n");
             }
             else if(op_menu_clientes == 0){
-                printf("Opção Inválida\n");
+                printf("Opção Inválida, Tente Novamente:\n");
                 printf("\n");
             }
         }
         else if(op_menu_principal == 2){
             system("clear||cls");
+            op_menu_funcionarios = funcionarios();
+            op_menu_funcionarios = verifica_opcao(op_menu_funcionarios);
+            if(op_menu_funcionarios == 1){
+                printf("Módulo de Cadastro!\n");
+            }
+            else if(op_menu_funcionarios == 2){
+                printf("Módulo de Deletar!\n");
+            }
+            else if(op_menu_funcionarios == 3){
+                printf("Módulo de Recuperar!\n");
+            }
+            else if(op_menu_funcionarios == 4){
+                printf("Módulo de Pesquisa!\n");
+            }
+            else if(op_menu_funcionarios == 5){
+                printf("Módulo de Atualização!\n");
+            }
+            else if(op_menu_funcionarios == 6){
+                printf("Módulo de Relatório!\n");
+            }
+            else if(op_menu_funcionarios == 7){
+                system("clear||cls");
+                printf("Voltando para o menu principal...\n");
+            }
+            else if(op_menu_funcionarios == 0){
+                printf("Opção Inválida, Tente Novamente:\n");
+                printf("\n");
+            }
         }
         else if(op_menu_principal == 3){
             system("clear||cls");

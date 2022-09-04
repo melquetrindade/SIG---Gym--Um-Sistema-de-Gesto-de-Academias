@@ -5,7 +5,7 @@
 // Assinatura das funções
 int menu_principal(void);
 int clientes(void);
-int funcionario(void);
+int funcionarios(void);
 int pagamentos(void);
 int mensalidades(void);
 int registrar_acesso(void);
