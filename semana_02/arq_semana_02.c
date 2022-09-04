@@ -86,24 +86,24 @@ int main(){
             system("clear||cls");
             op_menu_mensalidades == mensalidades();
             if(op_menu_mensalidades == 1){
-                printf("Módulo de Registrar pagamentos!");
+                printf("Módulo de Registrar pagamentos!\n");
             }
             else if(op_menu_mensalidades == 2){
-                printf("Módulo de listar pagamentos!");
+                printf("Módulo de listar pagamentos!\n");
             }
             else if(op_menu_mensalidades == 3){
-                printf("Módulo de pesquisar pagamentos!");
+                printf("Módulo de pesquisar pagamentos!\n");
             }
             else if(op_menu_mensalidades == 4){
-                printf("Módulo de exclusão de pagamentos!");
+                printf("Módulo de exclusão de pagamentos!\n");
             }
             else if(op_menu_mensalidades == 5){
                 system("clear||cls");
-                printf("Voltando para o menu principal...");
+                printf("Voltando para o menu principal...\n");
             }
             else if(op_menu_mensalidades == 0){
                 system("clear||cls");
-                printf("Opção Inválida, Tente Novamente:");
+                printf("Opção Inválida, Tente Novamente:\n");
             }
         }
         else if(op_menu_principal == 4){
@@ -122,7 +122,7 @@ int main(){
                 printf("Módulo de exclusão de pagamentos!\n");
             }
             else if(op_menu_pagamentos == 5){
-                printf("Voltando para o menu principal...!\n");
+                printf("Voltando para o menu principal...\n");
             }
             else if(op_menu_pagamentos == 0){
                 system("clear||cls");
@@ -132,9 +132,33 @@ int main(){
         }
         else if(op_menu_principal == 5){
             system("clear||cls");
+            op_menu_reg_acesso = registrar_acesso();
+            if(op_menu_reg_acesso == 1){
+                printf("Módulo de Registrar acesso!\n");
+            }
+            else if(op_menu_reg_acesso == 2){
+                printf("Módulo de Listar acesso!\n");
+            }
+            else if(op_menu_reg_acesso == 3){
+                printf("Módulo de Pesquisar acesso!\n");
+            }
+            else if(op_menu_reg_acesso == 4){
+                printf("Módulo de deletar acesso!\n");
+            }
+            else if(op_menu_reg_acesso == 5){
+                system("clear||cls");
+                printf("Voltando para o menu principal...\n");
+            }
+            else if(op_menu_reg_acesso == 0){
+                system("clear||cls");
+                printf("Opção Inválida, Tente Novamente:\n");
+            }
+
         }
         else if(op_menu_principal == 6){
             system("clear||cls");
+            tela_equipe();
+            tela_sobre_o_tema();
         }
         else if(op_menu_principal == 7){
             system("clear||cls");
@@ -146,6 +170,7 @@ int main(){
             printf("Entrda inválida, tente novamente:\n");
         }
     }
+    system("clear||cls");
     printf("SISTEMA ENCERRADO!\n");
 
     return 0;
