@@ -84,6 +84,27 @@ int main(){
         }
         else if(op_menu_principal == 3){
             system("clear||cls");
+            op_menu_mensalidades == mensalidades();
+            if(op_menu_mensalidades == 1){
+                printf("Módulo de Registrar pagamentos!");
+            }
+            else if(op_menu_mensalidades == 2){
+                printf("Módulo de listar pagamentos!");
+            }
+            else if(op_menu_mensalidades == 3){
+                printf("Módulo de pesquisar pagamentos!");
+            }
+            else if(op_menu_mensalidades == 4){
+                printf("Módulo de exclusão de pagamentos!");
+            }
+            else if(op_menu_mensalidades == 5){
+                system("clear||cls");
+                printf("Voltando para o menu principal...");
+            }
+            else if(op_menu_mensalidades == 0){
+                system("clear||cls");
+                printf("Opção Inválida, Tente Novamente:");
+            }
         }
         else if(op_menu_principal == 4){
             system("clear||cls");
