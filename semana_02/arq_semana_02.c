@@ -84,7 +84,7 @@ int main(){
         }
         else if(op_menu_principal == 3){
             system("clear||cls");
-            op_menu_mensalidades == mensalidades();
+            op_menu_mensalidades = mensalidades();
             if(op_menu_mensalidades == 1){
                 printf("Módulo de Registrar pagamentos!\n");
             }
