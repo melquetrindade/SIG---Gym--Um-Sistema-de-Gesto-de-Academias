@@ -61,3 +61,26 @@ int clientes(void){ // Tela de Clientes
     printf("\n");
     return x;
 }
+
+int funcionarios(void){ // Tela do módulo de funcionários
+    setlocale(LC_ALL,"Portuguese");
+    char op[3];
+
+    printf("--------------------------------------------------------\n");
+    printf("|                   MENU FUNCIONÁRIOS                  |\n");
+    printf("--------------------------------------------------------\n");
+    printf("|   -------------      -----------      -------------  |\n");
+    printf("| 1-| CADASTRAR |    2-| DELETAR |    3-| RECUPERAR |  |\n");
+    printf("|   -------------      -----------      -------------  |\n");
+    printf("|   -------------      -------------    -------------  |\n");
+    printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
+    printf("|   ------------       -------------    -------------  |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("| 7-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("--------------------------------------------------------\n");
+    printf("\n");
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    int x = atoi(op);
+    return x;
+}
