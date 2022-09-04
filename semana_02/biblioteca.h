@@ -14,7 +14,7 @@ void tela_sobre_o_tema(void);
 void tela_equipe(void);
 
 int menu_principal(void){ // Tela principal
-	setlocale(LC_ALL,"Portuguese");
+    setlocale(LC_ALL,"Portuguese");
     char op[3];
 
     printf("==============================================================\n");
