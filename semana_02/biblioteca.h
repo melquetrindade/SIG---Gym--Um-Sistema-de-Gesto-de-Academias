@@ -38,3 +38,26 @@ int menu_principal(void){ // Tela principal
     int x = atoi(op);
     return x;
 }
+
+int clientes(void){ // Tela de Clientes
+    setlocale(LC_ALL,"Portuguese");
+    char numero[3];
+    printf("--------------------------------------------------------\n");
+    printf("|                       MENU CLIENTES                  |\n");
+    printf("--------------------------------------------------------\n");
+    printf("|   -------------      -----------      -------------  |\n");
+    printf("| 1-| CADASTRAR |    2-| DELETAR |    3-| RECUPERAR |  |\n");
+    printf("|   -------------      -----------      -------------  |\n");
+    printf("|   -------------      -------------    -------------  |\n");
+    printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
+    printf("|   ------------       -------------    -------------  |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("| 7-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("--------------------------------------------------------\n");
+    printf("\n");
+    printf(">>> ESCOLHA SUA OPÇÃO:"); fgets(numero, 3, stdin); fflush(stdin);
+    int x = atoi(numero);
+    printf("\n");
+    return x;
+}
