@@ -106,3 +106,26 @@ int pagamentos(void){ // Tela do módulo de pagamentos
     int x = atoi(op);
     return x;
 }
+
+int mensalidades(void){ // Tela do módulo de mensalidades
+    setlocale(LC_ALL,"Portuguese");
+    char op[3];
+
+    printf("--------------------------------------------------------\n");
+    printf("|                  MENU MENSALIDADES                   |\n");
+    printf("--------------------------------------------------------\n");
+    printf("|   -----------------------     ---------------------  |\n");
+    printf("| 1-| REGISTRAR PAGAMENTO |   2-| LISTAR PAGAMENTOS |  |\n");
+    printf("|   -----------------------     ---------------------  |\n");
+    printf("|   -----------------------     ---------------------  |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |   4-| DELETAR PAGAMENTO |  |\n");
+    printf("|   -----------------------     ---------------------  |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("| 5-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("--------------------------------------------------------\n");
+    printf("\n");
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    int x = atoi(op);
+    return x;
+}
