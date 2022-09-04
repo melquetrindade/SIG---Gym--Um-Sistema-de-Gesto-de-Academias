@@ -30,33 +30,33 @@ int main(void){
     entrada = true;
 
     while(entrada != false){
-        op_menu_principal = menu_principal();
+		op_menu_principal = menu_principal();
         if(op_menu_principal == 1){
-			system("clear||cls");
-			op_menu_clientes = clientes();
+            system("clear||cls");
+        	op_menu_clientes = clientes();
 			op_menu_clientes = verifica_opcao(op_menu_clientes);
-			if(op_menu_clientes == 1){
-				printf("Módulo de Cadastro!\n");
-			}
-			else if(op_menu_clientes == 2){
-				printf("Módulo de Deletar!\n");
-			}
-			else if(op_menu_clientes == 3){
-				printf("Módulo de Recuperar!\n");
-			}
-			else if(op_menu_clientes == 4){
-				printf("Módulo de Pesquisa!\n");
-			}
-			else if(op_menu_clientes == 5){
-				printf("Módulo de Atualização!\n");
-			}
-			else if(op_menu_clientes == 6){
-				printf("Módulo de Relatório!\n");
-			}
-			else if(op_menu_clientes == 7){
+            if(op_menu_clientes == 1){
+                printf("Módulo de Cadastro!\n");
+            }
+            else if(op_menu_clientes == 2){
+                printf("Módulo de Deletar!\n");
+            }
+            else if(op_menu_clientes == 3){
+                printf("Módulo de Recuperar!\n");
+            }
+            else if(op_menu_clientes == 4){
+                printf("Módulo de Pesquisa!\n");
+            }
+            else if(op_menu_clientes == 5){
+                printf("Módulo de Atualização!\n");
+            }
+            else if(op_menu_clientes == 6){
+                printf("Módulo de Relatório!\n");
+            }
+            else if(op_menu_clientes == 7){
 				system("clear");
-				printf("Voltando para o menu principal...\n");
-			}
+                printf("Voltando para o menu principal...\n");
+            }
 			else if(op_menu_clientes == 0){
 				printf("opção inválida\n");
 				printf("\n");
