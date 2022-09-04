@@ -200,3 +200,19 @@ void tela_equipe(void){ // Tela sobre o desenvolvedor
     printf("|                                                                    |\n");
     printf(" --------------------------------------------------------------------\n");
 }
+
+int verifica_opcao(int opcao){ // Verifica se a opção escolhida é válida
+    #define false 0            // para os módulos 1 e 2
+    #define true 1
+    int verifica = false;
+    int opcoes[7] = {1,2,3,4,5,6,7};
+    while(verifica != true){
+        for(int i = 0; i<=6; i++){
+            if(opcao == opcoes[i]){
+                return opcao;
+            }
+        }
+        system("clear||cls");
+        return 0;
+    }
+}
