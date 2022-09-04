@@ -129,3 +129,26 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     int x = atoi(op);
     return x;
 }
+
+int registrar_acesso(void){ // Tela do módulo de registrar acesso
+    setlocale(LC_ALL,"Portuguese");
+    char op[3];
+
+    printf("--------------------------------------------------------\n");
+    printf("|                 MENU REGISTRAR ACESSO                |\n");
+    printf("--------------------------------------------------------\n");
+    printf("|   ----------------------       --------------------  |\n");
+    printf("| 1-|  REGISTRAR ACESSO  |     2-|  LISTAR ACESSOS  |  |\n");
+    printf("|   ----------------------       --------------------  |\n");
+    printf("|   ----------------------      ---------------------  |\n");
+    printf("| 3-|  PESQUISAR ACESSO  |    4-|  DELETAR ACESSOS  |  |\n");
+    printf("|   ----------------------      ---------------------  |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("| 5-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("|   --------------------------------                   |\n");
+    printf("--------------------------------------------------------\n");
+    printf("\n");
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    int x = atoi(op);
+    return x;
+}
