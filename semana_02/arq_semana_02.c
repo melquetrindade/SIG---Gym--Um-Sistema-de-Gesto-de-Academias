@@ -32,14 +32,14 @@ int main(void){
     while(entrada != false){
         op_menu_principal = menu_principal();
         if(op_menu_principal == 1){
-            system("clear||cls");
+			system("clear||cls");
 			op_menu_clientes = clientes();
 			op_menu_clientes = verifica_opcao(op_menu_clientes);
 			if(op_menu_clientes == 1){
-			    printf("Módulo de Cadastro!\n");
+				printf("Módulo de Cadastro!\n");
 			}
 			else if(op_menu_clientes == 2){
-			    printf("Módulo de Deletar!\n");
+				printf("Módulo de Deletar!\n");
 			}
 			else if(op_menu_clientes == 3){
 				printf("Módulo de Recuperar!\n");
