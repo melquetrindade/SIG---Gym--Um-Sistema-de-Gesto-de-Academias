@@ -13,8 +13,18 @@
 ///                                Semana 02                                ///
 ///////////////////////////////////////////////////////////////////////////////
 
+// variáveis
+int entrada;
+int op_menu_principal;
+int op_menu_clientes;
+int op_menu_funcionarios;
+int op_menu_mensalidade;
+int op_menu_pagamentos;
+int op_menu_reg_acesso;
 
 int main(void){
+
+
     
 
     return 0;
