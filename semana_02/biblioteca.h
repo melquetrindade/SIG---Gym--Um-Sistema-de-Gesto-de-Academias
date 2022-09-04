@@ -152,3 +152,30 @@ int registrar_acesso(void){ // Tela do módulo de registrar acesso
     int x = atoi(op);
     return x;
 }
+
+void tela_sobre_o_tema(void){ //Tela sobre o tema
+    setlocale(LC_ALL,"Portuguese");
+
+    printf("=============================================================\n");
+    printf("|                                                           |\n");
+    printf("|     Universidade Federal do Rio Grande do Norte           |\n");
+    printf("|        Centro de Ensino Superior do Seridó                |\n");
+    printf("|       Departamento de Computação  e Tecnologia            |\n");
+    printf("|          Disciplina DCT1106 -- Programação                |\n");
+    printf("|          Projeto Sistema de Gestão de Academias           |\n");
+    printf("|                                                           |\n");
+    printf("=============================================================\n");
+    printf("|      > > >  Sistema de Gestão de Academias  < < <         |\n");
+    printf("|-----------------------------------------------------------|\n");
+    printf("|                                                           |\n");
+    printf("|  As academias utilizam sistemas de gestão para controlar  |\n");
+    printf("|  dados e informações sobre seus clientes, funcionários,   |\n");
+    printf("|  equipe de instrutores e gestão financeira. O presente    |\n");
+    printf("|  projeto tem como objetivo propor um programa de          |\n");
+    printf("|  computador que implementa funcionalidades básicas        |\n");
+    printf("|  relacionadas à gestão de pessoas de uma academia,        |\n");
+    printf("|  incluindo dados dos clientes, de horários de acesso,     |\n");
+    printf("|  pagamento dos suas mensalidades, controle de pagamentos  |\n");
+    printf("|  dos funcionários e demais receitas e despesas.           |\n");
+    printf("=============================================================\n");
+}
