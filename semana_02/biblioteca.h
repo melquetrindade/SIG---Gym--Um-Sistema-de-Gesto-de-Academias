@@ -179,3 +179,24 @@ void tela_sobre_o_tema(void){ //Tela sobre o tema
     printf("|  dos funcionários e demais receitas e despesas.           |\n");
     printf("=============================================================\n");
 }
+
+void tela_equipe(void){ // Tela sobre o desenvolvedor
+    setlocale(LC_ALL,"Portuguese");
+
+    printf(" --------------------------------------------------------------------\n");
+    printf("|                                                                    |\n");
+    printf("|  UFRN CERES - CAICÓ                                                |\n");
+    printf("|  Projeto da Disciplica - Programação                               |\n");
+    printf("|  Docente: Flavius da Luz e Gorgônio                                |\n");
+    printf("|                                                                    |\n");
+    printf("|  SIG-Gym: Um Sistema de Gestão de Academias                        |\n");
+    printf("|                                                                    |\n");
+    printf("|  Curso:                                                            |\n");
+    printf("|    Bacharelado em Sistemas de Informação                           |\n");
+    printf("|    Período 2 - 2022.2                                              |\n");
+    printf("|                                                                    |\n");
+    printf("|  Discentes:                                                        |\n");
+    printf("|    Melque Rodrigues da Trindade Santos - 20220039190               |\n");
+    printf("|                                                                    |\n");
+    printf(" --------------------------------------------------------------------\n");
+}
