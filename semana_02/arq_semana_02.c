@@ -108,6 +108,27 @@ int main(){
         }
         else if(op_menu_principal == 4){
             system("clear||cls");
+            op_menu_pagamentos = pagamentos();
+            if(op_menu_pagamentos == 1){
+                printf("Módulo de efetuar pagamentos!\n");
+            }
+            else if(op_menu_pagamentos == 2){
+                printf("Módulo de listar pagamentos!\n");
+            }
+            else if(op_menu_pagamentos == 3){
+                printf("Módulo de pesquisar pagamentos!\n");
+            }
+            else if(op_menu_pagamentos == 4){
+                printf("Módulo de exclusão de pagamentos!\n");
+            }
+            else if(op_menu_pagamentos == 5){
+                printf("Voltando para o menu principal...!\n");
+            }
+            else if(op_menu_pagamentos == 0){
+                system("clear||cls");
+                printf("Opção Inválida, Tente Novamente:\n");
+            }
+
         }
         else if(op_menu_principal == 5){
             system("clear||cls");
