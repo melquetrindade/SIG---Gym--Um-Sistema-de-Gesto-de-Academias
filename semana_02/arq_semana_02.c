@@ -25,22 +25,22 @@ int main(){
             op_menu_clientes = clientes();
             op_menu_clientes = verifica_opcao_1(op_menu_clientes);
             if(op_menu_clientes == 1){
-                printf("Módulo de Cadastro!\n");
+                cadastrar_clientes();
             }
             else if(op_menu_clientes == 2){
-                printf("Módulo de Deletar!\n");
+                deletar_clientes();
             }
             else if(op_menu_clientes == 3){
-                printf("Módulo de Recuperar!\n");
+                recuperar_clientes();
             }
             else if(op_menu_clientes == 4){
-                printf("Módulo de Pesquisa!\n");
+                pesquisar_clientes();
             }
             else if(op_menu_clientes == 5){
-                printf("Módulo de Atualização!\n");
+                atualizar_clientes();
             }
             else if(op_menu_clientes == 6){
-                printf("Módulo de Relatório!\n");
+                listar_clientes();
             }
             else if(op_menu_clientes == 7){
                 system("clear||cls");
