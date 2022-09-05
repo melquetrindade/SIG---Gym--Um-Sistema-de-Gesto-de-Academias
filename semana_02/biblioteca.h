@@ -299,3 +299,26 @@ void atualizar_clientes(void){
     getchar();
     system("clear||cls");
 }
+
+void listar_clientes(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Listagem      |\n");
+    printf("\t===================================\n");
+    printf("\t| CLIENTE 1:                      |\n");
+    printf("\t| CPF: -------                    |\n");
+    printf("\t| NOME COMPLETO: --------         |\n");
+    printf("\t| E-MAIL: ---------               |\n");
+    printf("\t| TELEFONE:--------               |\n");
+    printf("\t| DATA DE NASCIMENTO: --------    |\n");
+    printf("\t|                                 |\n");
+    printf("\t| CLIENTE 2:                      |\n");
+    printf("\t|              .                  |\n");
+    printf("\t|              .                  |\n");
+    printf("\t|              .                  |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
