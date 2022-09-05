@@ -286,3 +286,16 @@ void pesquisar_clientes(void){
     getchar();
     system("clear||cls");
 }
+
+void atualizar_clientes(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|       Módulo de Atualização     |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
