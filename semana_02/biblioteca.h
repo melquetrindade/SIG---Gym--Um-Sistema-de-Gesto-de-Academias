@@ -247,3 +247,16 @@ void cadastrar_clientes(void){
     getchar();
     system("clear||cls");
 }
+
+void deletar_clientes(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Exclusão      |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");    
+}
