@@ -260,3 +260,16 @@ void deletar_clientes(void){
     getchar();
     system("clear||cls");    
 }
+
+void recuperar_clientes(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Recuperar     |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
