@@ -173,7 +173,7 @@ int main(){
         }
         else{
             system("clear||cls");
-            printf("Entrda inválida, tente novamente:\n");
+            printf("Entrada inválida, tente novamente:\n");
         }
     }
     system("clear||cls");
