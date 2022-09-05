@@ -13,6 +13,13 @@ int verifica_opcao_1(int opcao);
 int verifica_opcao_2(int opcao);
 void tela_sobre_o_tema(void);
 void tela_equipe(void);
+void cadastrar_clientes(void);
+void deletar_clientes(void);
+void recuperar_clientes(void);
+void pesquisar_clientes(void);
+void atualizar_clientes(void);
+void listar_clientes(void);
+
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
@@ -57,7 +64,7 @@ int clientes(void){ // Tela de Clientes
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA SUA OPÇÃO:"); fgets(numero, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA SUA OPÇÃO: "); fgets(numero, 3, stdin); fflush(stdin);
     int x = atoi(numero);
     printf("\n");
     return x;
@@ -222,4 +229,21 @@ int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é váli
     }
     system("clear||cls");
     return 0;
+}
+
+void cadastrar_clientes(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Cadastro      |\n");
+    printf("\t===================================\n");
+    printf("\t| CPF: (APENAS NÚMEROS)           |\n");
+    printf("\t| NOME COMPLETO:                  |\n");
+    printf("\t| E-MAIL:                         |\n");
+    printf("\t| TELEFONE:(APENAS NÚMEROS)       |\n");
+    printf("\t| DATA DE NASCIMENTO:(dd/mm/aaaa) |\n");
+    printf("\t|==================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
 }
