@@ -20,7 +20,6 @@ void pesquisar_clientes(void);
 void atualizar_clientes(void);
 void listar_clientes(void);
 
-
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
     char op[3];
