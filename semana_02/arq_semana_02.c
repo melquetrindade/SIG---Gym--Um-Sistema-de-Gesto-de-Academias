@@ -23,7 +23,7 @@ int main(){
         if(op_menu_principal == 1){
             system("clear||cls");
             op_menu_clientes = clientes();
-            op_menu_clientes = verifica_opcao(op_menu_clientes);
+            op_menu_clientes = verifica_opcao_1(op_menu_clientes);
             if(op_menu_clientes == 1){
                 printf("Módulo de Cadastro!\n");
             }
@@ -54,7 +54,7 @@ int main(){
         else if(op_menu_principal == 2){
             system("clear||cls");
             op_menu_funcionarios = funcionarios();
-            op_menu_funcionarios = verifica_opcao(op_menu_funcionarios);
+            op_menu_funcionarios = verifica_opcao_1(op_menu_funcionarios);
             if(op_menu_funcionarios == 1){
                 printf("Módulo de Cadastro!\n");
             }
@@ -85,6 +85,7 @@ int main(){
         else if(op_menu_principal == 3){
             system("clear||cls");
             op_menu_mensalidades = mensalidades();
+            op_menu_mensalidades = verifica_opcao_2(op_menu_mensalidades);
             if(op_menu_mensalidades == 1){
                 printf("Módulo de Registrar pagamentos!\n");
             }
@@ -109,6 +110,7 @@ int main(){
         else if(op_menu_principal == 4){
             system("clear||cls");
             op_menu_pagamentos = pagamentos();
+            op_menu_pagamentos = verifica_opcao_2(op_menu_pagamentos);
             if(op_menu_pagamentos == 1){
                 printf("Módulo de efetuar pagamentos!\n");
             }
@@ -133,6 +135,7 @@ int main(){
         else if(op_menu_principal == 5){
             system("clear||cls");
             op_menu_reg_acesso = registrar_acesso();
+            op_menu_reg_acesso = verifica_opcao_2(op_menu_reg_acesso);
             if(op_menu_reg_acesso == 1){
                 printf("Módulo de Registrar acesso!\n");
             }
@@ -159,6 +162,9 @@ int main(){
             system("clear||cls");
             tela_equipe();
             tela_sobre_o_tema();
+            printf("Presione ENTER para voltar ao menu principal >>> ");
+            getchar();
+            system("clear||cls");
         }
         else if(op_menu_principal == 7){
             system("clear||cls");

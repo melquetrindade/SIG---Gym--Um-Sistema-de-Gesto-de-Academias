@@ -9,7 +9,8 @@ int funcionarios(void);
 int pagamentos(void);
 int mensalidades(void);
 int registrar_acesso(void);
-int verifica_opcao(int opcao);
+int verifica_opcao_1(int opcao);
+int verifica_opcao_2(int opcao);
 void tela_sobre_o_tema(void);
 void tela_equipe(void);
 
@@ -201,18 +202,24 @@ void tela_equipe(void){ // Tela sobre o desenvolvedor
     printf(" --------------------------------------------------------------------\n");
 }
 
-int verifica_opcao(int opcao){ // Verifica se a opção escolhida é válida
-    #define false 0            // para os módulos 1 e 2
-    #define true 1
-    int verifica = false;
-    int opcoes[7] = {1,2,3,4,5,6,7};
-    while(verifica != true){
-        for(int i = 0; i<=6; i++){
-            if(opcao == opcoes[i]){
-                return opcao;
-            }
+int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é válida
+    int opcoes[7] = {1,2,3,4,5,6,7};    // para os módulos 1 e 2
+    for(int i = 0; i<=6; i++){
+        if(opcao == opcoes[i]){
+            return opcao;
         }
-        system("clear||cls");
-        return 0;
     }
+    system("clear||cls");
+    return 0;
+}
+
+int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
+    int opcoes[7] = {1,2,3,4,5};    // para os módulos 3, 4 e 5
+    for(int i = 0; i<=6; i++){
+        if(opcao == opcoes[i]){
+            return opcao;
+        }
+    }
+    system("clear||cls");
+    return 0;
 }
