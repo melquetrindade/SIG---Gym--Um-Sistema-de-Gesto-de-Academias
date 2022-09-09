@@ -230,18 +230,14 @@ int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é váli
     return 0;
 }
 
-void cadastrar_clientes(void){
+void cadastrar_clientes(void){ // Função de cadastrar clientes
     system("clear||cls");
 
     printf("\t===================================\n");
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    char cpf[30];
-    char nome[100];
-    char email[100];
-    char fone[30];
-    char data_nas[30];
+    char cpf[30], nome[100], email[100], fone[30], data_nas[30];
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 30, stdin); fflush(stdin);
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
@@ -263,7 +259,7 @@ void cadastrar_clientes(void){
     system("clear||cls");
 }
 
-void deletar_clientes(void){
+void deletar_clientes(void){  // Função de deletar clientes
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -276,7 +272,7 @@ void deletar_clientes(void){
     system("clear||cls");    
 }
 
-void recuperar_clientes(void){
+void recuperar_clientes(void){ // Função de recuperar Clientes
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -289,7 +285,7 @@ void recuperar_clientes(void){
     system("clear||cls");
 }
 
-void pesquisar_clientes(void){
+void pesquisar_clientes(void){ // Função de pesquisar clientes
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -302,7 +298,7 @@ void pesquisar_clientes(void){
     system("clear||cls");
 }
 
-void atualizar_clientes(void){
+void atualizar_clientes(void){ // Função de atualizar clientes
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -315,7 +311,7 @@ void atualizar_clientes(void){
     system("clear||cls");
 }
 
-void listar_clientes(void){
+void listar_clientes(void){ // Função de listar clientes
     system("clear||cls");
 
     printf("\t===================================\n");

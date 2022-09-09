@@ -162,7 +162,7 @@ int main(){
             system("clear||cls");
             tela_equipe();
             tela_sobre_o_tema();
-            printf("Presione ENTER para voltar ao menu principal >>> ");
+            printf("Presione <ENTER> para voltar ao menu principal >>> ");
             getchar();
             system("clear||cls");
         }
