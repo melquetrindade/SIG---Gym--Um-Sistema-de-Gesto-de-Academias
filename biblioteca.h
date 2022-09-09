@@ -236,12 +236,28 @@ void cadastrar_clientes(void){
     printf("\t===================================\n");
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
-    printf("\t| CPF: (APENAS NÚMEROS)           |\n");
-    printf("\t| NOME COMPLETO:                  |\n");
-    printf("\t| E-MAIL:                         |\n");
-    printf("\t| TELEFONE:(APENAS NÚMEROS)       |\n");
-    printf("\t| DATA DE NASCIMENTO:(dd/mm/aaaa) |\n");
-    printf("\t|==================================\n");
+
+    char cpf[11];
+    char nome[100];
+    char email[100];
+    char fone[10];
+    char data_nas[12];
+
+    printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 11, stdin); fflush(stdin);
+    printf("\n\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
+    printf("\n\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
+    printf("\n\tTELEFONE:(APENAS NÚMEROS)>>> "); fgets(fone, 10, stdin); fflush(stdin);
+    printf("\n\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 12, stdin); fflush(stdin);
+
+    system("clear||cls");
+
+    printf("\tCLIENTE CADASTRADO COM SUCESSO!");
+    printf("\n\n\tCPF: %s", cpf);
+    printf("\n\tNOME: %s", nome);
+    printf("\n\tE-MAIL: %s", email);
+    printf("\n\tTELEFONE: %s", fone);
+    printf("\n\tDATA DE NASCIMENTO: %s", data_nas);
+    
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
