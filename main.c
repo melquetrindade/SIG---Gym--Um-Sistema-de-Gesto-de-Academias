@@ -3,7 +3,7 @@
 #include <locale.h>
 #include "biblioteca.h"
 
-// Variáveis
+//  Variáveis
 int entrada;
 int op_menu_principal;
 int op_menu_clientes;
