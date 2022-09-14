@@ -447,6 +447,8 @@ void listar_funcionario(void){ // Função de listar funcionários
     system("clear||cls");
 }
 
+// ========================= FUNÇÕES DO MÓDULO DE MENSALIDADES ==================
+
 void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     system("clear||cls");
 
