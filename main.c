@@ -59,19 +59,19 @@ int main(){
                 cadastrar_funcionario();
             }
             else if(op_menu_funcionarios == 2){
-                printf("Módulo de Deletar!\n");
+                deletar_funcionario();
             }
             else if(op_menu_funcionarios == 3){
-                printf("Módulo de Recuperar!\n");
+                recuperar_funcionario();
             }
             else if(op_menu_funcionarios == 4){
-                printf("Módulo de Pesquisa!\n");
+                pesquisar_funcionario();
             }
             else if(op_menu_funcionarios == 5){
-                printf("Módulo de Atualização!\n");
+                atualizar_funcionario();
             }
             else if(op_menu_funcionarios == 6){
-                printf("Módulo de Relatório!\n");
+                listar_funcionario();
             }
             else if(op_menu_funcionarios == 7){
                 system("clear||cls");

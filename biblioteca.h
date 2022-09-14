@@ -269,6 +269,8 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     system("clear||cls");
 }
 
+// ========================= FUNÇÕES DO MÓDULO DE CLIENTES ==================
+
 void deletar_clientes(void){  // Função de deletar clientes
     system("clear||cls");
 
@@ -344,7 +346,9 @@ void listar_clientes(void){ // Função de listar clientes
     system("clear||cls");
 }
 
-void cadastrar_funcionario(void){
+// ========================= FUNÇÕES DO MÓDULO DE FUNCIONÁRIOS ==================
+
+void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -362,7 +366,7 @@ void cadastrar_funcionario(void){
     system("clear||cls");
 }
 
-void deletar_funcionario(void){
+void deletar_funcionario(void){ // Função de deletar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -375,7 +379,7 @@ void deletar_funcionario(void){
     system("clear||cls");
 }
 
-void recuperar_funcionario(void){
+void recuperar_funcionario(void){ // Função de recuperar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -388,7 +392,7 @@ void recuperar_funcionario(void){
     system("clear||cls");
 }
 
-void pesquisar_funcionario(void){
+void pesquisar_funcionario(void){ // Função de pesquisar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -401,7 +405,7 @@ void pesquisar_funcionario(void){
     system("clear||cls");
 }
 
-void atualizar_funcionario(void){
+void atualizar_funcionario(void){ // Função de atualizar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
@@ -414,7 +418,7 @@ void atualizar_funcionario(void){
     system("clear||cls");
 }
 
-void listar_funcionario(void){
+void listar_funcionario(void){ // Função de listar funcionários
     system("clear||cls");
 
     printf("\t===================================\n");
