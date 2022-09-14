@@ -90,15 +90,18 @@ int main(){
                 registrar_mensalidade();
             }
             else if(op_menu_mensalidades == 2){
-                printf("Módulo de listar pagamentos!\n");
+                listar_mensalidade();
             }
             else if(op_menu_mensalidades == 3){
-                printf("Módulo de pesquisar pagamentos!\n");
+                pesquisar_mensalidade();
             }
             else if(op_menu_mensalidades == 4){
-                printf("Módulo de exclusão de pagamentos!\n");
+                deletar_mensalidades();
             }
             else if(op_menu_mensalidades == 5){
+                mensalidades_pendentes();
+            }
+            else if(op_menu_mensalidades == 6){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
@@ -124,6 +127,9 @@ int main(){
                 printf("Módulo de exclusão de pagamentos!\n");
             }
             else if(op_menu_pagamentos == 5){
+                printf("Módulo de exclusão de pagamentos!\n");
+            }
+            else if(op_menu_pagamentos == 6){
                 printf("Voltando para o menu principal...\n");
             }
             else if(op_menu_pagamentos == 0){

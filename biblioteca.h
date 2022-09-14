@@ -34,6 +34,7 @@ void listar_funcionario(void);
 void registrar_mensalidade(void);
 void listar_mensalidade(void);
 void pesquisar_mensalidade(void);
+void deletar_mensalidades(void);
 void mensalidades_pendentes(void);
 
 int menu_principal(void){ // Tela principal
@@ -111,19 +112,19 @@ int funcionarios(void){ // Tela do módulo de funcionários
 int pagamentos(void){ // Tela do módulo de pagamentos
     setlocale(LC_ALL,"Portuguese");
     char op[3];
-    printf("--------------------------------------------------------\n");
-    printf("|                    MENU PAGAMENTOS                   |\n");
-    printf("--------------------------------------------------------\n");
-    printf("|   ----------------------      ---------------------  |\n");
-    printf("| 1-| REALIZAR PAGAMENTO |    2-| LISTAR PAGAMENTOS |  |\n");
-    printf("|   ----------------------      ---------------------  |\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |   4-| DELETAR PAGAMENTO |  |\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("| 5-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("--------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------\n");
+    printf("|                           MENU PAGAMENTOS                         |\n");
+    printf("---------------------------------------------------------------------\n");
+    printf("|   ----------------------         ---------------------            |\n");
+    printf("| 1-| REALIZAR PAGAMENTO |       2-| LISTAR PAGAMENTOS |            |\n");
+    printf("|   ----------------------         ---------------------            |\n");
+    printf("|   -----------------------        ---------------------            |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |      4-| DELETAR PAGAMENTO |            |\n");
+    printf("|   -----------------------        ---------------------            |\n");
+    printf("|   --------------------------     -------------------------------- |\n");
+    printf("| 5-| MENSALIDADES PENDENTES |   6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("|   --------------------------     -------------------------------- |\n");
+    printf("---------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
     int x = atoi(op);
@@ -134,19 +135,19 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     setlocale(LC_ALL,"Portuguese");
     char op[3];
 
-    printf("--------------------------------------------------------\n");
-    printf("|                  MENU MENSALIDADES                   |\n");
-    printf("--------------------------------------------------------\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("| 1-| REGISTRAR PAGAMENTO |   2-| LISTAR PAGAMENTOS |  |\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |   4-| DELETAR PAGAMENTO |  |\n");
-    printf("|   -----------------------     ---------------------  |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("| 5-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("--------------------------------------------------------\n");
+    printf("--------------------------------------------------------------------\n");
+    printf("|                  MENU MENSALIDADES                               |\n");
+    printf("--------------------------------------------------------------------\n");
+    printf("|   -----------------------       ---------------------            |\n");
+    printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |            |\n");
+    printf("|   -----------------------       ---------------------            |\n");
+    printf("|   -----------------------       ---------------------            |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |     4-| DELETAR PAGAMENTO |            |\n");
+    printf("|   -----------------------       ---------------------            |\n");
+    printf("|   ------------------------      -------------------------------- |\n");
+    printf("| 5-| PAGAMENTOS PENDENTES |    6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("|   ------------------------      -------------------------------- |\n");
+    printf("--------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
     int x = atoi(op);
@@ -236,7 +237,18 @@ int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é v
 }
 
 int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[7] = {1,2,3,4,5};    // para os módulos 3, 4 e 5
+    int opcoes[6] = {1,2,3,4,5,6};    // para os módulos 3 e 4
+    for(int i = 0; i<=6; i++){
+        if(opcao == opcoes[i]){
+            return opcao;
+        }
+    }
+    system("clear||cls");
+    return 0;
+}
+
+int verifica_opcao_3(int opcao){     // Verifica se a opção escolhida é válida
+    int opcoes[5] = {1,2,3,4,5};    // para o módulo 5
     for(int i = 0; i<=6; i++){
         if(opcao == opcoes[i]){
             return opcao;
@@ -462,3 +474,67 @@ void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     getchar();
     system("clear||cls");
 }
+
+void listar_mensalidade(void){ // Função de listar as mensalidades
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|     Módulo de Listar Mensalidades   |\n");
+    printf("\t=======================================\n");
+    printf("\t| MENSALIDADE 1:                      |\n");
+    printf("\t| NOME DO CLIENTE: ----------         |\n");
+    printf("\t| ÚLTIMO PAGAMENTO REALIZADO: ------  |\n");
+    printf("\t|                                     |\n");
+    printf("\t| MESALIDADE 2:                       |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void pesquisar_mensalidade(void){ // Função de pesquisar mensalidades
+    system("clear||cls");
+
+    printf("\t======================================\n");
+    printf("\t|  Módulo de Pesquisar Mensalidades  |\n");
+    printf("\t======================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
+    printf("\t======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void deletar_mensalidades(void){ // Função de deletar mensalidades
+    system("clear||cls");
+
+    printf("\t======================================\n");
+    printf("\t|  Módulo de Pesquisar Mensalidades  |\n");
+    printf("\t======================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
+    printf("\t======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void mensalidades_pendentes(void){ // Função de listar apenas as mensalidades atrasadas
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|   Módulo de Mensalidades Pendentes  |\n");
+    printf("\t=======================================\n");
+    printf("\t| MENSALIDADE 1:                      |\n");
+    printf("\t| NOME DO CLIENTE: ----------         |\n");
+    printf("\t| ÚLTIMO PAGAMENTO REALIZADO: ------  |\n");
+    printf("\t|                                     |\n");
+    printf("\t| MESALIDADE 2:                       |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+} 
