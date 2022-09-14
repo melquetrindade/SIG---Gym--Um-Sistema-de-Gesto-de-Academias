@@ -387,3 +387,52 @@ void recuperar_funcionario(void){
     getchar();
     system("clear||cls");
 }
+
+void pesquisar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Pesquisar     |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void atualizar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|       Módulo de Atualização     |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void listar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Listagem      |\n");
+    printf("\t===================================\n");
+    printf("\t| FUNCIONÁRIO 1:                  |\n");
+    printf("\t| CPF: -------                    |\n");
+    printf("\t| NOME COMPLETO: --------         |\n");
+    printf("\t| E-MAIL: ---------               |\n");
+    printf("\t| TELEFONE:--------               |\n");
+    printf("\t| DATA DE NASCIMENTO: --------    |\n");
+    printf("\t|                                 |\n");
+    printf("\t| FUNCIONÁRIO 2:                  |\n");
+    printf("\t|              .                  |\n");
+    printf("\t|              .                  |\n");
+    printf("\t|              .                  |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
