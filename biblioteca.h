@@ -30,6 +30,12 @@ void pesquisar_funcionario(void);
 void atualizar_funcionario(void);
 void listar_funcionario(void);
 
+// Funções do Módulo de Mensalidades
+void registrar_mensalidade(void);
+void listar_mensalidade(void);
+void pesquisar_mensalidade(void);
+void mensalidades_pendentes(void);
+
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
     char op[3];
@@ -436,6 +442,20 @@ void listar_funcionario(void){ // Função de listar funcionários
     printf("\t|              .                  |\n");
     printf("\t|              .                  |\n");
     printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void registrar_mensalidade(void){ // Função de Registrar Mensalidades
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|   Módulo de Registrar Mensalidades  |\n");
+    printf("\t=======================================\n");
+    printf("\t| INFORME O CPF:                      |\n");
+    printf("\t| VALOR DA MENSALIDADE:               |\n");
+    printf("\t=======================================\n");
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");

@@ -87,7 +87,7 @@ int main(){
             op_menu_mensalidades = mensalidades();
             op_menu_mensalidades = verifica_opcao_2(op_menu_mensalidades);
             if(op_menu_mensalidades == 1){
-                printf("Módulo de Registrar pagamentos!\n");
+                registrar_mensalidade();
             }
             else if(op_menu_mensalidades == 2){
                 printf("Módulo de listar pagamentos!\n");
