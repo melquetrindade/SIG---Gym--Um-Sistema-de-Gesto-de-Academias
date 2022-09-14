@@ -56,7 +56,7 @@ int main(){
             op_menu_funcionarios = funcionarios();
             op_menu_funcionarios = verifica_opcao_1(op_menu_funcionarios);
             if(op_menu_funcionarios == 1){
-                printf("Módulo de Cadastro!\n");
+                cadastrar_funcionario();
             }
             else if(op_menu_funcionarios == 2){
                 printf("Módulo de Deletar!\n");

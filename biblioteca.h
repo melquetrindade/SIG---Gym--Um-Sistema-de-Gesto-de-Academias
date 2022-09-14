@@ -13,12 +13,22 @@ int verifica_opcao_1(int opcao);
 int verifica_opcao_2(int opcao);
 void tela_sobre_o_tema(void);
 void tela_equipe(void);
+
+// Funções do Módulo de Clientes
 void cadastrar_clientes(void);
 void deletar_clientes(void);
 void recuperar_clientes(void);
 void pesquisar_clientes(void);
 void atualizar_clientes(void);
 void listar_clientes(void);
+
+// Funções do Módulo de Funcionários
+void cadastrar_funcionario(void);
+void deletar_funcionario(void);
+void recuperar_funcionario(void);
+void pesquisar_funcionario(void);
+void atualizar_funcionario(void);
+void listar_funcionario(void);
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
@@ -328,6 +338,50 @@ void listar_clientes(void){ // Função de listar clientes
     printf("\t|              .                  |\n");
     printf("\t|              .                  |\n");
     printf("\t|              .                  |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void cadastrar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Cadastro      |\n");
+    printf("\t===================================\n");
+    printf("\t| CPF:(APENAS NÚMEROS)            |\n");
+    printf("\t| NOME COMPLETO:                  |\n");
+    printf("\t| E-MAIL:                         |\n");
+    printf("\t| TELEFONE:(APENAS NÚMEROS)       |\n");
+    printf("\t| DATA DE NASCIMENTO:(dd/mm/aaaa) |\n");
+    printf("\t===================================\n");
+
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void deletar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Exclusão      |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
+    printf("\t===================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void recuperar_funcionario(void){
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Recuperar     |\n");
+    printf("\t===================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
     printf("\t===================================\n");
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
