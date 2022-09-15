@@ -115,19 +115,19 @@ int main(){
             op_menu_pagamentos = pagamentos();
             op_menu_pagamentos = verifica_opcao_2(op_menu_pagamentos);
             if(op_menu_pagamentos == 1){
-                printf("Módulo de efetuar pagamentos!\n");
+                realizar_pagamentos();
             }
             else if(op_menu_pagamentos == 2){
-                printf("Módulo de listar pagamentos!\n");
+                listar_pagamentos();
             }
             else if(op_menu_pagamentos == 3){
-                printf("Módulo de pesquisar pagamentos!\n");
+                pesquisar_pagamentos();
             }
             else if(op_menu_pagamentos == 4){
-                printf("Módulo de exclusão de pagamentos!\n");
+                deletar_pagamentos();
             }
             else if(op_menu_pagamentos == 5){
-                printf("Módulo de exclusão de pagamentos!\n");
+                pagamentos_pendentes();
             }
             else if(op_menu_pagamentos == 6){
                 printf("Voltando para o menu principal...\n");

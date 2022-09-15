@@ -30,12 +30,19 @@ void pesquisar_funcionario(void);
 void atualizar_funcionario(void);
 void listar_funcionario(void);
 
-// Funções do Módulo de Mensalidades
+// Funções do Módulo de Mensalidades dos clientes
 void registrar_mensalidade(void);
 void listar_mensalidade(void);
 void pesquisar_mensalidade(void);
 void deletar_mensalidades(void);
 void mensalidades_pendentes(void);
+
+// Funções do Módulo de Pagamentos dos funcinários
+void realizar_pagamentos(void);
+void listar_pagamentos(void);
+void pesquisar_pagamentos(void);
+void deletar_pagamentos(void);
+void pagamentos_pendentes(void);
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
@@ -122,7 +129,7 @@ int pagamentos(void){ // Tela do módulo de pagamentos
     printf("| 3-| PESQUISAR PAGAMENTO |      4-| DELETAR PAGAMENTO |            |\n");
     printf("|   -----------------------        ---------------------            |\n");
     printf("|   --------------------------     -------------------------------- |\n");
-    printf("| 5-| MENSALIDADES PENDENTES |   6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("| 5-|  PAGAMENTOS PENDENTES  |   6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
     printf("|   --------------------------     -------------------------------- |\n");
     printf("---------------------------------------------------------------------\n");
     printf("\n");
@@ -135,19 +142,19 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     setlocale(LC_ALL,"Portuguese");
     char op[3];
 
-    printf("--------------------------------------------------------------------\n");
-    printf("|                  MENU MENSALIDADES                               |\n");
-    printf("--------------------------------------------------------------------\n");
-    printf("|   -----------------------       ---------------------            |\n");
-    printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |            |\n");
-    printf("|   -----------------------       ---------------------            |\n");
-    printf("|   -----------------------       ---------------------            |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |     4-| DELETAR PAGAMENTO |            |\n");
-    printf("|   -----------------------       ---------------------            |\n");
-    printf("|   ------------------------      -------------------------------- |\n");
-    printf("| 5-| PAGAMENTOS PENDENTES |    6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
-    printf("|   ------------------------      -------------------------------- |\n");
-    printf("--------------------------------------------------------------------\n");
+    printf("----------------------------------------------------------------------\n");
+    printf("|                  MENU MENSALIDADES                                 |\n");
+    printf("----------------------------------------------------------------------\n");
+    printf("|   -----------------------       ---------------------              |\n");
+    printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |              |\n");
+    printf("|   -----------------------       ---------------------              |\n");
+    printf("|   -----------------------       ---------------------              |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |     4-| DELETAR PAGAMENTO |              |\n");
+    printf("|   -----------------------       ---------------------              |\n");
+    printf("|   --------------------------      -------------------------------- |\n");
+    printf("| 5-| MENSALIDADES PENDENTES |    6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("|   --------------------------      -------------------------------- |\n");
+    printf("----------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
     int x = atoi(op);
@@ -459,7 +466,7 @@ void listar_funcionario(void){ // Função de listar funcionários
     system("clear||cls");
 }
 
-// ========================= FUNÇÕES DO MÓDULO DE MENSALIDADES ==================
+// =================== FUNÇÕES DO MÓDULO DE MENSALIDADES DOS CLIENTES ==================
 
 void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     system("clear||cls");
@@ -511,7 +518,7 @@ void deletar_mensalidades(void){ // Função de deletar mensalidades
     system("clear||cls");
 
     printf("\t======================================\n");
-    printf("\t|  Módulo de Pesquisar Mensalidades  |\n");
+    printf("\t|   Módulo de Deletar Mensalidades   |\n");
     printf("\t======================================\n");
     printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
     printf("\t======================================\n");
@@ -537,4 +544,84 @@ void mensalidades_pendentes(void){ // Função de listar apenas as mensalidades 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
-} 
+}
+
+// ================== FUNÇÕES DO MÓDULO DE PAGAMENTOS DOS FUNCIONÁRIOS ==================
+
+void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcionários
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|     Módulo de Realizar Pagamentos   |\n");
+    printf("\t=======================================\n");
+    printf("\t| INFORME O CPF:                      |\n");
+    printf("\t| VALOR DO SALÁRIO:                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void listar_pagamentos(void){ // Função de Listar os pagamentos dos funcionários
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|     Módulo de Listar Pagamentos     |\n");
+    printf("\t=======================================\n");
+    printf("\t| SALÁRIO 1:                          |\n");
+    printf("\t| NOME DO FUNCIONÁRIO: ----------     |\n");
+    printf("\t| ÚLTIMO PAGAMENTO REALIZADO: ------  |\n");
+    printf("\t|                                     |\n");
+    printf("\t| SALÁRIO 2:                          |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
+    system("clear||cls");
+
+    printf("\t======================================\n");
+    printf("\t|   Módulo de Pesquisar Pagamentos   |\n");
+    printf("\t======================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
+    printf("\t======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void deletar_pagamentos(void){ // Função de deletar pagamentos 
+    system("clear||cls");
+
+    printf("\t======================================\n");
+    printf("\t|    Módulo de Deletar Pagamentos    |\n");
+    printf("\t======================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
+    printf("\t======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void pagamentos_pendentes(void){ // Função de listar apenas os salários atrasados
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|    Módulo de Pagamentos Pendentes   |\n");
+    printf("\t=======================================\n");
+    printf("\t| SALÁRIO 1:                          |\n");
+    printf("\t| NOME DO CLIENTE: ----------         |\n");
+    printf("\t| ÚLTIMO PAGAMENTO REALIZADO: ------  |\n");
+    printf("\t|                                     |\n");
+    printf("\t| SALÁRIO 2:                          |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
