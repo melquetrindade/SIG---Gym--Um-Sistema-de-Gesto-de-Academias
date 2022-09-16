@@ -3,6 +3,8 @@
 #include <locale.h>
 
 // Assinatura das funções
+
+// Funções das telas dos módulos principais
 int menu_principal(void);
 int clientes(void);
 int funcionarios(void);
@@ -265,6 +267,8 @@ int verifica_opcao_3(int opcao){     // Verifica se a opção escolhida é váli
     return 0;
 }
 
+// ========================= FUNÇÕES DO MÓDULO DE CLIENTES ==================
+
 void cadastrar_clientes(void){ // Função de cadastrar clientes
     system("clear||cls");
 
@@ -293,8 +297,6 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     getchar();
     system("clear||cls");
 }
-
-// ========================= FUNÇÕES DO MÓDULO DE CLIENTES ==================
 
 void deletar_clientes(void){  // Função de deletar clientes
     system("clear||cls");
