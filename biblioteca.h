@@ -630,7 +630,7 @@ void pagamentos_pendentes(void){ // Função de listar apenas os salários atras
     system("clear||cls");
 }
 
-// ================== FUNÇÕES DO MÓDULO DE PAGAMENTOS DOS FUNCIONÁRIOS ==================
+// ======================= FUNÇÕES DO MÓDULO DE REGISTRAR ACESSO ==================
 
 void registrar_frequencia(void){ // Função de registrar acesso
     system("clear||cls");
