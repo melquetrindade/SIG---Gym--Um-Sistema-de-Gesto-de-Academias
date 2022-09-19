@@ -141,20 +141,14 @@ int main(){
         else if(op_menu_principal == 5){
             system("clear||cls");
             op_menu_reg_acesso = registrar_acesso();
-            op_menu_reg_acesso = verifica_opcao_2(op_menu_reg_acesso);
+            op_menu_reg_acesso = verifica_opcao_3(op_menu_reg_acesso);
             if(op_menu_reg_acesso == 1){
-                printf("Módulo de Registrar acesso!\n");
+                registrar_frequencia();
             }
             else if(op_menu_reg_acesso == 2){
-                printf("Módulo de Listar acesso!\n");
+                listar_frequencia();
             }
             else if(op_menu_reg_acesso == 3){
-                printf("Módulo de Pesquisar acesso!\n");
-            }
-            else if(op_menu_reg_acesso == 4){
-                printf("Módulo de deletar acesso!\n");
-            }
-            else if(op_menu_reg_acesso == 5){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }

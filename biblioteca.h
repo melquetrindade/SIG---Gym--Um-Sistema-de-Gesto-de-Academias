@@ -46,6 +46,11 @@ void pesquisar_pagamentos(void);
 void deletar_pagamentos(void);
 void pagamentos_pendentes(void);
 
+// Funções do Módulo de Acesso a academia
+void registrar_frequencia(void);
+void listar_frequencia(void);
+
+
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
     char op[3];
@@ -173,11 +178,8 @@ int registrar_acesso(void){ // Tela do módulo de registrar acesso
     printf("|   ----------------------       --------------------  |\n");
     printf("| 1-|  REGISTRAR ACESSO  |     2-|  LISTAR ACESSOS  |  |\n");
     printf("|   ----------------------       --------------------  |\n");
-    printf("|   ----------------------      ---------------------  |\n");
-    printf("| 3-|  PESQUISAR ACESSO  |    4-|  DELETAR ACESSOS  |  |\n");
-    printf("|   ----------------------      ---------------------  |\n");
     printf("|   --------------------------------                   |\n");
-    printf("| 5-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("| 3-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
@@ -247,7 +249,7 @@ int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é v
 
 int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
     int opcoes[6] = {1,2,3,4,5,6};    // para os módulos 3 e 4
-    for(int i = 0; i<=6; i++){
+    for(int i = 0; i<=5; i++){
         if(opcao == opcoes[i]){
             return opcao;
         }
@@ -257,8 +259,8 @@ int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é váli
 }
 
 int verifica_opcao_3(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[5] = {1,2,3,4,5};    // para o módulo 5
-    for(int i = 0; i<=6; i++){
+    int opcoes[3] = {1,2,3};        // para o módulo 5
+    for(int i = 0; i<=2; i++){
         if(opcao == opcoes[i]){
             return opcao;
         }
@@ -620,6 +622,40 @@ void pagamentos_pendentes(void){ // Função de listar apenas os salários atras
     printf("\t| ÚLTIMO PAGAMENTO REALIZADO: ------  |\n");
     printf("\t|                                     |\n");
     printf("\t| SALÁRIO 2:                          |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t|                 .                   |\n");
+    printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+// ================== FUNÇÕES DO MÓDULO DE PAGAMENTOS DOS FUNCIONÁRIOS ==================
+
+void registrar_frequencia(void){ // Função de registrar acesso
+    system("clear||cls");
+
+    printf("\t======================================\n");
+    printf("\t|     Módulo de Registrar Acesso     |\n");
+    printf("\t======================================\n");
+    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
+    printf("\t======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void listar_frequencia(void){ // Função de listar frequência
+    system("clear||cls");
+
+    printf("\t=======================================\n");
+    printf("\t|       Módulo de Listar Acessos      |\n");
+    printf("\t=======================================\n");
+    printf("\t| ------------------------------      |\n");
+    printf("\t| NOME DO CLIENTE: ----------         |\n");
+    printf("\t| DATA DE ACESSO: ----------          |\n");
+    printf("\t| ------------------------------      |\n");
+    printf("\t|                 .                   |\n");
     printf("\t|                 .                   |\n");
     printf("\t|                 .                   |\n");
     printf("\t=======================================\n");
