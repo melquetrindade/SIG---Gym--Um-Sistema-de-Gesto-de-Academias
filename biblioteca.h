@@ -50,6 +50,8 @@ void pagamentos_pendentes(void);
 void registrar_frequencia(void);
 void listar_frequencia(void);
 
+// Função do Módulo sobre o programa e desenvolvedores
+void informes(void);
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
@@ -659,6 +661,20 @@ void listar_frequencia(void){ // Função de listar frequência
     printf("\t|                 .                   |\n");
     printf("\t|                 .                   |\n");
     printf("\t=======================================\n");
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+// ============= FUNÇÃO DO MÓDULO SOBRE O PROGRAMA E DESENVOLVEDORES ==================
+
+void informes(void){
+    system("clear||cls");
+    tela_sobre_o_tema();
+    printf("\n\tPresione <ENTER> para continuar >>> ");
+    getchar();
+    system("clear||cls");
+    tela_equipe();
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");

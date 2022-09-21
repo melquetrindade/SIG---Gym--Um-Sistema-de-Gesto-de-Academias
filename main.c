@@ -159,12 +159,7 @@ int main(){
 
         }
         else if(op_menu_principal == 6){
-            system("clear||cls");
-            tela_equipe();
-            tela_sobre_o_tema();
-            printf("Presione <ENTER> para voltar ao menu principal >>> ");
-            getchar();
-            system("clear||cls");
+            informes();
         }
         else if(op_menu_principal == 7){
             system("clear||cls");
