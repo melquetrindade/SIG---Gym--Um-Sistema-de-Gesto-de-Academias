@@ -9,6 +9,7 @@ int mensalidades(void);
 int registrar_acesso(void);
 int verifica_opcao_1(int opcao);
 int verifica_opcao_2(int opcao);
+int verifica_opcao_3(int opcao);
 void tela_sobre_o_tema(void);
 void tela_equipe(void);
 
