@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "bibliotecas/menu_principal/menu_principal.h"
+#include "bibliotecas/menu_principal/menu_principal.c"
 #include "bibliotecas/clientes/clientes.h"
 #include "bibliotecas/clientes/clientes.c"
 #include "bibliotecas/funcionarios/funcionarios.h"
