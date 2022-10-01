@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
 void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     system("clear||cls");
 
