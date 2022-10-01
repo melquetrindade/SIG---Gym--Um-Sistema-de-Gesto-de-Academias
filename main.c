@@ -2,11 +2,17 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "bibliotecas/clientes/clientes.h"
+#include "bibliotecas/clientes/clientes.c"
 #include "bibliotecas/funcionarios/funcionarios.h"
+#include "bibliotecas/funcionarios/funcionarios.c"
 #include "bibliotecas/informes/informes.h"
+#include "bibliotecas/informes/informes.c"
 #include "bibliotecas/mensalidades/mensalidades.h"
+#include "bibliotecas/mensalidades/mensalidades.c"
 #include "bibliotecas/pagamentos/pagamentos.h"
+#include "bibliotecas/pagamentos/pagamentos.c"
 #include "bibliotecas/reg_acesso/reg_acesso.h"
+#include "bibliotecas/reg_acesso/reg_acesso.c"
 
 //  Variáveis
 int entrada;
