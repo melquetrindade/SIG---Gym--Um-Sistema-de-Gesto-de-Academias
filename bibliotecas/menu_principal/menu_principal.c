@@ -101,7 +101,7 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     char op[3];
 
     printf("----------------------------------------------------------------------\n");
-    printf("|                  MENU MENSALIDADES                                 |\n");
+    printf("|                         MENU MENSALIDADES                          |\n");
     printf("----------------------------------------------------------------------\n");
     printf("|   -----------------------       ---------------------              |\n");
     printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |              |\n");

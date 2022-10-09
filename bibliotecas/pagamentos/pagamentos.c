@@ -5,12 +5,17 @@
 void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcionários
     system("clear||cls");
 
-    printf("\t=======================================\n");
-    printf("\t|     Módulo de Realizar Pagamentos   |\n");
-    printf("\t=======================================\n");
-    printf("\t| INFORME O CPF:                      |\n");
-    printf("\t| VALOR DO SALÁRIO:                   |\n");
-    printf("\t=======================================\n");
+    printf("\t========================================\n");
+    printf("\t|      Módulo de Registrar Salário     |\n");
+    printf("\t========================================\n");
+
+    char cpf[30];
+    char valor_sal[20];
+
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\tINFORME O VALOR DO SALÁRIO: EX: (1.200,99) >>> "); 
+    fgets(valor_sal, 20, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -41,8 +46,11 @@ void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
     printf("\t======================================\n");
     printf("\t|   Módulo de Pesquisar Pagamentos   |\n");
     printf("\t======================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
-    printf("\t======================================\n");
+
+    char cpf[30];
+
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -54,8 +62,11 @@ void deletar_pagamentos(void){ // Função de deletar pagamentos
     printf("\t======================================\n");
     printf("\t|    Módulo de Deletar Pagamentos    |\n");
     printf("\t======================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
-    printf("\t======================================\n");
+
+    char cpf[30];
+
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");

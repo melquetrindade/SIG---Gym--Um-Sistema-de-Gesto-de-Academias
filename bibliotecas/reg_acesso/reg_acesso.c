@@ -8,8 +8,11 @@ void registrar_frequencia(void){ // Função de registrar acesso
     printf("\t======================================\n");
     printf("\t|     Módulo de Registrar Acesso     |\n");
     printf("\t======================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS)    |\n");
-    printf("\t======================================\n");
+
+    char cpf[30];
+
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
