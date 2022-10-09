@@ -37,8 +37,11 @@ void deletar_clientes(void){  // Função de deletar clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Exclusão      |\n");
     printf("\t===================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
-    printf("\t===================================\n");
+
+    char cpf[30];
+
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");    
@@ -50,8 +53,11 @@ void recuperar_clientes(void){ // Função de recuperar Clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Recuperar     |\n");
     printf("\t===================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
-    printf("\t===================================\n");
+
+    char cpf[30];
+
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -63,8 +69,11 @@ void pesquisar_clientes(void){ // Função de pesquisar clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Pesquisar     |\n");
     printf("\t===================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
-    printf("\t===================================\n");
+
+    char cpf[30];
+
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -76,8 +85,11 @@ void atualizar_clientes(void){ // Função de atualizar clientes
     printf("\t===================================\n");
     printf("\t|       Módulo de Atualização     |\n");
     printf("\t===================================\n");
-    printf("\t| INFORME O CPF: (APENAS NÚMEROS) |\n");
-    printf("\t===================================\n");
+
+    char cpf[30];
+
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
