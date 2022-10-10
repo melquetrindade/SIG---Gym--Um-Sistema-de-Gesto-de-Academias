@@ -55,7 +55,7 @@ int main(){
             else if(op_menu_clientes == 6){
                 listar_clientes();
             }
-            else if(op_menu_clientes == 7){
+            else if(op_menu_clientes == 9){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
@@ -86,7 +86,7 @@ int main(){
             else if(op_menu_funcionarios == 6){
                 listar_funcionario();
             }
-            else if(op_menu_funcionarios == 7){
+            else if(op_menu_funcionarios == 9){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
@@ -114,7 +114,7 @@ int main(){
             else if(op_menu_mensalidades == 5){
                 mensalidades_pendentes();
             }
-            else if(op_menu_mensalidades == 6){
+            else if(op_menu_mensalidades == 9){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
@@ -142,7 +142,8 @@ int main(){
             else if(op_menu_pagamentos == 5){
                 pagamentos_pendentes();
             }
-            else if(op_menu_pagamentos == 6){
+            else if(op_menu_pagamentos == 9){
+                system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
             else if(op_menu_pagamentos == 0){
@@ -161,7 +162,7 @@ int main(){
             else if(op_menu_reg_acesso == 2){
                 listar_frequencia();
             }
-            else if(op_menu_reg_acesso == 3){
+            else if(op_menu_reg_acesso == 9){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
             }
@@ -174,7 +175,7 @@ int main(){
         else if(op_menu_principal == 6){
             informes();
         }
-        else if(op_menu_principal == 7){
+        else if(op_menu_principal == 9){
             system("clear||cls");
             printf("Módulo de Encerramento!\n");
             entrada = false;

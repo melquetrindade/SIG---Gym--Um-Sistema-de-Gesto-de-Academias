@@ -18,7 +18,7 @@ int menu_principal(void){ // Tela principal
     printf("|    4-| PAGAMENTOS |    5-| REGISTRAR ACESSO |              |\n");
     printf("|      --------------      --------------------              |\n");
     printf("|      ------------------------------------     -----------  |\n");
-    printf("|    6-| SOBRE O PROGRAMA/DESENVOLVEDORES |   7-|  SAIR   |  |\n");
+    printf("|    6-| SOBRE O PROGRAMA/DESENVOLVEDORES |   9-|  SAIR   |  |\n");
     printf("|      ------------------------------------     -----------  |\n");
     printf("==============================================================\n");
     printf("\n");
@@ -41,7 +41,7 @@ int clientes(void){ // Tela de Clientes
     printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
     printf("|   ------------       -------------    -------------  |\n");
     printf("|   --------------------------------                   |\n");
-    printf("| 7-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
@@ -65,7 +65,7 @@ int funcionarios(void){ // Tela do módulo de funcionários
     printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
     printf("|   ------------       -------------    -------------  |\n");
     printf("|   --------------------------------                   |\n");
-    printf("| 7-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
@@ -87,7 +87,7 @@ int pagamentos(void){ // Tela do módulo de pagamentos
     printf("| 3-| PESQUISAR PAGAMENTO |      4-| DELETAR PAGAMENTO |            |\n");
     printf("|   -----------------------        ---------------------            |\n");
     printf("|   --------------------------     -------------------------------- |\n");
-    printf("| 5-|  PAGAMENTOS PENDENTES  |   6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("| 5-|  PAGAMENTOS PENDENTES  |   9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
     printf("|   --------------------------     -------------------------------- |\n");
     printf("---------------------------------------------------------------------\n");
     printf("\n");
@@ -110,7 +110,7 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     printf("| 3-| PESQUISAR PAGAMENTO |     4-| DELETAR PAGAMENTO |              |\n");
     printf("|   -----------------------       ---------------------              |\n");
     printf("|   --------------------------      -------------------------------- |\n");
-    printf("| 5-| MENSALIDADES PENDENTES |    6-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("| 5-| MENSALIDADES PENDENTES |    9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
     printf("|   --------------------------      -------------------------------- |\n");
     printf("----------------------------------------------------------------------\n");
     printf("\n");
@@ -130,7 +130,7 @@ int registrar_acesso(void){ // Tela do módulo de registrar acesso
     printf("| 1-|  REGISTRAR ACESSO  |     2-|  LISTAR ACESSOS  |  |\n");
     printf("|   ----------------------       --------------------  |\n");
     printf("|   --------------------------------                   |\n");
-    printf("| 3-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
@@ -188,7 +188,7 @@ void tela_equipe(void){ // Tela sobre o desenvolvedor
 }
 
 int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é válida
-    int opcoes[7] = {1,2,3,4,5,6,7};    // para os módulos 1 e 2
+    int opcoes[7] = {1,2,3,4,5,6,9};    // para os módulos 1 e 2
     for(int i = 0; i<=6; i++){
         if(opcao == opcoes[i]){
             return opcao;
@@ -199,7 +199,7 @@ int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é v
 }
 
 int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[6] = {1,2,3,4,5,6};    // para os módulos 3 e 4
+    int opcoes[6] = {1,2,3,4,5,9};    // para os módulos 3 e 4
     for(int i = 0; i<=5; i++){
         if(opcao == opcoes[i]){
             return opcao;
@@ -210,7 +210,7 @@ int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é váli
 }
 
 int verifica_opcao_3(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[3] = {1,2,3};        // para o módulo 5
+    int opcoes[3] = {1,2,9};        // para o módulo 5
     for(int i = 0; i<=2; i++){
         if(opcao == opcoes[i]){
             return opcao;
