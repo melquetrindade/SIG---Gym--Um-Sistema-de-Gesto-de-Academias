@@ -13,7 +13,7 @@ void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcioná
     char valor_sal[20];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
     printf("\tINFORME O VALOR DO SALÁRIO: EX: (1.200,99) >>> "); 
     fgets(valor_sal, 20, stdin); fflush(stdin);
 
@@ -51,7 +51,7 @@ void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
     char cpf[30];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -68,7 +68,7 @@ void deletar_pagamentos(void){ // Função de deletar pagamentos
     char cpf[30];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();

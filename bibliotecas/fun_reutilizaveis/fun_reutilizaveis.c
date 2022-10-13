@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include "fun_reutilizaveis.h"
 
-void while_cpf(char *cpf_teste){ // Função que fica no loop até o usuário digitar uma data válida
+void loop_cpf(char *cpf_teste){ // Função que fica no loop até o usuário digitar uma data válida
 
     char cpf_aux[30];
     strcpy(cpf_aux, cpf_teste);
@@ -68,7 +69,7 @@ int valida_cpf(char *cpf_teste){ // Função que válida CPF
     return 1;
 }
 
-void while_de_validacao_data(char *data_teste){ // Função que fica no loop até o usuário digitar uma data válida
+void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até o usuário digitar uma data válida
 
     char data_aux[40];
     int vetor_data[3]; 
@@ -91,7 +92,7 @@ void while_de_validacao_data(char *data_teste){ // Função que fica no loop at�
         char data_aux3[40];
         printf("INFORME UMA DATA VÁLIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
-        while_de_validacao_data(data_aux3);
+        loop_de_validacao_data(data_aux3);
     }
     strcpy(data_teste, data_aux);
 }

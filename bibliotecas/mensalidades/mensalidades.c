@@ -13,7 +13,7 @@ void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     char valor_mens[10];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
     printf("\tINFORME O VALOR DA MENSALIDADE: EX: (60,99) >>> "); 
     fgets(valor_mens, 10, stdin); fflush(stdin);
 
@@ -51,7 +51,7 @@ void pesquisar_mensalidade(void){ // Função de pesquisar mensalidades
     char cpf[30];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -68,7 +68,7 @@ void deletar_mensalidades(void){ // Função de deletar mensalidades
     char cpf[30];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
-    while_cpf(cpf);
+    loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
