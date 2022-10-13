@@ -84,10 +84,7 @@ void while_de_validacao_data(char *data_teste){ // Função que fica no loop at�
         }
     }
     divide_data_inteiro(data_aux, vetor_data);
-    int dia = vetor_data[0];
-    int mes = vetor_data[1];
-    int ano = vetor_data[2];
-    int confirma_data = dataValida(dia, mes, ano);
+    int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
         printf("A DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
