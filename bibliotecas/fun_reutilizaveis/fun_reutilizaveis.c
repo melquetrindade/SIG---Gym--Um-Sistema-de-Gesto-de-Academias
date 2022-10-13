@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include <string.h>
 
 void while_cpf(char *cpf_teste){ // Função que fica no loop até o usuário digitar uma data válida
@@ -76,7 +77,7 @@ void while_de_validacao_data(char *data_teste){ // Função que fica no loop at�
 
     if(formatacao == 0){
         while(formatacao == 0){
-            printf("ERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
+            printf("ERRO DE FORMATAÇÃO, TENTE NOVAMENTE!\n");
             char data_aux2[40];
             printf("DIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
@@ -86,9 +87,9 @@ void while_de_validacao_data(char *data_teste){ // Função que fica no loop at�
     divide_data_inteiro(data_aux, vetor_data);
     int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
-        printf("A DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
+        printf("A DATA INFORMADA E INVÁLIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
-        printf("INFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
+        printf("INFORME UMA DATA VÁLIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
         while_de_validacao_data(data_aux3);
     }

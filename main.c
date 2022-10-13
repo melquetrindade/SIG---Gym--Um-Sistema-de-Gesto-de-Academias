@@ -15,6 +15,8 @@
 #include "bibliotecas/pagamentos/pagamentos.c"
 #include "bibliotecas/reg_acesso/reg_acesso.h"
 #include "bibliotecas/reg_acesso/reg_acesso.c"
+#include "bibliotecas/fun_reutilizaveis/fun_reutilizaveis.h"
+#include "bibliotecas/fun_reutilizaveis/fun_reutilizaveis.c"
 
 //  Variáveis
 int entrada;

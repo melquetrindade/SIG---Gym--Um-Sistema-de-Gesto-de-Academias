@@ -12,10 +12,12 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     char cpf[30], nome[100], email[100], fone[30], data_nas[30];
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    while_cpf(cpf);
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
     printf("\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
     printf("\tTELEFONE:(APENAS NÚMEROS)>>> "); fgets(fone, 30, stdin); fflush(stdin);
     printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 30, stdin); fflush(stdin);
+    while_de_validacao_data(data_nas);
 
     system("clear||cls");
 
@@ -41,6 +43,7 @@ void deletar_clientes(void){  // Função de deletar clientes
     char cpf[30];
 
     printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    while_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -57,6 +60,7 @@ void recuperar_clientes(void){ // Função de recuperar Clientes
     char cpf[30];
 
     printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    while_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -73,6 +77,7 @@ void pesquisar_clientes(void){ // Função de pesquisar clientes
     char cpf[30];
 
     printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    while_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -89,6 +94,7 @@ void atualizar_clientes(void){ // Função de atualizar clientes
     char cpf[30];
 
     printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    while_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
