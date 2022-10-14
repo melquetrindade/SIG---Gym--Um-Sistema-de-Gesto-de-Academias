@@ -11,9 +11,9 @@ void loop_cpf(char *cpf_teste){ // Função que fica no loop até o usuário dig
     int teste = valida_cpf(cpf_aux);
     if(teste == 0){
         while(teste == 0){
-            printf("CPF INVÁLIDO, TENTE NOVAMENTE!\n");
+            printf("\tCPF INVÁLIDO, TENTE NOVAMENTE!\n");
             char cpf_aux2[40];
-            printf("DIGITE UM NOVO CPF: (APENAS NÚMEROS) >>> "); 
+            printf("\tDIGITE UM NOVO CPF: (APENAS NÚMEROS) >>> "); 
             fgets(cpf_aux2, 40, stdin); fflush(stdin);
             strcpy(cpf_aux, cpf_aux2);
             teste = valida_cpf(cpf_aux2);
@@ -78,9 +78,9 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
 
     if(formatacao == 0){
         while(formatacao == 0){
-            printf("ERRO DE FORMATAÇÃO, TENTE NOVAMENTE!\n");
+            printf("\tERRO DE FORMATAÇÃO, TENTE NOVAMENTE!\n");
             char data_aux2[40];
-            printf("DIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
+            printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
             formatacao = valida_format_data(data_aux2);
         }
@@ -88,9 +88,9 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
     divide_data_inteiro(data_aux, vetor_data);
     int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
-        printf("A DATA INFORMADA E INVÁLIDA, TENTE NOVAMENTE!\n");
+        printf("\tA DATA INFORMADA É INVÁLIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
-        printf("INFORME UMA DATA VÁLIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
+        printf("\tINFORME UMA DATA VÁLIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
         loop_de_validacao_data(data_aux3);
     }

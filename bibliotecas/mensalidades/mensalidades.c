@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "../fun_reutilizaveis/fun_reutilizaveis.h"
+#include "../menu_principal/menu_principal.h"
 
 void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     system("clear||cls");

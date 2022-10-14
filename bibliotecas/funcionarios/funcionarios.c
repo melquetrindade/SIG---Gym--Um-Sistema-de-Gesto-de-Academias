@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "../fun_reutilizaveis/fun_reutilizaveis.h"
+#include "../menu_principal/menu_principal.h"
 
 void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     system("clear||cls");
