@@ -215,7 +215,7 @@ void cal_atraso_etp2(int dia, int mes, int ano){ // Função que calcula quantas
 
     int ano_t = 2022;
     int mes_t = 6;
-    int dia_t = 12;
+    //int dia_t = 12;
 
     if((ano_t - ano) > 2){
         int ano_aux = ano + 1;
