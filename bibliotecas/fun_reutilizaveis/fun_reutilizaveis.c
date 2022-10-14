@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 #include "fun_reutilizaveis.h"
 
 void loop_cpf(char *cpf_teste){ // Função que fica no loop até o usuário digitar uma data válida
@@ -180,3 +181,101 @@ void divide_data_inteiro(char *data_teste, int *vetorData){ // Função que queb
     strcpy(data_teste, copia_data);
 }
 
+void pegaData(int *vetor){ // Função que pega a data do computador
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    vetor[0] = tm.tm_year + 1900;
+    vetor[1] = tm.tm_mon + 1;
+    vetor[2] =tm.tm_mday;
+    vetor[3] = tm.tm_hour;
+    vetor[4] = tm.tm_min;
+    vetor[5] = tm.tm_sec;
+}
+
+void cal_prox_pagamento(int dia, int mes, int ano){ // Função que calcula quando será a próxima mensalidade/pagamento
+    int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    if(bissexto(ano)){
+        meses[1] = 29;
+    }
+    for(int i = 1; i <= meses[mes-1]; i++){
+        dia += 1;
+        if(dia > meses[mes-1]){
+            mes += 1;
+            dia = 1;
+            if(mes == 13){
+                mes = 1;
+                ano += 1;
+            }
+        }
+    }
+    printf("\nProxima Mensaliade: %i/%i/%i \n", dia, mes, ano);
+}
+
+void cal_atraso_etp2(int dia, int mes, int ano){ // Função que calcula quantas mensalidades/salários estão em atraso
+
+    int ano_t = 2022;
+    int mes_t = 6;
+    int dia_t = 12;
+
+    if((ano_t - ano) > 2){
+        int ano_aux = ano + 1;
+        int diferenca_mes1 = 0;
+        while(ano_aux != ano_t){
+            printf("variavel: %i\n", ano_aux);
+            diferenca_mes1 += 12;
+            ano_aux += 1;
+        }
+        int diferenca_mes2 = 12 - mes;
+        int total_mes = diferenca_mes1 + diferenca_mes2 + mes_t;
+        printf("total de meses em atraso: %i\n", total_mes);
+    }
+    else if((ano_t - ano) == 1){
+        int diferenca_mes2 = 12 - mes;
+        int total_mes = diferenca_mes2 + mes_t;
+        printf("total de meses em atraso1: %i", total_mes);
+    }
+    else{
+        int diferenca_mes3 = mes_t - mes;
+        printf("Total de meses em atraso2: %i", diferenca_mes3);
+    }
+}
+
+int cal_atraso_etp1(int dia, int mes, int ano){ // Função que calcula se houve atraso na mensalidade 
+    int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    if(bissexto(ano)){
+        meses[1] = 29;
+    }
+    int ano_t = 2022;
+    int mes_t = 6;
+    int dia_t = 12;
+    if(ano != ano_t && mes != mes_t){
+        if(mes < 12 || mes_t > 1 || (ano_t - ano > 1)){
+            return 1;
+        }else{
+            int diferenca = 31 - dia;
+            int soma1 = diferenca + dia_t;
+            if(soma1 > meses[mes-1]){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }else if(ano != ano_t && mes_t == mes){
+        return 1;
+    }else if(ano == ano_t && mes != mes_t){
+        int soma = 0;
+        int dif_mes = mes_t - mes;
+        for(int i = 0; i < dif_mes; i++){
+            soma+= meses[(mes-1)+i];
+        }
+        soma = soma - dia;
+        soma = soma + dia_t;
+        if(soma > meses[mes-1]){
+            return 1;
+        }else{
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}
