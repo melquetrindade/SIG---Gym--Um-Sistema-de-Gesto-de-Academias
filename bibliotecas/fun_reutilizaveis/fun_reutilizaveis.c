@@ -307,6 +307,7 @@ void loop_fone(char *fone_teste){ // Função de loop de validação de telefone
     strcpy(copia_fone,fone_teste);
 
     fone_inteiro(copia_fone);
+    printf("%s", copia_fone);
     int verifica = fone_valida_etp2(copia_fone);
     if(verifica == 0){
         char fone_novo[40];
