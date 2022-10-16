@@ -5,22 +5,23 @@
 #include <time.h>
 #include "fun_reutilizaveis.h"
 
-void loop_cpf(char *cpf_teste){ // Função que fica no loop até o usuário digitar uma data válida
+void loop_cpf(char *cpf_teste){ // Função de loop de validação de telefone
 
-    char cpf_aux[30];
-    strcpy(cpf_aux, cpf_teste);
-    int teste = valida_cpf(cpf_aux);
-    if(teste == 0){
-        while(teste == 0){
-            printf("\tCPF INVÁLIDO, TENTE NOVAMENTE!\n");
-            char cpf_aux2[40];
-            printf("\tDIGITE UM NOVO CPF: (APENAS NÚMEROS) >>> "); 
-            fgets(cpf_aux2, 40, stdin); fflush(stdin);
-            strcpy(cpf_aux, cpf_aux2);
-            teste = valida_cpf(cpf_aux2);
-        }
+    int tam1 = strlen(cpf_teste);
+    char *copia_cpf;
+    copia_cpf = (char*)(malloc(tam1+1));
+    strcpy(copia_cpf,cpf_teste);
+
+    cpf_inteiro(copia_cpf);
+    int verifica = valida_cpf(copia_cpf);
+    if(verifica == 0){
+        char cpf_novo[40];
+        printf("CPF INVÁLIDO, DIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> "); 
+        fgets(cpf_novo, 40, stdin); fflush(stdin);
+        strcpy(copia_cpf, cpf_novo);
+        loop_cpf(copia_cpf);
     }
-    strcpy(cpf_teste, cpf_aux);
+    strcpy(cpf_teste, copia_cpf);
 }
 
 int valida_cpf(char *cpf_teste){ // Função que válida CPF
@@ -79,9 +80,9 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
 
     if(formatacao == 0){
         while(formatacao == 0){
-            printf("\tERRO DE FORMATAÇÃO, TENTE NOVAMENTE!\n");
+            printf("ERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
             char data_aux2[40];
-            printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
+            printf("DIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
             formatacao = valida_format_data(data_aux2);
         }
@@ -89,9 +90,9 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
     divide_data_inteiro(data_aux, vetor_data);
     int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
-        printf("\tA DATA INFORMADA É INVÁLIDA, TENTE NOVAMENTE!\n");
+        printf("A DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
-        printf("\tINFORME UMA DATA VÁLIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
+        printf("INFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
         loop_de_validacao_data(data_aux3);
     }
@@ -132,22 +133,26 @@ int dataValida(int dd, int mm, int aa){ // Função que valida datas. Créditos:
 
 int valida_format_data(char *data){ // Função que valida a formatação da data
     int tam = strlen(data);
-
-    if(tam != 11){
+    int cont = 0;
+    if(data[0] == '/' || data[tam-2] == '/'){
         return 0;
     }
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < (tam-1); i++){
         if(data[i] >= '0' && data[i] <= '9'){
             continue;
         }
+        else if(data[i] == '/' && data[i+1] == '/'){
+            return 0;
+        }
         else if(data[i] == '/'){
+            cont += 1;
             continue;
         }
         else{
             return 0;
         }
     }
-    if(data[2] != '/' || data[5] != '/'){
+    if(cont != 2){
         return 0;
     }
     return 1;
@@ -158,7 +163,7 @@ void divide_data_inteiro(char *data_teste, int *vetorData){ // Função que queb
     char *pt;
     char dia[10];
     char mes[10];
-    char ano[10];
+    char ano[20];
     strcpy(copia_data, data_teste);
     pt = strtok(data_teste, "/");
     int cont = 1;
@@ -192,84 +197,86 @@ void pegaData(int *vetor){ // Função que pega a data do computador
     vetor[5] = tm.tm_sec;
 }
 
-void cal_prox_pagamento(int dia, int mes, int ano){ // Função que calcula quando será a próxima mensalidade/pagamento
+void cal_prox_pagamento(int dia, int mes, int ano, int *vetor_data){ // Função que calcula quando será a próxima mensalidade/pagamento
+    int dia_t = dia;
+    int mes_t = mes;
+    int ano_t = ano;
     int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
-    if(bissexto(ano)){
+    if(bissexto(ano_t)){
         meses[1] = 29;
     }
-    for(int i = 1; i <= meses[mes-1]; i++){
-        dia += 1;
-        if(dia > meses[mes-1]){
-            mes += 1;
-            dia = 1;
-            if(mes == 13){
-                mes = 1;
-                ano += 1;
+    for(int i = 1; i <= meses[mes_t-1]; i++){
+        dia_t += 1;
+        if(dia_t > meses[mes_t-1]){
+            mes_t += 1;
+            dia_t = 1;
+            if(mes_t == 13){
+                mes_t = 1;
+                ano_t += 1;
             }
         }
     }
-    printf("\nProxima Mensaliade: %i/%i/%i \n", dia, mes, ano);
+    vetor_data[0] = dia_t;
+    vetor_data[1] = mes_t;
+    vetor_data[2] = ano_t;
 }
 
-void cal_atraso_etp2(int dia, int mes, int ano){ // Função que calcula quantas mensalidades/salários estão em atraso
+void cal_atraso_etp2(int dia, int mes, int ano, int *diferenca){ // Função que calcula quantas mensalidades/salários estão em atraso
 
-    int ano_t = 2022;
-    int mes_t = 6;
-    //int dia_t = 12;
+    int vetor[6];
+    pegaData(vetor);
 
-    if((ano_t - ano) > 2){
+    if((vetor[0] - ano) > 1){
         int ano_aux = ano + 1;
         int diferenca_mes1 = 0;
-        while(ano_aux != ano_t){
-            printf("variavel: %i\n", ano_aux);
+        while(ano_aux != vetor[0]){
             diferenca_mes1 += 12;
             ano_aux += 1;
         }
         int diferenca_mes2 = 12 - mes;
-        int total_mes = diferenca_mes1 + diferenca_mes2 + mes_t;
-        printf("total de meses em atraso: %i\n", total_mes);
+        int total_mes = diferenca_mes1 + diferenca_mes2 + vetor[1];
+        *diferenca = total_mes;
     }
-    else if((ano_t - ano) == 1){
+    else if((vetor[0] - ano) == 1){
         int diferenca_mes2 = 12 - mes;
-        int total_mes = diferenca_mes2 + mes_t;
-        printf("total de meses em atraso1: %i", total_mes);
+        int total_mes = diferenca_mes2 + vetor[1];
+        *diferenca = total_mes;
     }
     else{
-        int diferenca_mes3 = mes_t - mes;
-        printf("Total de meses em atraso2: %i", diferenca_mes3);
+        int diferenca_mes3 = vetor[1] - mes;
+        *diferenca = diferenca_mes3;
     }
 }
 
-int cal_atraso_etp1(int dia, int mes, int ano){ // Função que calcula se houve atraso na mensalidade 
+int cal_atraso(int dia, int mes, int ano){ // Função que calcula se houve atraso na mensalidade 
     int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
     if(bissexto(ano)){
         meses[1] = 29;
     }
-    int ano_t = 2022;
-    int mes_t = 6;
-    int dia_t = 12;
-    if(ano != ano_t && mes != mes_t){
-        if(mes < 12 || mes_t > 1 || (ano_t - ano > 1)){
+    int vetor[6];
+    pegaData(vetor);
+    if(ano != vetor[0] && mes != vetor[0]){
+        if(mes < 12 || vetor[1] > 1 || (vetor[0] - ano > 1)){
             return 1;
         }else{
             int diferenca = 31 - dia;
-            int soma1 = diferenca + dia_t;
+            int soma1 = diferenca + vetor[1];
             if(soma1 > meses[mes-1]){
                 return 1;
             }else{
                 return 0;
             }
         }
-    }else if(ano != ano_t && mes_t == mes){
+    }else if(ano != vetor[0] && vetor[1] == mes){
         return 1;
-    }else if(ano == ano_t && mes != mes_t){
+    }else if(ano == vetor[0] && mes != vetor[1]){
         int soma = 0;
-        int dif_mes = mes_t - mes;
+        int dif_mes = vetor[1] - mes;
         for(int i = 0; i < dif_mes; i++){
             soma+= meses[(mes-1)+i];
         }
         soma = soma - dia;
-        soma = soma + dia_t;
+        soma = soma + vetor[2];
         if(soma > meses[mes-1]){
             return 1;
         }else{
@@ -278,4 +285,17 @@ int cal_atraso_etp1(int dia, int mes, int ano){ // Função que calcula se houve
     }else{
         return 0;
     }
+}
+
+void cpf_inteiro(char *fone_teste){ // Função que retira caracteres diferentes de números
+    int tam = strlen(fone_teste);
+    char *cpf;
+    char *pt;
+    cpf = (char*)(malloc(tam+1));
+    pt = strtok(fone_teste, " .-");
+    while(pt){
+        strcat(cpf, pt);
+        pt = strtok(NULL, " .-");
+    }
+    strcpy(fone_teste,cpf); 
 }
