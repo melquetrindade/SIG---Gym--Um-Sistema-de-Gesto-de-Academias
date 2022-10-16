@@ -10,3 +10,7 @@ void cal_prox_pagamento(int, int, int, int *);
 void cal_atraso_etp2(int, int, int, int *);
 int cal_atraso(int, int, int);
 void cpf_inteiro(char *);
+void loop_fone(char *);
+void fone_inteiro(char *);
+int valida_dd(char *);
+int fone_valida_etp2(char *);

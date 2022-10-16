@@ -7,16 +7,14 @@
 
 void loop_cpf(char *cpf_teste){ // Função de loop de validação de telefone
 
-    int tam1 = strlen(cpf_teste);
-    char *copia_cpf;
-    copia_cpf = (char*)(malloc(tam1+1));
+    char copia_cpf[30];
     strcpy(copia_cpf,cpf_teste);
 
     cpf_inteiro(copia_cpf);
     int verifica = valida_cpf(copia_cpf);
     if(verifica == 0){
         char cpf_novo[40];
-        printf("CPF INVÁLIDO, DIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> "); 
+        printf("\tCPF INVÁLIDO, DIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> "); 
         fgets(cpf_novo, 40, stdin); fflush(stdin);
         strcpy(copia_cpf, cpf_novo);
         loop_cpf(copia_cpf);
@@ -80,9 +78,9 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
 
     if(formatacao == 0){
         while(formatacao == 0){
-            printf("ERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
+            printf("\tERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
             char data_aux2[40];
-            printf("DIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
+            printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
             formatacao = valida_format_data(data_aux2);
         }
@@ -90,11 +88,14 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
     divide_data_inteiro(data_aux, vetor_data);
     int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
-        printf("A DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
+        printf("\tA DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
-        printf("INFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
+        printf("\tINFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
         loop_de_validacao_data(data_aux3);
+    }
+    else{
+        strcpy(data_teste, data_aux);
     }
     strcpy(data_teste, data_aux);
 }
@@ -288,14 +289,96 @@ int cal_atraso(int dia, int mes, int ano){ // Função que calcula se houve atra
 }
 
 void cpf_inteiro(char *fone_teste){ // Função que retira caracteres diferentes de números
-    int tam = strlen(fone_teste);
-    char *cpf;
+    char cpf[30] = {""};
     char *pt;
-    cpf = (char*)(malloc(tam+1));
     pt = strtok(fone_teste, " .-");
     while(pt){
         strcat(cpf, pt);
         pt = strtok(NULL, " .-");
     }
     strcpy(fone_teste,cpf); 
+}
+
+void loop_fone(char *fone_teste){ // Função de loop de validação de telefone
+
+    int tam1 = strlen(fone_teste);
+    char *copia_fone;
+    copia_fone = (char*)(malloc(tam1+1));
+    strcpy(copia_fone,fone_teste);
+
+    fone_inteiro(copia_fone);
+    int verifica = fone_valida_etp2(copia_fone);
+    if(verifica == 0){
+        char fone_novo[40];
+        printf("NÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
+        fgets(fone_novo, 40, stdin); fflush(stdin);
+        strcpy(copia_fone, fone_novo);
+        loop_fone(copia_fone);
+    }
+    int ok_dd = valida_dd(copia_fone);
+    if(ok_dd == 0){
+        char fone_novo2[40];
+        printf("NÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
+        fgets(fone_novo2, 40, stdin); fflush(stdin);
+        strcpy(copia_fone, fone_novo2);
+        loop_fone(copia_fone);
+    }
+    strcpy(fone_teste, copia_fone);
+}
+
+void fone_inteiro(char *fone_teste){ // Função que retira caracteres diferentes de números
+    int tam = strlen(fone_teste);
+    char *fone;
+    char *pt;
+    fone = (char*)(malloc(tam+1));
+    pt = strtok(fone_teste, ")( .-");
+    while(pt){
+        strcat(fone, pt);
+        pt = strtok(NULL, ")( .-");
+    }
+    strcpy(fone_teste,fone);  
+}
+
+int valida_dd(char *fone_teste){ // Função que verifica se o DD é válido
+    int dds[67] = {61,62,64,65,66,67,82,71,73,74,75,77,85,88,98,99,83,81,87,86,89,84,79,68,96,92,97,91,93,94,69,95,63,27,28,31,32,33,34,35,37,38,21,22,24,11,12,13,14,15,16,17,18,19,41,42,43,44,45,46,51,53,54,55,47,48,49};
+    int tam = strlen(fone_teste);
+    char *dd1;
+    char resto2[10];
+    dd1 = (char*)(malloc(tam+1));
+    strncpy(dd1, fone_teste, 2);
+    for(int i = 0; i < tam; i++){
+        if(i > 1){
+            resto2[i-2] = fone_teste[i];
+        }
+    }
+    int dd_int = atoi(dd1);
+    int tam_resto = strlen(resto2);
+    if(tam_resto != 10){
+        return 0;
+    }
+    for(int i = 0; i <= 67; i++){
+        if(dd_int == dds[i]){
+            return 1;
+        }
+        else{
+            continue;
+        }
+    }
+    return 0;
+}
+
+int fone_valida_etp2(char *fone_teste){ //Função Verifica se a quantidade de carcacter está certo
+    int tam = strlen(fone_teste);
+    if(tam != 12){
+        return 0;
+    }
+    for(int i = 0; i < tam-1; i++){
+        if((fone_teste[i] >= '0' && fone_teste[i] <= '9') || fone_teste[i] == ' '){
+            continue;
+        }
+        else{
+            return 0;
+        }
+    }
+    return 1;
 }

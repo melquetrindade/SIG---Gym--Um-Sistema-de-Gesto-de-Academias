@@ -18,6 +18,7 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
     printf("\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
     printf("\tTELEFONE:(APENAS NÚMEROS)>>> "); fgets(fone, 30, stdin); fflush(stdin);
+    loop_fone(fone);
     printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 30, stdin); fflush(stdin);
     loop_de_validacao_data(data_nas);
 
