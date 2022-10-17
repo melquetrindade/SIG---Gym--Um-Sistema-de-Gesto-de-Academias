@@ -17,7 +17,7 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     loop_cpf(cpf);
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
     printf("\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
-    printf("\tTELEFONE:(APENAS NÚMEROS)>>> "); fgets(fone, 30, stdin); fflush(stdin);
+    printf("\tTELEFONE:(APENAS NÚMEROS)>>> +55 "); fgets(fone, 30, stdin); fflush(stdin);
     loop_fone(fone);
     printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 40, stdin); fflush(stdin);
     loop_de_validacao_data(data_nas);
@@ -28,7 +28,7 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     printf("\n\tCPF: %s", cpf);
     printf("\tNOME: %s", nome);
     printf("\tE-MAIL: %s", email);
-    printf("\tTELEFONE: %s", fone);
+    printf("\tTELEFONE: +55 %s", fone);
     printf("\tDATA DE NASCIMENTO: %s", data_nas);
     
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
