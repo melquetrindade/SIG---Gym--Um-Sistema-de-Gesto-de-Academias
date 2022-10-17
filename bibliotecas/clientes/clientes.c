@@ -11,7 +11,7 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    char cpf[30], nome[100], email[100], fone[30], data_nas[30];
+    char cpf[30], nome[100], email[100], fone[30], data_nas[40];
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 30, stdin); fflush(stdin);
     loop_cpf(cpf);
@@ -19,7 +19,7 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
     printf("\tTELEFONE:(APENAS NÚMEROS)>>> "); fgets(fone, 30, stdin); fflush(stdin);
     loop_fone(fone);
-    printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 30, stdin); fflush(stdin);
+    printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 40, stdin); fflush(stdin);
     loop_de_validacao_data(data_nas);
 
     system("clear||cls");

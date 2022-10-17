@@ -5,7 +5,8 @@
 #include <time.h>
 #include "fun_reutilizaveis.h"
 
-void loop_cpf(char *cpf_teste){ // Função de loop de validação de telefone
+// Função de loop de validação de cpf
+void loop_cpf(char *cpf_teste){
 
     char copia_cpf[30];
     strcpy(copia_cpf,cpf_teste);
@@ -22,7 +23,8 @@ void loop_cpf(char *cpf_teste){ // Função de loop de validação de telefone
     strcpy(cpf_teste, copia_cpf);
 }
 
-int valida_cpf(char *cpf_teste){ // Função que válida CPF
+// Função que válida CPF
+int valida_cpf(char *cpf_teste){ 
 
     char cpf[30];
     strcpy(cpf, cpf_teste);
@@ -69,7 +71,8 @@ int valida_cpf(char *cpf_teste){ // Função que válida CPF
     return 1;
 }
 
-void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até o usuário digitar uma data válida
+// Função que fica no loop até o usuário digitar uma data válida
+void loop_de_validacao_data(char *data_teste){ 
 
     char data_aux[40];
     int vetor_data[3]; 
@@ -80,9 +83,10 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
         while(formatacao == 0){
             printf("\tERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
             char data_aux2[40];
-            printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); fgets(data_aux2, 40, stdin); fflush(stdin);
+            printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); 
+            fgets(data_aux2, 40, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
-            formatacao = valida_format_data(data_aux2);
+            formatacao = valida_format_data(data_aux);
         }
     }
     divide_data_inteiro(data_aux, vetor_data);
@@ -90,17 +94,16 @@ void loop_de_validacao_data(char *data_teste){ // Função que fica no loop até
     if(confirma_data == 0){
         printf("\tA DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
         char data_aux3[40];
-        printf("\tINFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); fgets(data_aux3, 40, stdin); fflush(stdin);
+        printf("\tINFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); 
+        fgets(data_aux3, 40, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
-        loop_de_validacao_data(data_aux3);
-    }
-    else{
-        strcpy(data_teste, data_aux);
+        loop_de_validacao_data(data_aux);
     }
     strcpy(data_teste, data_aux);
 }
 
-int bissexto(int aa){ // Função que calcula se o ano é bissexto. Créditos: Flavius Gorgônio da Luz
+// Função que calcula se o ano é bissexto. Créditos: Flavius Gorgônio da Luz
+int bissexto(int aa){ 
     if((aa % 4 == 0) && (aa % 100 != 0)){
         return 1;
     }else if(aa % 400 == 0){
@@ -110,7 +113,8 @@ int bissexto(int aa){ // Função que calcula se o ano é bissexto. Créditos: F
     }
 }
 
-int dataValida(int dd, int mm, int aa){ // Função que valida datas. Créditos: Flavius Gorgônio da Luz
+// Função que valida datas. Créditos: Flavius Gorgônio da Luz
+int dataValida(int dd, int mm, int aa){ 
     int maiorDia;
     if(aa < 0 || mm < 1 || mm > 12 || dd < 1) {
         return 0;
@@ -132,7 +136,8 @@ int dataValida(int dd, int mm, int aa){ // Função que valida datas. Créditos:
     return 1;
 }
 
-int valida_format_data(char *data){ // Função que valida a formatação da data
+// Função que valida a formatação da data
+int valida_format_data(char *data){
     int tam = strlen(data);
     int cont = 0;
     if(data[0] == '/' || data[tam-2] == '/'){
@@ -159,12 +164,13 @@ int valida_format_data(char *data){ // Função que valida a formatação da dat
     return 1;
 }
 
-void divide_data_inteiro(char *data_teste, int *vetorData){ // Função que quebra a data string em data inteiro
+// Função que quebra a data string em data inteiro
+void divide_data_inteiro(char *data_teste, int *vetorData){
     char copia_data[40];
     char *pt;
-    char dia[10];
-    char mes[10];
-    char ano[20];
+    char dia[10] = {""};
+    char mes[10] = {""};
+    char ano[20] = {""};
     strcpy(copia_data, data_teste);
     pt = strtok(data_teste, "/");
     int cont = 1;
@@ -187,7 +193,8 @@ void divide_data_inteiro(char *data_teste, int *vetorData){ // Função que queb
     strcpy(data_teste, copia_data);
 }
 
-void pegaData(int *vetor){ // Função que pega a data do computador
+// Função que pega a data do computador
+void pegaData(int *vetor){ 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     vetor[0] = tm.tm_year + 1900;
@@ -198,7 +205,8 @@ void pegaData(int *vetor){ // Função que pega a data do computador
     vetor[5] = tm.tm_sec;
 }
 
-void cal_prox_pagamento(int dia, int mes, int ano, int *vetor_data){ // Função que calcula quando será a próxima mensalidade/pagamento
+// Função que calcula quando será a próxima mensalidade/pagamento
+void cal_prox_pagamento(int dia, int mes, int ano, int *vetor_data){
     int dia_t = dia;
     int mes_t = mes;
     int ano_t = ano;
@@ -222,7 +230,8 @@ void cal_prox_pagamento(int dia, int mes, int ano, int *vetor_data){ // Função
     vetor_data[2] = ano_t;
 }
 
-void cal_atraso_etp2(int dia, int mes, int ano, int *diferenca){ // Função que calcula quantas mensalidades/salários estão em atraso
+// Função que calcula quantas mensalidades/salários estão em atraso
+void cal_atraso_etp2(int dia, int mes, int ano, int *diferenca){
 
     int vetor[6];
     pegaData(vetor);
@@ -249,7 +258,8 @@ void cal_atraso_etp2(int dia, int mes, int ano, int *diferenca){ // Função que
     }
 }
 
-int cal_atraso(int dia, int mes, int ano){ // Função que calcula se houve atraso na mensalidade 
+// Função que calcula se houve atraso na mensalidade 
+int cal_atraso(int dia, int mes, int ano){
     int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
     if(bissexto(ano)){
         meses[1] = 29;
@@ -288,7 +298,8 @@ int cal_atraso(int dia, int mes, int ano){ // Função que calcula se houve atra
     }
 }
 
-void cpf_inteiro(char *fone_teste){ // Função que retira caracteres diferentes de números
+// Função que retira caracteres diferentes de números
+void cpf_inteiro(char *fone_teste){ 
     char cpf[30] = {""};
     char *pt;
     pt = strtok(fone_teste, " .-");
@@ -299,39 +310,36 @@ void cpf_inteiro(char *fone_teste){ // Função que retira caracteres diferentes
     strcpy(fone_teste,cpf); 
 }
 
-void loop_fone(char *fone_teste){ // Função de loop de validação de telefone
+// Função de loop de validação de telefone
+void loop_fone(char *fone_teste){ 
 
-    int tam1 = strlen(fone_teste);
-    char *copia_fone;
-    copia_fone = (char*)(malloc(tam1+1));
+    char copia_fone[30] = {""};
     strcpy(copia_fone,fone_teste);
 
     fone_inteiro(copia_fone);
-    printf("%s", copia_fone);
     int verifica = fone_valida_etp2(copia_fone);
     if(verifica == 0){
-        char fone_novo[40];
-        printf("NÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo, 40, stdin); fflush(stdin);
+        char fone_novo[30];
+        printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
+        fgets(fone_novo,30, stdin); fflush(stdin);
         strcpy(copia_fone, fone_novo);
         loop_fone(copia_fone);
     }
     int ok_dd = valida_dd(copia_fone);
     if(ok_dd == 0){
-        char fone_novo2[40];
-        printf("NÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo2, 40, stdin); fflush(stdin);
+        char fone_novo2[30];
+        printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
+        fgets(fone_novo2, 30, stdin); fflush(stdin);
         strcpy(copia_fone, fone_novo2);
         loop_fone(copia_fone);
     }
     strcpy(fone_teste, copia_fone);
 }
 
-void fone_inteiro(char *fone_teste){ // Função que retira caracteres diferentes de números
-    int tam = strlen(fone_teste);
-    char *fone;
+// Função que retira caracteres diferentes de números
+void fone_inteiro(char *fone_teste){ 
+    char fone[30] = {""};
     char *pt;
-    fone = (char*)(malloc(tam+1));
     pt = strtok(fone_teste, ")( .-");
     while(pt){
         strcat(fone, pt);
@@ -340,7 +348,8 @@ void fone_inteiro(char *fone_teste){ // Função que retira caracteres diferente
     strcpy(fone_teste,fone);  
 }
 
-int valida_dd(char *fone_teste){ // Função que verifica se o DD é válido
+// Função que verifica se o DD é válido
+int valida_dd(char *fone_teste){
     int dds[67] = {61,62,64,65,66,67,82,71,73,74,75,77,85,88,98,99,83,81,87,86,89,84,79,68,96,92,97,91,93,94,69,95,63,27,28,31,32,33,34,35,37,38,21,22,24,11,12,13,14,15,16,17,18,19,41,42,43,44,45,46,51,53,54,55,47,48,49};
     int tam = strlen(fone_teste);
     char *dd1;
@@ -368,7 +377,8 @@ int valida_dd(char *fone_teste){ // Função que verifica se o DD é válido
     return 0;
 }
 
-int fone_valida_etp2(char *fone_teste){ //Função Verifica se a quantidade de carcacter está certo
+//Função Verifica se a quantidade de carcacter está certo
+int fone_valida_etp2(char *fone_teste){
     int tam = strlen(fone_teste);
     if(tam != 12){
         return 0;
