@@ -11,13 +11,13 @@ void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcioná
     printf("\t|      Módulo de Registrar Salário     |\n");
     printf("\t========================================\n");
 
-    char cpf[30];
-    char valor_sal[20];
+    char cpf[100];
+    char valor_sal[50];
 
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
     printf("\tINFORME O VALOR DO SALÁRIO: EX: (1.200,99) >>> "); 
-    fgets(valor_sal, 20, stdin); fflush(stdin);
+    fgets(valor_sal, 50, stdin); fflush(stdin);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -50,9 +50,9 @@ void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
     printf("\t|   Módulo de Pesquisar Pagamentos   |\n");
     printf("\t======================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
@@ -67,9 +67,9 @@ void deletar_pagamentos(void){ // Função de deletar pagamentos
     printf("\t|    Módulo de Deletar Pagamentos    |\n");
     printf("\t======================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");

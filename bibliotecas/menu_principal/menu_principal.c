@@ -4,7 +4,7 @@
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
-    char op[3];
+    char op[20];
 
     printf("==============================================================\n");
     printf("|                       MENU PRINCIPAL                       |\n");
@@ -22,7 +22,7 @@ int menu_principal(void){ // Tela principal
     printf("|      ------------------------------------     -----------  |\n");
     printf("==============================================================\n");
     printf("\n");
-    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     printf("\n");
     int x = atoi(op);
     return x;
@@ -30,7 +30,7 @@ int menu_principal(void){ // Tela principal
 
 int clientes(void){ // Tela de Clientes
     setlocale(LC_ALL,"Portuguese");
-    char numero[3];
+    char numero[20];
     printf("--------------------------------------------------------\n");
     printf("|                       MENU CLIENTES                  |\n");
     printf("--------------------------------------------------------\n");
@@ -45,7 +45,7 @@ int clientes(void){ // Tela de Clientes
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA SUA OPÇÃO: "); fgets(numero, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA SUA OPÇÃO: "); fgets(numero, 20, stdin); fflush(stdin);
     int x = atoi(numero);
     printf("\n");
     return x;
@@ -53,7 +53,7 @@ int clientes(void){ // Tela de Clientes
 
 int funcionarios(void){ // Tela do módulo de funcionários
     setlocale(LC_ALL,"Portuguese");
-    char op[3];
+    char op[20];
 
     printf("--------------------------------------------------------\n");
     printf("|                   MENU FUNCIONÁRIOS                  |\n");
@@ -69,14 +69,14 @@ int funcionarios(void){ // Tela do módulo de funcionários
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);
     return x;
 }
 
 int pagamentos(void){ // Tela do módulo de pagamentos
     setlocale(LC_ALL,"Portuguese");
-    char op[3];
+    char op[20];
     printf("---------------------------------------------------------------------\n");
     printf("|                           MENU PAGAMENTOS                         |\n");
     printf("---------------------------------------------------------------------\n");
@@ -91,14 +91,14 @@ int pagamentos(void){ // Tela do módulo de pagamentos
     printf("|   --------------------------     -------------------------------- |\n");
     printf("---------------------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);
     return x;
 }
 
 int mensalidades(void){ // Tela do módulo de mensalidades
     setlocale(LC_ALL,"Portuguese");
-    char op[3];
+    char op[20];
 
     printf("----------------------------------------------------------------------\n");
     printf("|                         MENU MENSALIDADES                          |\n");
@@ -114,14 +114,14 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     printf("|   --------------------------      -------------------------------- |\n");
     printf("----------------------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);
     return x;
 }
 
 int registrar_acesso(void){ // Tela do módulo de registrar acesso
     setlocale(LC_ALL,"Portuguese");
-    char op[3];
+    char op[20];
 
     printf("--------------------------------------------------------\n");
     printf("|                 MENU REGISTRAR ACESSO                |\n");
@@ -134,7 +134,7 @@ int registrar_acesso(void){ // Tela do módulo de registrar acesso
     printf("|   --------------------------------                   |\n");
     printf("--------------------------------------------------------\n");
     printf("\n");
-    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 3, stdin); fflush(stdin);
+    printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);
     return x;
 }

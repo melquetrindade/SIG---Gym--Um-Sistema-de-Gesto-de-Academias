@@ -11,9 +11,9 @@ void registrar_frequencia(void){ // Função de registrar acesso
     printf("\t|     Módulo de Registrar Acesso     |\n");
     printf("\t======================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");

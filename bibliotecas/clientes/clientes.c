@@ -44,9 +44,9 @@ void deletar_clientes(void){  // Função de deletar clientes
     printf("\t|         Módulo de Exclusão      |\n");
     printf("\t===================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
@@ -61,9 +61,9 @@ void recuperar_clientes(void){ // Função de recuperar Clientes
     printf("\t|         Módulo de Recuperar     |\n");
     printf("\t===================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
@@ -78,9 +78,9 @@ void pesquisar_clientes(void){ // Função de pesquisar clientes
     printf("\t|         Módulo de Pesquisar     |\n");
     printf("\t===================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
@@ -95,9 +95,9 @@ void atualizar_clientes(void){ // Função de atualizar clientes
     printf("\t|       Módulo de Atualização     |\n");
     printf("\t===================================\n");
 
-    char cpf[30];
+    char cpf[100];
 
-    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 30, stdin); fflush(stdin);
+    printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
