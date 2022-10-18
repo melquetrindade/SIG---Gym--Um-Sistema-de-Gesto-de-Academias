@@ -8,15 +8,15 @@
 // Função de loop de validação de cpf
 void loop_cpf(char *cpf_teste){
 
-    char copia_cpf[30];
+    char copia_cpf[100];
     strcpy(copia_cpf,cpf_teste);
 
     cpf_inteiro(copia_cpf);
     int verifica = valida_cpf(copia_cpf);
     if(verifica == 0){
-        char cpf_novo[40];
+        char cpf_novo[100];
         printf("\tCPF INVÁLIDO, DIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> "); 
-        fgets(cpf_novo, 40, stdin); fflush(stdin);
+        fgets(cpf_novo, 100, stdin); fflush(stdin);
         strcpy(copia_cpf, cpf_novo);
         loop_cpf(copia_cpf);
     }
@@ -26,7 +26,7 @@ void loop_cpf(char *cpf_teste){
 // Função que válida CPF
 int valida_cpf(char *cpf_teste){ 
 
-    char cpf[30];
+    char cpf[100];
     strcpy(cpf, cpf_teste);
 
     int tam = strlen(cpf);
@@ -74,7 +74,7 @@ int valida_cpf(char *cpf_teste){
 // Função que fica no loop até o usuário digitar uma data válida
 void loop_de_validacao_data(char *data_teste){ 
 
-    char data_aux[40];
+    char data_aux[100];
     int vetor_data[3]; 
     strcpy(data_aux, data_teste);
     int formatacao = valida_format_data(data_aux);
@@ -82,9 +82,9 @@ void loop_de_validacao_data(char *data_teste){
     if(formatacao == 0){
         while(formatacao == 0){
             printf("\tERRO DE FORMATACAO, TENTE NOVAMENTE!\n");
-            char data_aux2[40];
+            char data_aux2[100];
             printf("\tDIGITE UMA NOVA DATA: (dd/mm/aaaa) >>> "); 
-            fgets(data_aux2, 40, stdin); fflush(stdin);
+            fgets(data_aux2, 100, stdin); fflush(stdin);
             strcpy(data_aux, data_aux2);
             formatacao = valida_format_data(data_aux);
         }
@@ -93,9 +93,9 @@ void loop_de_validacao_data(char *data_teste){
     int confirma_data = dataValida(vetor_data[0], vetor_data[1], vetor_data[2]);
     if(confirma_data == 0){
         printf("\tA DATA INFORMADA E INVALIDA, TENTE NOVAMENTE!\n");
-        char data_aux3[40];
+        char data_aux3[100];
         printf("\tINFORME UMA DATA VALIDA: (dd/mm/aaaa) >>> "); 
-        fgets(data_aux3, 40, stdin); fflush(stdin);
+        fgets(data_aux3, 100, stdin); fflush(stdin);
         strcpy(data_aux, data_aux3);
         loop_de_validacao_data(data_aux);
     }
@@ -168,9 +168,9 @@ int valida_format_data(char *data){
 void divide_data_inteiro(char *data_teste, int *vetorData){
     char copia_data[40];
     char *pt;
-    char dia[10] = {""};
-    char mes[10] = {""};
-    char ano[20] = {""};
+    char dia[30] = {""};
+    char mes[30] = {""};
+    char ano[30] = {""};
     strcpy(copia_data, data_teste);
     pt = strtok(data_teste, "/");
     int cont = 1;
@@ -315,17 +315,17 @@ void loop_fone(char *fone_teste){
     fone_inteiro(fone_teste);
     int verifica = fone_valida_etp2(fone_teste);
     if(verifica == 0){
-        char fone_novo[40] = {""};
+        char fone_novo[100] = {""};
         printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo,40, stdin); fflush(stdin);
+        fgets(fone_novo,100, stdin); fflush(stdin);
         strcpy(fone_teste, fone_novo);
         loop_fone(fone_teste);
     }
     int ok_dd = valida_dd(fone_teste);
     if(ok_dd == 0){
-        char fone_novo2[40] = {""};
+        char fone_novo2[100] = {""};
         printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo2, 40, stdin); fflush(stdin);
+        fgets(fone_novo2, 100, stdin); fflush(stdin);
         strcpy(fone_teste, fone_novo2);
         loop_fone(fone_teste);
     }
@@ -333,7 +333,7 @@ void loop_fone(char *fone_teste){
 
 // Função que retira caracteres diferentes de números
 void fone_inteiro(char *fone_teste){ 
-    char fone[40] = {""};
+    char fone[100] = {""};
     char *pt;
     pt = strtok(fone_teste, ")( .-");
     while(pt){
@@ -387,7 +387,7 @@ int fone_valida_etp2(char *fone_teste){
     }
     return 1;
 }
-
+// Função que quebra o email em duas partes;
 void quebra_email(char *email_teste, char *prt_local, char *prt_dominio){
     char copia_email[200] = {""};
     strcpy(copia_email, email_teste);
@@ -411,6 +411,7 @@ void quebra_email(char *email_teste, char *prt_local, char *prt_dominio){
 
 }
 
+// Função que verifica se tem o @ no email
 int verifica_arroba(char *email_teste){
     int tam = strlen(email_teste);
     int cont = 0;
@@ -428,6 +429,7 @@ int verifica_arroba(char *email_teste){
     return 1;
 }
 
+// Função que recebe o retorno da função local e domínio
 int valida_local_dominio(char *local, char *dominio){
     int recebe_local = verifica_local(local);
     int recebe_dominio = verifica_dominio(dominio);
@@ -437,6 +439,7 @@ int valida_local_dominio(char *local, char *dominio){
     return 0;
 }
 
+// Função que valida a parte local do email
 int verifica_local(char *local){ // # ! % $ ‘ & + * – / = ? ^ _`. { | } ~
     int caracteres[20] = {35,33,37,36,39,38,43,42,95,47,61,63,94,45,96,46,123,124,125,126};
     int tam = strlen(local);
@@ -469,6 +472,7 @@ int verifica_local(char *local){ // # ! % $ ‘ & + * – / = ? ^ _`. { | } ~
     return 1;
 }
 
+// Função que valida a parte domínio do email
 int verifica_dominio(char *dominio){
     int tam = strlen(dominio);
     int cont = 0;
@@ -510,6 +514,7 @@ int verifica_dominio(char *dominio){
     return 1;
 }
 
+// Função do loop do email
 void loop_email(char *email_teste){ 
     int taOk = verifica_arroba(email_teste);
 
