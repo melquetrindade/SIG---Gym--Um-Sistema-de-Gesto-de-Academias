@@ -11,12 +11,13 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    char cpf[30], nome[100], email[100], fone[30], data_nas[40];
+    char cpf[30], nome[100], email[200], fone[30], data_nas[40];
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 30, stdin); fflush(stdin);
     loop_cpf(cpf);
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
-    printf("\tE-MAIL: "); fgets(email, 100, stdin); fflush(stdin);
+    printf("\tE-MAIL: "); fgets(email, 200, stdin); fflush(stdin);
+    loop_email(email);
     printf("\tTELEFONE:(APENAS NÚMEROS)>>> +55 "); fgets(fone, 30, stdin); fflush(stdin);
     loop_fone(fone);
     printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 40, stdin); fflush(stdin);

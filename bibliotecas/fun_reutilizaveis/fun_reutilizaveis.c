@@ -393,3 +393,154 @@ int fone_valida_etp2(char *fone_teste){
     }
     return 1;
 }
+
+void quebra_email(char *email_teste, char *prt_local, char *prt_dominio){
+    char copia_email[200] = {""};
+    strcpy(copia_email, email_teste);
+    char local[100] = {""};
+    char dominio[100] = {""};
+    char *pt;
+    pt = strtok(copia_email, "@");
+    int cont = 1;
+    while(pt){
+        if(cont == 1){
+            strcat(local, pt);
+        }
+        else{
+            strcat(dominio, pt);
+        }
+        cont += 1;
+        pt = strtok(NULL, "@");
+    }
+    strcpy(prt_local,local);
+    strcpy(prt_dominio, dominio); 
+
+}
+
+int verifica_arroba(char *email_teste){
+    int tam = strlen(email_teste);
+    int cont = 0;
+    for(int i = 0; i < (tam-1); i++){
+        if(email_teste[i] == '@'){
+            cont += 1;
+        }
+        else{
+            continue;
+        }
+    }
+    if(cont != 1){
+        return 0;
+    }
+    return 1;
+}
+
+int valida_local_dominio(char *local, char *dominio){
+    int recebe_local = verifica_local(local);
+    int recebe_dominio = verifica_dominio(dominio);
+    if(recebe_local == 1 && recebe_dominio == 1){
+        return 1;
+    }
+    return 0;
+}
+
+int verifica_local(char *local){ // # ! % $ ‘ & + * – / = ? ^ _`. { | } ~
+    int caracteres[20] = {35,33,37,36,39,38,43,42,95,47,61,63,94,45,96,46,123,124,125,126};
+    int tam = strlen(local);
+    if(tam > 65){
+        return 0;
+    }if(local[0] == '.'){
+        return 0;
+    }for(int i = 0; i < (tam); i++){
+        if(local[i] >= 'a' && local[i] <= 'z'){
+            continue;
+        }else if(local[i] >= 'A' && local[i] <= 'Z'){
+            continue;
+        }else if(local[i] == '.' && local[i+1] == '.'){
+            return 0;
+        }else if(local[i] >= '0' && local[i] <= '9'){
+            continue;
+        }else{
+            int con3 = 0;
+            for(int y = 0; y < 20; y++){
+                if(local[i] == caracteres[y]){
+                    continue;
+                }else{
+                    con3 += 1;
+                }
+            }if(con3 == 20){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int verifica_dominio(char *dominio){
+    int tam = strlen(dominio);
+    int cont = 0;
+    int cont2 = 0;
+    if(tam > 65){
+        return 0;
+    }
+    if((dominio[tam-2] == '.') || (dominio[0] == '-' && dominio[tam-2] == '-')){
+        return 0;
+    }
+    for(int i = 0; i < (tam - 2); i++){
+        if((dominio[i] >= 'a' && dominio[i] <= 'z') || (dominio[i] >= 'A' && dominio[i] <= 'Z')){
+            continue;
+        }
+        else if(dominio[i] >= '0' && dominio[i] <= '9'){
+            cont += 1;
+            continue;
+        }
+        else if(dominio[i] == '.' && dominio[i+1] == '.'){
+            return 0;
+        }
+        else if(dominio[i] == '.'){
+            cont2 += 1;
+            continue;
+        }
+        else if(dominio[i] == '-'){
+            continue;
+        }
+        else{
+            return 0;
+        }
+    }
+    if(cont == tam){
+        return 0;
+    }
+    if(cont2 < 1){
+        return 0;
+    }
+    return 1;
+}
+
+void loop_email(char *email_teste){ 
+    char copia_email[200] = {""};
+    strcpy(copia_email, email_teste);
+    int taOk = verifica_arroba(copia_email);
+
+    if(taOk == 1){
+        char local[100] = {""};
+        char dominio[100] = {""};
+        quebra_email(copia_email, local, dominio);
+        int confirma = valida_local_dominio(local, dominio);
+        if(confirma == 0){
+            char email_novo[200] = {""};
+            printf("\tE-MAIL INVÁLIDO, DIGITE UM NOVO E-MAIL: "); 
+            fgets(email_novo,200, stdin); fflush(stdin);
+            strcpy(email_teste, email_novo);
+            loop_email(email_teste);
+        }
+        strcpy(email_teste,copia_email);
+
+    }
+    else{
+        char email_novo[200] = {""};
+        printf("\tE-MAIL INVÁLIDO, DIGITE UM NOVO E-MAIL: "); 
+        fgets(email_novo,200, stdin); fflush(stdin);
+        strcpy(email_teste, email_novo);
+        loop_email(email_teste);
+    }
+}
