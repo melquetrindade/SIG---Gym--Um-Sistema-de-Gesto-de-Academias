@@ -312,33 +312,28 @@ void cpf_inteiro(char *fone_teste){
 
 // Função de loop de validação de telefone
 void loop_fone(char *fone_teste){ 
-
-    char copia_fone[30] = {""};
-    strcpy(copia_fone,fone_teste);
-
-    fone_inteiro(copia_fone);
-    int verifica = fone_valida_etp2(copia_fone);
+    fone_inteiro(fone_teste);
+    int verifica = fone_valida_etp2(fone_teste);
     if(verifica == 0){
-        char fone_novo[30];
+        char fone_novo[40] = {""};
         printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo,30, stdin); fflush(stdin);
-        strcpy(copia_fone, fone_novo);
-        loop_fone(copia_fone);
+        fgets(fone_novo,40, stdin); fflush(stdin);
+        strcpy(fone_teste, fone_novo);
+        loop_fone(fone_teste);
     }
-    int ok_dd = valida_dd(copia_fone);
+    int ok_dd = valida_dd(fone_teste);
     if(ok_dd == 0){
-        char fone_novo2[30];
+        char fone_novo2[40] = {""};
         printf("\tNÚMERO INVÁLIDO, DIGITE UM NOVO NÚMERO: (APENAS NÚMEROS)>>> "); 
-        fgets(fone_novo2, 30, stdin); fflush(stdin);
-        strcpy(copia_fone, fone_novo2);
-        loop_fone(copia_fone);
+        fgets(fone_novo2, 40, stdin); fflush(stdin);
+        strcpy(fone_teste, fone_novo2);
+        loop_fone(fone_teste);
     }
-    strcpy(fone_teste, copia_fone);
 }
 
 // Função que retira caracteres diferentes de números
 void fone_inteiro(char *fone_teste){ 
-    char fone[30] = {""};
+    char fone[40] = {""};
     char *pt;
     pt = strtok(fone_teste, ")( .-");
     while(pt){
@@ -352,9 +347,8 @@ void fone_inteiro(char *fone_teste){
 int valida_dd(char *fone_teste){
     int dds[67] = {61,62,64,65,66,67,82,71,73,74,75,77,85,88,98,99,83,81,87,86,89,84,79,68,96,92,97,91,93,94,69,95,63,27,28,31,32,33,34,35,37,38,21,22,24,11,12,13,14,15,16,17,18,19,41,42,43,44,45,46,51,53,54,55,47,48,49};
     int tam = strlen(fone_teste);
-    char *dd1;
+    char dd1[3];
     char resto2[10];
-    dd1 = (char*)(malloc(tam+1));
     strncpy(dd1, fone_teste, 2);
     for(int i = 0; i < tam; i++){
         if(i > 1){
@@ -517,14 +511,12 @@ int verifica_dominio(char *dominio){
 }
 
 void loop_email(char *email_teste){ 
-    char copia_email[200] = {""};
-    strcpy(copia_email, email_teste);
-    int taOk = verifica_arroba(copia_email);
+    int taOk = verifica_arroba(email_teste);
 
     if(taOk == 1){
         char local[100] = {""};
         char dominio[100] = {""};
-        quebra_email(copia_email, local, dominio);
+        quebra_email(email_teste, local, dominio);
         int confirma = valida_local_dominio(local, dominio);
         if(confirma == 0){
             char email_novo[200] = {""};
@@ -533,8 +525,6 @@ void loop_email(char *email_teste){
             strcpy(email_teste, email_novo);
             loop_email(email_teste);
         }
-        strcpy(email_teste,copia_email);
-
     }
     else{
         char email_novo[200] = {""};
