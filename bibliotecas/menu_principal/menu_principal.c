@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "../menu_principal/menu_principal.h"
 
 int menu_principal(void){ // Tela principal
     setlocale(LC_ALL,"Portuguese");
