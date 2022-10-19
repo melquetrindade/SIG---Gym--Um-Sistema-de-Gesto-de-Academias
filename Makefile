@@ -1,15 +1,16 @@
 run: all
-	./SIG---Gym--Um-Sistema-de-Gesto-de-Academias
+	
 
 all:
-	gcc -c -Wall ./biblioteca/clientes/clientes.c; 
-	gcc -c -Wall ./biblioteca/fun_reutilizaveis/fun_reutilizaveis.c; 
-	gcc -c -Wall ./biblioteca/funcionarios/funcionarios.c; 
-	gcc -c -Wall ./biblioteca/informes/informes.c; 
-	gcc -c -Wall ./biblioteca/mensalidades/mensalidades.c; 
-	gcc -c -Wall ./biblioteca/menu_principal/menu_principal.c;
-	gcc -c -Wall ./biblioteca/pagamentos/pagamentos.c; 
-	gcc -c -Wall ./biblioteca/reg_acesso/reg_acesso.c;
+	gcc -c -Wall bibliotecas/clientes/clientes.c; 
+	gcc -c -Wall bibliotecas/fun_reutilizaveis/fun_reutilizaveis.c; 
+	gcc -c -Wall bibliotecas/funcionarios/funcionarios.c; 
+	gcc -c -Wall bibliotecas/informes/informes.c; 
+	gcc -c -Wall bibliotecas/mensalidades/mensalidades.c; 
+	gcc -c -Wall bibliotecas/menu_principal/menu_principal.c;
+	gcc -c -Wall bibliotecas/pagamentos/pagamentos.c; 
+	gcc -c -Wall bibliotecas/reg_acesso/reg_acesso.c;
+	gcc -c -Wall main.c
 	gcc -o main *.o;
 
 clean:
