@@ -26,7 +26,7 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\n\tPLANOS: \n\t1- BÁSICO: R$ 59,99\n\t2- MÉDIO: R$ 69,99\n\t3- PREMIUM: 79,99");
     printf("\n\t>>> SELECIONE UM PLANO: ");
     fgets(plano, 20, stdin); fflush(stdin);
-    loop_valor(plano);
+    loop_valor_cliente(plano);
 
 
     system("clear||cls");

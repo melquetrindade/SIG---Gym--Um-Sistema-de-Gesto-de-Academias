@@ -12,12 +12,9 @@ void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcioná
     printf("\t========================================\n");
 
     char cpf[100];
-    char valor_sal[50];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
-    printf("\tINFORME O VALOR DO SALÁRIO: EX: (1.200,99) >>> "); 
-    fgets(valor_sal, 50, stdin); fflush(stdin);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();

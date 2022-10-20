@@ -12,12 +12,9 @@ void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     printf("\t=======================================\n");
 
     char cpf[100];
-    char valor_mens[50];
 
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
-    printf("\tINFORME O VALOR DA MENSALIDADE: EX: (60,99) >>> "); 
-    fgets(valor_mens, 50, stdin); fflush(stdin);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();

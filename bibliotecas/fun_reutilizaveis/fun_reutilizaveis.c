@@ -587,7 +587,7 @@ void formata_nome(char *nome_teste){ // Função que quebra a data string em dat
     strcpy(nome_teste,nome);
 }
 
-int valida_caracter_valor(char *valor){
+int valida_caracter_valor_cliente(char *valor){
     int tam = strlen(valor);
     if(tam != 2){
         return 0;
@@ -612,24 +612,63 @@ void valor_inteiro(char *plano_teste){ // Função que retira caracteres diferen
     strcpy(plano_teste,plano);  
 }
 
-void loop_valor(char *valor_teste){
+void loop_valor_cliente(char *valor_teste){
 
     valor_inteiro(valor_teste);
-    int verifica = valida_caracter_valor(valor_teste);
+    int verifica = valida_caracter_valor_cliente(valor_teste);
     if(verifica == 0){
         char valor_novo[20];
         printf("\tPLANO INVÁLIDO, DIGITE UM NOVO PLANO: "); 
         fgets(valor_novo, 20, stdin); fflush(stdin);
         strcpy(valor_teste, valor_novo);
-        loop_valor(valor_teste);
+        loop_valor_cliente(valor_teste);
     }
     if(valor_teste[0] == 49){
         strcpy(valor_teste, "59,99");
     }
-    else if(valor_teste[0] == 49){
+    else if(valor_teste[0] == 50){
         strcpy(valor_teste, "69,99");
     }
     else{
         strcpy(valor_teste, "79,99");
     }
+}
+
+void loop_valor_funcionario(char *valor_teste){
+
+    valor_inteiro(valor_teste);
+    int verifica = valida_caracter_valor_funcionario(valor_teste);
+    if(verifica == 0){
+        char valor_novo[20];
+        printf("\tPLANO INVÁLIDO, DIGITE UM NOVO PLANO: "); 
+        fgets(valor_novo, 20, stdin); fflush(stdin);
+        strcpy(valor_teste, valor_novo);
+        loop_valor_funcionario(valor_teste);
+    }
+    if(valor_teste[0] == 49){
+        strcpy(valor_teste, "606,00");
+    }
+    else if(valor_teste[0] == 50){
+        strcpy(valor_teste, "1.212,00");
+    }
+    else if(valor_teste[0] == 51){
+        strcpy(valor_teste, "2.424,00");
+    }
+    else{
+        strcpy(valor_teste, "3.636,00");
+    }
+}
+
+int valida_caracter_valor_funcionario(char *valor){
+    int tam = strlen(valor);
+    if(tam != 2){
+        return 0;
+    }
+    int planos[5] = {49,50,51,52,10};
+    for(int i = 0; i < 5; i++){
+        if(valor[0] == planos[i]){
+            return 1;
+        }
+    }
+    return 0;
 }

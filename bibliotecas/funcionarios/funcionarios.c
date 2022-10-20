@@ -26,6 +26,7 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     printf("\n\tSALÁRIOS: \n\t1- MEIO SALÁRIO: R$ 606,00\n\t2- UM SALÁRIO: R$ 1.212,00\n\t3- DOIS SALÁRIOS: R$ 2.424,00\n\t4- TRÊS SALÁRIOS: R$ 3.636,00");
     printf("\n\t>>> SELECIONE UM SALÁRIO: ");
     fgets(salario, 20, stdin); fflush(stdin);
+    loop_valor_funcionario(salario);
 
     system("clear||cls");
 
@@ -35,9 +36,9 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     printf("\tE-MAIL: %s", email);
     printf("\tTELEFONE: +55 %s", fone);
     printf("\tDATA DE NASCIMENTO: %s", data_nas);
-    printf("\tSALÁRIO: %s", salario);
+    printf("\tSALÁRIO: R$ %s", salario);
     
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
