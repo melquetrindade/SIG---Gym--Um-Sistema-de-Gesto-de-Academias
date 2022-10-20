@@ -539,3 +539,97 @@ void loop_email(char *email_teste){
         loop_email(email_teste);
     }
 }
+
+int verifica_caracter(char *nome){
+    int tam = strlen(nome);
+    for(int i = 0; i < (tam-1); i++){
+        if((nome[i] >= 33 && nome[i] <= 64) || (nome[i] >= 91 && nome[i] <= 96)){
+            return 0;
+        }
+        else if(nome[i] >= 123 && nome[i] <= 126){
+            return 0;
+        }
+        else{
+            continue;
+        }
+    }
+    if(tam == 2){
+        if(nome[0] == 10){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void loop_nome(char *nome_teste){
+
+    formata_nome(nome_teste);
+    verifica_caracter(nome_teste);
+    int verifica = verifica_caracter(nome_teste);
+    if(verifica == 0){
+        char nome_novo[100] = {""};
+        printf("\tNOME INVÁLIDO, DIGITE UM NOVO NOME: "); 
+        fgets(nome_novo, 100, stdin); fflush(stdin);
+        strcpy(nome_teste, nome_novo);
+        loop_nome(nome_teste);
+    }
+}
+
+void formata_nome(char *nome_teste){ // Função que quebra a data string em data inteiro
+    char *pt;
+    char nome[100] = {""};
+    pt = strtok(nome_teste, " ");
+    while(pt){
+        strcat(nome, pt);
+        strcat(nome, " ");
+        pt = strtok(NULL, " ");
+    }
+    strcpy(nome_teste,nome);
+}
+
+int valida_caracter_valor(char *valor){
+    int tam = strlen(valor);
+    if(tam != 2){
+        return 0;
+    }
+    int planos[4] = {49,50,51,10};
+    for(int i = 0; i < 4; i++){
+        if(valor[0] == planos[i]){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void valor_inteiro(char *plano_teste){ // Função que retira caracteres diferentes de números
+    char plano[20] = {""};
+    char *pt;
+    pt = strtok(plano_teste, " ");
+    while(pt){
+        strcat(plano, pt);
+        pt = strtok(NULL, " ");
+    }
+    strcpy(plano_teste,plano);  
+}
+
+void loop_valor(char *valor_teste){
+
+    valor_inteiro(valor_teste);
+    int verifica = valida_caracter_valor(valor_teste);
+    if(verifica == 0){
+        char valor_novo[20];
+        printf("\tPLANO INVÁLIDO, DIGITE UM NOVO PLANO: "); 
+        fgets(valor_novo, 20, stdin); fflush(stdin);
+        strcpy(valor_teste, valor_novo);
+        loop_valor(valor_teste);
+    }
+    if(valor_teste[0] == 49){
+        strcpy(valor_teste, "59,99");
+    }
+    else if(valor_teste[0] == 49){
+        strcpy(valor_teste, "69,99");
+    }
+    else{
+        strcpy(valor_teste, "79,99");
+    }
+}

@@ -11,26 +11,31 @@ void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    char cpf[100], nome[100], email[200], fone[100], data_nas[100];
+    char cpf[100], nome[100], email[200], fone[100], data_nas[100], salario[20];
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
     printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
+    loop_nome(nome);
     printf("\tE-MAIL: "); fgets(email, 200, stdin); fflush(stdin);
     loop_email(email);
     printf("\tTELEFONE:(APENAS NÚMEROS)>>> +55 "); fgets(fone, 100, stdin); fflush(stdin);
     loop_fone(fone);
     printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 100, stdin); fflush(stdin);
     loop_de_validacao_data(data_nas);
+    printf("\n\tSALÁRIOS: \n\t1- MEIO SALÁRIO: R$ 606,00\n\t2- UM SALÁRIO: R$ 1.212,00\n\t3- DOIS SALÁRIOS: R$ 2.424,00\n\t4- TRÊS SALÁRIOS: R$ 3.636,00");
+    printf("\n\t>>> SELECIONE UM SALÁRIO: ");
+    fgets(salario, 20, stdin); fflush(stdin);
 
     system("clear||cls");
 
-    printf("\tFUNCIONÁRIO CADASTRADO COM SUCESSO!\n");
+    printf("\n\n\tFUNCIONÁRIO CADASTRADO COM SUCESSO!\n");
     printf("\n\tCPF: %s", cpf);
     printf("\tNOME: %s", nome);
     printf("\tE-MAIL: %s", email);
     printf("\tTELEFONE: +55 %s", fone);
     printf("\tDATA DE NASCIMENTO: %s", data_nas);
+    printf("\tSALÁRIO: %s", salario);
     
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
