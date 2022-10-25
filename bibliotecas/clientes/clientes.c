@@ -3,6 +3,9 @@
 #include <locale.h>
 #include "../fun_reutilizaveis/fun_reutilizaveis.h"
 #include "../menu_principal/menu_principal.h"
+#include "clientes.h"
+
+typedef struct cliente Cliente;
 
 void cadastrar_clientes(void){ // Função de cadastrar clientes
     system("clear||cls");
@@ -11,33 +14,34 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    char cpf[100], nome[100], email[200], fone[100], data_nas[100], plano[20];
+    //char cpf[100], nome[100], email[200], fone[100], data_nas[100], plano[20];
+    Cliente cliente;
 
-    printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cpf, 100, stdin); fflush(stdin);
-    loop_cpf(cpf);
-    printf("\tNOME: "); fgets(nome, 100, stdin); fflush(stdin);
-    loop_nome(nome);
-    printf("\tE-MAIL: "); fgets(email, 200, stdin); fflush(stdin);
-    loop_email(email);
-    printf("\tTELEFONE:(APENAS NÚMEROS)>>> +55 "); fgets(fone, 100, stdin); fflush(stdin);
-    loop_fone(fone);
-    printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(data_nas, 100, stdin); fflush(stdin);
-    loop_de_validacao_data(data_nas);
+    printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cliente.cpf, 100, stdin); fflush(stdin);
+    loop_cpf(cliente.cpf);
+    printf("\tNOME: "); fgets(cliente.nome, 100, stdin); fflush(stdin);
+    loop_nome(cliente.nome);
+    printf("\tE-MAIL: "); fgets(cliente.email, 200, stdin); fflush(stdin);
+    loop_email(cliente.email);
+    printf("\tTELEFONE:(APENAS NÚMEROS)>>> +55 "); fgets(cliente.fone, 100, stdin); fflush(stdin);
+    loop_fone(cliente.fone);
+    printf("\tDATA DE NASCIMENTO:(dd/mm/aaaa)>>> "); fgets(cliente.data_nas, 100, stdin); fflush(stdin);
+    loop_de_validacao_data(cliente.data_nas);
     printf("\n\tPLANOS: \n\t1- BÁSICO: R$ 59,99\n\t2- MÉDIO: R$ 69,99\n\t3- PREMIUM: 79,99");
     printf("\n\t>>> SELECIONE UM PLANO: ");
-    fgets(plano, 20, stdin); fflush(stdin);
-    loop_valor_cliente(plano);
+    fgets(cliente.plano, 20, stdin); fflush(stdin);
+    loop_valor_cliente(cliente.plano);
 
 
     system("clear||cls");
 
     printf("\tCLIENTE CADASTRADO COM SUCESSO!\n");
-    printf("\n\tCPF: %s", cpf);
-    printf("\tNOME: %s", nome);
-    printf("\tE-MAIL: %s", email);
-    printf("\tTELEFONE: +55 %s", fone);
-    printf("\tDATA DE NASCIMENTO: %s", data_nas);
-    printf("\tPLANO: R$ %s", plano);
+    printf("\n\tCPF: %s", cliente.cpf);
+    printf("\tNOME: %s", cliente.nome);
+    printf("\tE-MAIL: %s", cliente.email);
+    printf("\tTELEFONE: +55 %s", cliente.fone);
+    printf("\tDATA DE NASCIMENTO: %s", cliente.data_nas);
+    printf("\tPLANO: R$ %s", cliente.plano);
     
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
