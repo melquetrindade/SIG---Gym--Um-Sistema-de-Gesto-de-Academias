@@ -4,7 +4,7 @@
 #include "../menu_principal/menu_principal.h"
 #include "informes.h"
 
-void informes(void){
+void informes(void){ // Função de exibir os informes
     system("clear||cls");
     tela_sobre_o_tema();
     printf("\n\tPresione <ENTER> para continuar >>> ");

@@ -14,7 +14,6 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     printf("\t|         Módulo de Cadastro      |\n");
     printf("\t===================================\n");
 
-    //char cpf[100], nome[100], email[200], fone[100], data_nas[100], plano[20];
     Cliente cliente;
 
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cliente.cpf, 100, stdin); fflush(stdin);

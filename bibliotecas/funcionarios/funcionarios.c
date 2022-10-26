@@ -5,6 +5,8 @@
 #include "../menu_principal/menu_principal.h"
 #include "funcionarios.h"
 
+typedef struct funcionario Funcionario;
+
 void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     system("clear||cls");
 
