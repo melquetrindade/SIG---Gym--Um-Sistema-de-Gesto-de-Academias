@@ -32,17 +32,8 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     fgets(cliente.plano, 20, stdin); fflush(stdin);
     loop_valor_cliente(cliente.plano);
 
+    exibe_cliente(&cliente);
 
-    system("clear||cls");
-
-    printf("\tCLIENTE CADASTRADO COM SUCESSO!\n");
-    printf("\n\tCPF: %s", cliente.cpf);
-    printf("\tNOME: %s", cliente.nome);
-    printf("\tE-MAIL: %s", cliente.email);
-    printf("\tTELEFONE: +55 %s", cliente.fone);
-    printf("\tDATA DE NASCIMENTO: %s", cliente.data_nas);
-    printf("\tPLANO: R$ %s", cliente.plano);
-    
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -137,4 +128,16 @@ void listar_clientes(void){ // Função de listar clientes
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
+}
+
+void exibe_cliente(const Cliente* cliente){ // Função exibe o cliente cadastrado
+    system("clear||cls");
+
+    printf("\tCLIENTE CADASTRADO COM SUCESSO!\n");
+    printf("\n\tCPF: %s", cliente->cpf);
+    printf("\tNOME: %s", cliente->nome);
+    printf("\tE-MAIL: %s", cliente->email);
+    printf("\tTELEFONE: +55 %s", cliente->fone);
+    printf("\tDATA DE NASCIMENTO: %s", cliente->data_nas);
+    printf("\tPLANO: R$ %s", cliente->plano);
 }

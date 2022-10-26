@@ -8,19 +8,15 @@
 // Função de loop de validação de cpf
 void loop_cpf(char *cpf_teste){
 
-    char copia_cpf[100];
-    strcpy(copia_cpf,cpf_teste);
-
-    cpf_inteiro(copia_cpf);
-    int verifica = valida_cpf(copia_cpf);
+    cpf_inteiro(cpf_teste);
+    int verifica = valida_cpf(cpf_teste);
     if(verifica == 0){
         char cpf_novo[100];
         printf("\tCPF INVÁLIDO, DIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> "); 
         fgets(cpf_novo, 100, stdin); fflush(stdin);
-        strcpy(copia_cpf, cpf_novo);
-        loop_cpf(copia_cpf);
+        strcpy(cpf_teste, cpf_novo);
+        loop_cpf(cpf_teste);
     }
-    strcpy(cpf_teste, copia_cpf);
 }
 
 // Função que válida CPF
@@ -540,6 +536,7 @@ void loop_email(char *email_teste){
     }
 }
 
+// Função verica se existe outro que não seja letras
 int verifica_caracter(char *nome){
     int tam = strlen(nome);
     for(int i = 0; i < (tam-1); i++){
@@ -561,6 +558,7 @@ int verifica_caracter(char *nome){
     return 1;
 }
 
+// Função de loop de nome
 void loop_nome(char *nome_teste){
 
     formata_nome(nome_teste);
@@ -575,7 +573,8 @@ void loop_nome(char *nome_teste){
     }
 }
 
-void formata_nome(char *nome_teste){ // Função que quebra a data string em data inteiro
+// Função retira todos os caracteres de espaçamento
+void formata_nome(char *nome_teste){
     char *pt;
     char nome[100] = {""};
     pt = strtok(nome_teste, " ");
@@ -587,6 +586,7 @@ void formata_nome(char *nome_teste){ // Função que quebra a data string em dat
     strcpy(nome_teste,nome);
 }
 
+// Função que verifica se a opção do plano é válida
 int valida_caracter_valor_cliente(char *valor){
     int tam = strlen(valor);
     if(tam != 2){
@@ -601,7 +601,8 @@ int valida_caracter_valor_cliente(char *valor){
     return 0;
 }
 
-void valor_inteiro(char *plano_teste){ // Função que retira caracteres diferentes de números
+// Função retira todos os caracteres de espaçamento
+void valor_inteiro(char *plano_teste){
     char plano[20] = {""};
     char *pt;
     pt = strtok(plano_teste, " ");
@@ -612,6 +613,7 @@ void valor_inteiro(char *plano_teste){ // Função que retira caracteres diferen
     strcpy(plano_teste,plano);  
 }
 
+// Função de lopp de plano para clientes
 void loop_valor_cliente(char *valor_teste){
 
     valor_inteiro(valor_teste);
@@ -623,17 +625,20 @@ void loop_valor_cliente(char *valor_teste){
         strcpy(valor_teste, valor_novo);
         loop_valor_cliente(valor_teste);
     }
-    if(valor_teste[0] == 49){
-        strcpy(valor_teste, "59,99");
-    }
-    else if(valor_teste[0] == 50){
-        strcpy(valor_teste, "69,99");
-    }
     else{
-        strcpy(valor_teste, "79,99");
+        if(valor_teste[0] == 49){
+            strcpy(valor_teste, "59,99");
+        }
+        else if(valor_teste[0] == 50){
+            strcpy(valor_teste, "69,99");
+        }
+        else{
+            strcpy(valor_teste, "79,99");
+        }
     }
 }
 
+// Função de loop de salário para funcionários
 void loop_valor_funcionario(char *valor_teste){
 
     valor_inteiro(valor_teste);
@@ -645,20 +650,23 @@ void loop_valor_funcionario(char *valor_teste){
         strcpy(valor_teste, valor_novo);
         loop_valor_funcionario(valor_teste);
     }
-    if(valor_teste[0] == 49){
-        strcpy(valor_teste, "606,00");
-    }
-    else if(valor_teste[0] == 50){
-        strcpy(valor_teste, "1.212,00");
-    }
-    else if(valor_teste[0] == 51){
-        strcpy(valor_teste, "2.424,00");
-    }
     else{
-        strcpy(valor_teste, "3.636,00");
+        if(valor_teste[0] == 49){
+            strcpy(valor_teste, "606,00");
+        }
+        else if(valor_teste[0] == 50){
+            strcpy(valor_teste, "1.212,00");
+        }
+        else if(valor_teste[0] == 51){
+            strcpy(valor_teste, "2.424,00");
+        }
+        else{
+            strcpy(valor_teste, "3.636,00");
+        }
     }
 }
 
+// Função que verifica se a opção de salário é válida
 int valida_caracter_valor_funcionario(char *valor){
     int tam = strlen(valor);
     if(tam != 2){

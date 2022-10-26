@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "../menu_principal/menu_principal.h"
+#include "informes.h"
 
 void informes(void){
     system("clear||cls");

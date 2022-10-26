@@ -1,10 +1,3 @@
-void cadastrar_clientes(void);
-void deletar_clientes(void);
-void recuperar_clientes(void);
-void pesquisar_clientes(void);
-void atualizar_clientes(void);
-void listar_clientes(void);
-
 typedef struct cliente Cliente;
 
 struct cliente{
@@ -15,3 +8,11 @@ struct cliente{
     char data_nas[100];
     char plano[20];
 };
+
+void cadastrar_clientes(void);
+void deletar_clientes(void);
+void recuperar_clientes(void);
+void pesquisar_clientes(void);
+void atualizar_clientes(void);
+void listar_clientes(void);
+void exibe_cliente(const Cliente*);

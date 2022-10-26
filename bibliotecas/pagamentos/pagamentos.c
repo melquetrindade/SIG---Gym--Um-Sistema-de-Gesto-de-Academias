@@ -3,6 +3,7 @@
 #include <locale.h>
 #include "../fun_reutilizaveis/fun_reutilizaveis.h"
 #include "../menu_principal/menu_principal.h"
+#include "pagamentos.h"
 
 void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcionários
     system("clear||cls");
