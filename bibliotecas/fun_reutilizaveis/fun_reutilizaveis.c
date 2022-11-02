@@ -4,6 +4,9 @@
 #include <string.h>
 #include <time.h>
 #include "fun_reutilizaveis.h"
+#include "../clientes/clientes.h"
+#include "../menu_principal/menu_principal.h"
+#include "../funcionarios/funcionarios.h"
 
 // Função de loop de validação de cpf
 void loop_cpf(char *cpf_teste){
@@ -679,4 +682,35 @@ int valida_caracter_valor_funcionario(char *valor){
         }
     }
     return 0;
+}
+
+int verifica_pessoa(char *arquivo, char *cpf){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        return 1;
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if((strcmp(cliente->cpf,cpf)) == 0){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+void verifica_pessoa1(char *arquivo, char *cpf){ // vou usar este por enquanto!!
+    int taOk = verifica_pessoa(arquivo, cpf);
+    if(taOk == 0){
+        printf("\n\tJÁ EXISTE UMA PESSOA CADASTRADA COM ESTE CPF!\n");
+        char cpf_novo[100];
+        printf("\tDIGITE UM NOVO CPF: (APENAS NÚMEROS)>>> ");
+        fgets(cpf_novo, 100, stdin); fflush(stdin);
+        strcpy(cpf, cpf_novo);
+        loop_cpf(cpf);
+        verifica_pessoa1(arquivo, cpf);
+    }
 }
