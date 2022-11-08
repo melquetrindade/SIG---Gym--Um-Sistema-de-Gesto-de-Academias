@@ -28,5 +28,3 @@ void valor_inteiro(char *);
 void loop_valor_cliente(char *);
 void loop_valor_funcionario(char *);
 int valida_caracter_valor_funcionario(char *);
-int verifica_pessoa(char *, char *);
-void verifica_pessoa1(char *, char *);

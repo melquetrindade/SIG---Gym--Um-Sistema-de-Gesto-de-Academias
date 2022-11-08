@@ -10,7 +10,7 @@ struct registro{
 void registrar_frequencia(void);
 void listar_frequencia(void);
 Registro* busca_frequencia(char *, char *);
-Registro* preenche_frequencia(char *, char*);
+Registro* preenche_frequencia(char *, char *);
 void salvar_no_arq_registro(const Registro *, char *);
 void ler_arquivo_registro(char *);
 void confirma_acesso(char *, Registro *);
