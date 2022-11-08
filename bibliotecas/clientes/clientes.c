@@ -23,7 +23,7 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
 
     Cliente *cliente;
 
-    cliente = preenche_cliente();
+    cliente = preenche_cliente(arquivo_cliente);
 
     salvar_no_arq_cliente(cliente, arquivo_cliente);
     system("clear||cls");
@@ -57,9 +57,9 @@ void deletar_clientes(void){  // Função de deletar clientes
     }
     free(cliente);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
-    system("clear||cls");    
+    system("clear||cls");   
 }
 
 void recuperar_clientes(void){ // Função de recuperar Clientes
@@ -116,7 +116,7 @@ void pesquisar_clientes(void){ // Função de pesquisar clientes
     }
     free(cliente);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -151,7 +151,7 @@ void atualizar_clientes(void){ // Função de atualizar clientes
     }
     free(cliente);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -190,12 +190,12 @@ void salvar_no_arq_cliente(const Cliente *cliente, char *arquivo){
     fclose(arq);
 }
 
-Cliente* preenche_cliente(void){
+Cliente* preenche_cliente(char *arquivo){
     Cliente *cliente;
     cliente = (Cliente*) malloc(sizeof(Cliente));
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(cliente->cpf, 100, stdin); fflush(stdin);
     loop_cpf(cliente->cpf);
-    verifica_pessoa1(arquivo_cliente, cliente->cpf);
+    verifica_pessoa_cliente(arquivo, cliente->cpf);
     printf("\tNOME: "); fgets(cliente->nome, 100, stdin); fflush(stdin);
     loop_nome(cliente->nome);
     printf("\tE-MAIL: "); fgets(cliente->email, 200, stdin); fflush(stdin);
@@ -450,6 +450,7 @@ void recupera_cliente(char *arquivo, Cliente *cliente){
     free(cliente_teste);
 }
 
+// Verifica se um determinado CPF já está sendo usado por alguma pessoa
 int verifica_2_cpfs(char *arquivo, Cliente *cliente){
     FILE *arq;
     arq = fopen(arquivo, "rb");

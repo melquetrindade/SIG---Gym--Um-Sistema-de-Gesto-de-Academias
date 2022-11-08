@@ -110,7 +110,7 @@ void pesquisar_funcionario(void){ // Função de pesquisar funcionários
     }
     free(funcionario);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -178,7 +178,7 @@ Funcionario* preenche_funcionario(void){
     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
     printf("\n\tCPF:(APENAS NÚMEROS)>>> "); fgets(funcionario->cpf, 100, stdin); fflush(stdin);
     loop_cpf(funcionario->cpf);
-    verifica_pessoa1(arquivo_funcionario, funcionario->cpf);
+    verifica_pessoa_func(arquivo_funcionario, funcionario->cpf);
     printf("\tNOME: "); fgets(funcionario->nome, 100, stdin); fflush(stdin);
     loop_nome(funcionario->nome);
     printf("\tE-MAIL: "); fgets(funcionario->email, 200, stdin); fflush(stdin);

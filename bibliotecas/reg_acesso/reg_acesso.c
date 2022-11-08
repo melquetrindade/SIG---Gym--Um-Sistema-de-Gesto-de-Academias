@@ -50,7 +50,7 @@ void registrar_frequencia(void){ // Função de registrar acesso
     }
     free(frequencia);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -64,7 +64,7 @@ void listar_frequencia(void){ // Função de listar frequência
 
     ler_arquivo_registro(arq_registro);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }

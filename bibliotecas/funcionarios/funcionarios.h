@@ -26,4 +26,4 @@ Funcionario* busca_func_excluido(char *, char *);
 void recupera_funcionario(char *, Funcionario *);
 int verifica_2_cpfs_func(char *, Funcionario *);
 void verifica_pessoa_func(char *, char *);
-void atualiza_funcionario(char *arquivo, Funcionario *);
+void atualiza_funcionario(char *, Funcionario *);

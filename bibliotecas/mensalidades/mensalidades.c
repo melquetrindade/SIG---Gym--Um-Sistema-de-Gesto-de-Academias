@@ -61,7 +61,7 @@ void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     }
     free(mensalidade);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -102,7 +102,7 @@ void pesquisar_mensalidade(void){ // Função de pesquisar mensalidades
     }
     free(mensalidade);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -128,7 +128,7 @@ void deletar_mensalidades(void){ // Função de deletar mensalidades
     }
     free(mensalidade);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -282,7 +282,7 @@ Mensalidade* pesquisa_mensalidade(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
-void exibe_mensalidade(const Mensalidade* mensalidade){
+void exibe_mensalidade(const Mensalidade* mensalidade){ // Função exibe o cliente cadastrado
     printf("\n\tCPF: %s", mensalidade->cpf);
     printf("\tNOME: %s", mensalidade->nome);
     printf("\tPLANO: %s", mensalidade->plano);
