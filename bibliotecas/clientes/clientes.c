@@ -307,14 +307,14 @@ void confir_excl_cliente(Cliente *cliente_teste, FILE *arq, char *arq_mensa, cha
             system("clear||cls");
             exibe_cliente(cliente_teste);
             printf("\n\tOBS: CLIENTE EM ATRASO! TOTAL DE MESES EM ATRASO: %d", dif_mes);
-            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
             cfrm_exclu_clnt_etp2(mensa_teste->cpf, op, arq_mensa, arq, cliente_teste, arq3, frequencia->cpf);
         }
         else{
             char op[15];
             system("clear||cls");
             exibe_cliente(cliente_teste);
-            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op, 15, stdin); fflush(stdin);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 15, stdin); fflush(stdin);
             cfrm_exclu_clnt_etp2(mensa_teste->cpf, op, arq_mensa, arq, cliente_teste, arq3, frequencia->cpf);
         }
     }
@@ -324,11 +324,11 @@ void confir_excl_cliente(Cliente *cliente_teste, FILE *arq, char *arq_mensa, cha
 
 void cfrm_exclu_clnt_etp2(char *mensa_cpf, char *op, char *arq2, FILE *arq, Cliente *cliente_teste, char *arq3, char *freq_cpf){
     int op1 = atoi(op);
-    while((op1 < 0) || (op1 > 1)){
+    while((op1 < 1) || (op1 > 2)){
         system("clear||cls");
         printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
         char op_aux[10];
-        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
         op1 = atoi(op_aux);
     }
     if(op1 == 1){
@@ -353,7 +353,6 @@ void cfrm_exclu_clnt_etp2(char *mensa_cpf, char *op, char *arq2, FILE *arq, Clie
         deleta_frequencia(arq3, freq_cpf,mensa_busca->data_pg);
         cliente_teste->id[0]=mensa_busca->data_pg[0];cliente_teste->id[1]=mensa_busca->data_pg[1];cliente_teste->id[2]=mensa_busca->data_pg[2];cliente_teste->id[3]=mensa_busca->data_pg[3];cliente_teste->id[4]=mensa_busca->data_pg[4];cliente_teste->id[5]=mensa_busca->data_pg[5];
         cliente_teste->status = 'x';
-        printf("para cliente: ano: %d, mes: %d, dia: %d, hora %d, min: %d, seg: %d",cliente_teste->id[0],cliente_teste->id[1],cliente_teste->id[2],cliente_teste->id[3],cliente_teste->id[4],cliente_teste->id[5]);
         fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
         fwrite(cliente_teste, sizeof(Cliente), 1, arq);
         printf("\n\tCLIENTE EXCLUÍDO COM SUCESSO!");

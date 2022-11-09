@@ -84,12 +84,12 @@ int pagamentos(void){ // Tela do módulo de pagamentos
     printf("|   ----------------------         ---------------------            |\n");
     printf("| 1-| REALIZAR PAGAMENTO |       2-| LISTAR PAGAMENTOS |            |\n");
     printf("|   ----------------------         ---------------------            |\n");
-    printf("|   -----------------------        ---------------------            |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |      4-| DELETAR PAGAMENTO |            |\n");
-    printf("|   -----------------------        ---------------------            |\n");
-    printf("|   --------------------------     -------------------------------- |\n");
-    printf("| 5-|  PAGAMENTOS PENDENTES  |   9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
-    printf("|   --------------------------     -------------------------------- |\n");
+    printf("|   -----------------------        ------------------------         |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |      4-| PAGAMENTOS PENDENTES |         |\n");
+    printf("|   -----------------------        ------------------------         |\n");
+    printf("|   --------------------------------                                |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                                |\n");
+    printf("|   --------------------------------                                |\n");
     printf("---------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
@@ -107,12 +107,12 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     printf("|   -----------------------       ---------------------              |\n");
     printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |              |\n");
     printf("|   -----------------------       ---------------------              |\n");
-    printf("|   -----------------------       ---------------------              |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |     4-| DELETAR PAGAMENTO |              |\n");
-    printf("|   -----------------------       ---------------------              |\n");
-    printf("|   --------------------------      -------------------------------- |\n");
-    printf("| 5-| MENSALIDADES PENDENTES |    9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
-    printf("|   --------------------------      -------------------------------- |\n");
+    printf("|   -----------------------       --------------------------         |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |     4-| MENSALIDADES PENDENTES |         |\n");
+    printf("|   -----------------------       --------------------------         |\n");
+    printf("|   --------------------------------                                 |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                                 |\n");
+    printf("|   --------------------------------                                 |\n");
     printf("----------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
@@ -200,7 +200,7 @@ int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é v
 }
 
 int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[6] = {1,2,3,4,5,9};    // para os módulos 3 e 4
+    int opcoes[6] = {1,2,3,4,9};    // para os módulos 3 e 4
     for(int i = 0; i<=5; i++){
         if(opcao == opcoes[i]){
             return opcao;

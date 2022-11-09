@@ -312,7 +312,7 @@ void deleta_mensalidade(char *arquivo, Mensalidade *mensalidade){
                 printf("\n\tA SEGUINTE MENSALIDADE SERÁ EXCLUÍDA:");
                 exibe_mensalidade(mensa_teste);
                 printf("\n\tOBS: CLIENTE EM ATRASO! TOTAL DE MESES EM ATRASO: %d", dif_mes);
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
+                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
                 confirma_exclucao_mensa(mensa_teste, op, arq);
             }
             else{
@@ -320,7 +320,7 @@ void deleta_mensalidade(char *arquivo, Mensalidade *mensalidade){
                 printf("\n\tA SEGUINTE MENSALIDADE SERÁ EXCLUÍDA:");
                 exibe_mensalidade(mensa_teste);
                 printf("\n\tOBS: NÃO HÁ MENSALIDADES PENDENTES PARA ESTE CLIENTE!");
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
+                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
                 confirma_exclucao_mensa(mensa_teste, op, arq);
             }
         }
@@ -331,11 +331,11 @@ void deleta_mensalidade(char *arquivo, Mensalidade *mensalidade){
 
 void confirma_exclucao_mensa(Mensalidade *mensalidade, char *op, FILE *arq){
     int op1 = atoi(op);
-    while((op1 < 0) || (op1 > 1)){
+    while((op1 < 1) || (op1 > 2)){
         system("clear||cls");
         printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
         char op_aux[10];
-        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
         op1 = atoi(op_aux);
     }
     if(op1 == 1){
