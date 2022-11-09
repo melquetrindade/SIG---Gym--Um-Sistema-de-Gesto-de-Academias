@@ -24,7 +24,6 @@ void cadastrar_clientes(void){ // Função de cadastrar clientes
     Cliente *cliente;
 
     cliente = preenche_cliente(arquivo_cliente);
-
     salvar_no_arq_cliente(cliente, arquivo_cliente);
     system("clear||cls");
     printf("\tCLIENTE CADASTRADO COM SUCESSO!\n");

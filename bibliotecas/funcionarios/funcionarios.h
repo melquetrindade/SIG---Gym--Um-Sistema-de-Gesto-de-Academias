@@ -27,3 +27,5 @@ void recupera_funcionario(char *, Funcionario *);
 int verifica_2_cpfs_func(char *, Funcionario *);
 void verifica_pessoa_func(char *, char *);
 void atualiza_funcionario(char *, Funcionario *);
+void confir_excl_func(Funcionario*, FILE*, char*);
+void cfrm_exclu_func_etp2(char*, char*, char*, FILE*, Funcionario*);

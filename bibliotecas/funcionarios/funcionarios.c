@@ -5,9 +5,12 @@
 #include "../fun_reutilizaveis/fun_reutilizaveis.h"
 #include "../menu_principal/menu_principal.h"
 #include "funcionarios.h"
+#include "../pagamentos/pagamentos.h"
 
 typedef struct funcionario Funcionario;
+
 char arquivo_funcionario[] = {"arq_funcionario.dat"};
+char arq_salario1[] = {"arq_salario.dat"};
 
 void cadastrar_funcionario(void){ // Função de cadastrar funcionários
     system("clear||cls");
@@ -51,7 +54,7 @@ void deletar_funcionario(void){ // Função de deletar funcionários
     }
     free(funcionario);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls"); 
 }
@@ -262,29 +265,122 @@ Funcionario* busca_funcionario(char *arquivo, char *cpf_busca){
 }
 
 // Função que deleta cliente
+// void deleta_funcionario(char *arquivo, Funcionario *funcionario){
+//     Funcionario *funcionario_teste;
+//     FILE *arq;
+//     arq = fopen(arquivo, "r+b");
+//     if (arq == NULL) {
+//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+//         exit(1);
+//     }
+//     funcionario_teste = (Funcionario*) malloc(sizeof(Funcionario));
+//     int achou = 0;
+//     while((!feof(arq)) && (achou == 0)) {
+//         fread(funcionario_teste, sizeof(Funcionario), 1, arq);
+//         if((strcmp(funcionario_teste->cpf, funcionario->cpf) == 0) && (funcionario_teste->status != 'x')) {
+//             achou = 1;
+//             funcionario->status = 'x';
+//             fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
+//             fwrite(funcionario_teste, sizeof(Funcionario), 1, arq);
+//             printf("\n\tFUNCIONÁRIO EXCLUÍDO COM SUCESSO!\n");
+//         }
+//     }
+//     fclose(arq);
+//     free(funcionario_teste);
+    
+// }
+
+// Função que deleta cliente
 void deleta_funcionario(char *arquivo, Funcionario *funcionario){
-    Funcionario *funcionario_teste;
+    Funcionario *func_teste;
     FILE *arq;
     arq = fopen(arquivo, "r+b");
     if (arq == NULL) {
         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
         exit(1);
     }
-    funcionario_teste = (Funcionario*) malloc(sizeof(Funcionario));
+    func_teste = (Funcionario*) malloc(sizeof(Funcionario));
     int achou = 0;
     while((!feof(arq)) && (achou == 0)) {
-        fread(funcionario_teste, sizeof(Funcionario), 1, arq);
-        if((strcmp(funcionario_teste->cpf, funcionario->cpf) == 0) && (funcionario_teste->status != 'x')) {
+        fread(func_teste, sizeof(Funcionario), 1, arq);
+        if((strcmp(func_teste->cpf, funcionario->cpf) == 0) && (func_teste->status != 'x')) {
             achou = 1;
-            funcionario->status = 'x';
-            fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
-            fwrite(funcionario_teste, sizeof(Funcionario), 1, arq);
-            printf("\n\tFUNCIONÁRIO EXCLUÍDO COM SUCESSO!\n");
+            confir_excl_func(func_teste, arq, arq_salario1);
         }
     }
     fclose(arq);
-    free(funcionario_teste);
+    free(func_teste);
     
+}
+
+void confir_excl_func(Funcionario *func_teste, FILE *arq, char *arq_salario1){
+    Salario *salario_teste;
+    salario_teste = pesquisa_salario(arq_salario1, func_teste->cpf);
+    if(salario_teste == NULL){
+        printf("\n\tERRO, NÃO FOI POSSÍVEL CONTINUAR COM A OPERAÇÃO!");
+        printf("\n\tO FUNCIONÁRIO PRECISA TER UMA CONTA SALARIAL");
+    }
+    else{
+        int atraso = cal_atraso(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0]);
+        if(atraso == 1){
+            char op[15];
+            int dif_mes = 0;
+            cal_atraso_etp2(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0], &dif_mes);
+            system("clear||cls");
+            exibe_funcionario(func_teste);
+            printf("\n\tOBS: FUNCIONÁRIO ESTÁ COM SALÁRIO EM ATRASO! TOTAL DE SALÁRIOS EM ATRASO: %d", dif_mes);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
+            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario1, arq, func_teste);
+        }
+        else{
+            char op[15];
+            system("clear||cls");
+            exibe_funcionario(func_teste);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op, 15, stdin); fflush(stdin);
+            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario1, arq, func_teste);
+        }
+    }
+    free(salario_teste);
+}
+
+void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq2, FILE *arq, Funcionario *func_teste){
+    int op1 = atoi(op);
+    while((op1 < 0) || (op1 > 1)){
+        system("clear||cls");
+        printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
+        char op_aux[10];
+        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+        op1 = atoi(op_aux);
+    }
+    if(op1 == 1){
+        FILE *arq_salari;
+        Salario *salario_busca;
+        arq_salari = fopen(arq2, "r+b");
+        if(arq_salari == NULL){
+            printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+            exit(1);
+        }
+        salario_busca = (Salario*) malloc(sizeof(Salario));
+        int achou = 0;
+        while((!feof(arq_salari)) && (achou == 0)) {
+            fread(salario_busca, sizeof(Salario), 1, arq_salari);
+            if((strcmp(salario_busca->cpf, salario_cpf) == 0) && (salario_busca->status != 'x')) {
+                achou = 1;
+                salario_busca->status = 'x';
+                fseek(arq_salari, -1*sizeof(Salario), SEEK_CUR);
+                fwrite(salario_busca, sizeof(Salario), 1, arq_salari);
+            }
+        }
+        fclose(arq_salari);
+        free(salario_busca);
+        func_teste->status = 'x';
+        fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
+        fwrite(func_teste, sizeof(Funcionario), 1, arq);
+        printf("\n\tFUNCIONÁRIO EXCLUÍDO COM SUCESSO!");
+    }
+    else{
+        printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
+    }
 }
 
 // Função que procura por algum cliente excluído e garante que ele não está ativo antes de fazer a recuperação
