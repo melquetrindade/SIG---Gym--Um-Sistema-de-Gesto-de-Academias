@@ -23,3 +23,4 @@ Mensalidade* pesquisa_mensalidade(char *, char *);
 void exibe_mensalidade(const Mensalidade*);
 void deleta_mensalidade(char *, Mensalidade *);
 void confirma_exclucao_mensa(Mensalidade *, char *, FILE *);
+void recupera_mensalidade(char*, char*, int*);

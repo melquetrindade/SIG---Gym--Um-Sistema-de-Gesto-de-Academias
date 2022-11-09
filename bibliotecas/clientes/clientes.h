@@ -8,6 +8,7 @@ struct cliente{
     char data_nas[100];
     char plano[20];
     char status;
+    int id[6];
 };
 
 void cadastrar_clientes(void);
@@ -23,7 +24,7 @@ void ler_arquivo_cliente(char *);
 Cliente* busca_cliente(char *, char *);
 void deleta_cliente(char *, Cliente *);
 Cliente* busca_clnt_excluido(char *, char *);
-void recupera_cliente(char *, Cliente *);
+void recupera_cliente(char *, Cliente *, char*, char*);
 int verifica_2_cpfs(char *, Cliente *);
 void verifica_pessoa_cliente(char * ,char *);
 void atualiza_cliente(char *, Cliente *);

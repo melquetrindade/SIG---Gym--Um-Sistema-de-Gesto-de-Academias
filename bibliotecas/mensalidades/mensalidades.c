@@ -348,3 +348,26 @@ void confirma_exclucao_mensa(Mensalidade *mensalidade, char *op, FILE *arq){
         printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
     }
 }
+
+void recupera_mensalidade(char *arquivo, char *cpf, int*data){
+    FILE *arq_mensalidade;
+    Mensalidade *mensa_busca;
+    arq_mensalidade = fopen(arquivo, "r+b");
+    if(arq_mensalidade == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    mensa_busca = (Mensalidade*) malloc(sizeof(Mensalidade));
+    int achou = 0;
+    while((!feof(arq_mensalidade) && (achou == 0))){
+        fread(mensa_busca, sizeof(Mensalidade), 1, arq_mensalidade);
+        if((strcmp(mensa_busca->cpf,cpf) == 0) && (mensa_busca->status == 'x') && (mensa_busca->data_pg[0]=data[0]) && (mensa_busca->data_pg[1]=data[1]) && (mensa_busca->data_pg[2]=data[2]) && (mensa_busca->data_pg[3]=data[3]) && (mensa_busca->data_pg[4]=data[4]) && (mensa_busca->data_pg[5]=data[5])){
+            achou = 1;
+            mensa_busca->status = 'v';
+            fseek(arq_mensalidade, -1*sizeof(Mensalidade), SEEK_CUR);
+            fwrite(mensa_busca, sizeof(Mensalidade), 1, arq_mensalidade);
+        }
+    }
+    fclose(arq_mensalidade);
+    free(mensa_busca);
+}

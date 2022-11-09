@@ -5,6 +5,7 @@ struct registro{
     char nome[100];
     int ult_data[6];
     char status;
+    int id[6];
 };
 
 void registrar_frequencia(void);
@@ -15,4 +16,5 @@ void salvar_no_arq_registro(const Registro *, char *);
 void ler_arquivo_registro(char *);
 void confirma_acesso(char *, Registro *);
 Registro* pesquisa_frequencia(char *, char *);
-void deleta_frequencia(char *, char *);
+void deleta_frequencia(char *, char *, int*);
+void recupera_frequencia(char*, char*, int*);

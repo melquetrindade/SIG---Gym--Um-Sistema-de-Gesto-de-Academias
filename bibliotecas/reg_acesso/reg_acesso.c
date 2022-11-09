@@ -100,6 +100,7 @@ Registro* preenche_frequencia(char *cpf, char*nome){
     strcpy(frequencia->nome,nome);
     pegaData(frequencia->ult_data);
     frequencia->status = 'v';
+    frequencia->id[0]=0;frequencia->id[1]=0;frequencia->id[2]=0;frequencia->id[3]=0;frequencia->id[4]=0;frequencia->id[5]=0;
     return frequencia;
 }
 
@@ -189,7 +190,7 @@ Registro* pesquisa_frequencia(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
-void deleta_frequencia(char *arquivo, char *cpf){
+void deleta_frequencia(char *arquivo, char *cpf, int*data){
     FILE *arq_frequencia;
     Registro *frequencia_busca;
     arq_frequencia = fopen(arquivo, "r+b");
@@ -204,6 +205,31 @@ void deleta_frequencia(char *arquivo, char *cpf){
         if((strcmp(frequencia_busca->cpf,cpf) == 0) && (frequencia_busca->status != 'x')) {
             achou = 1;
             frequencia_busca->status = 'x';
+            frequencia_busca->id[0]=data[0];frequencia_busca->id[1]=data[1];frequencia_busca->id[2]=data[2];frequencia_busca->id[3]=data[3];frequencia_busca->id[4]=data[4];frequencia_busca->id[5]=data[5];
+            printf("para frequencia: ano: %d, mes: %d, dia: %d, hora %d, min: %d, seg: %d",frequencia_busca->id[0],frequencia_busca->id[1],frequencia_busca->id[2],frequencia_busca->id[3],frequencia_busca->id[4],frequencia_busca->id[5]);
+            fseek(arq_frequencia, -1*sizeof(Registro), SEEK_CUR);
+            fwrite(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
+        }
+    }
+    fclose(arq_frequencia);
+    free(frequencia_busca);
+}
+
+void recupera_frequencia(char *arquivo, char *cpf, int*data){
+    FILE *arq_frequencia;
+    Registro *frequencia_busca;
+    arq_frequencia = fopen(arquivo, "r+b");
+    if(arq_frequencia == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    frequencia_busca = (Registro*) malloc(sizeof(Registro));
+    int achou = 0;
+    while((!feof(arq_frequencia) && (achou == 0))){
+        fread(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
+        if((strcmp(frequencia_busca->cpf,cpf) == 0) && (frequencia_busca->status == 'x') && (frequencia_busca->id[0]=data[0]) && (frequencia_busca->id[1]=data[1]) && (frequencia_busca->id[2]=data[2]) && (frequencia_busca->id[3]=data[3]) && (frequencia_busca->id[4]=data[4]) && (frequencia_busca->id[5]=data[5])){
+            achou = 1;
+            frequencia_busca->status = 'v';
             fseek(arq_frequencia, -1*sizeof(Registro), SEEK_CUR);
             fwrite(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
         }

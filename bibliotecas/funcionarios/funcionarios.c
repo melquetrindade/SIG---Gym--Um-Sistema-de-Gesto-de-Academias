@@ -196,6 +196,7 @@ Funcionario* preenche_funcionario(void){
     fgets(funcionario->salaraio, 20, stdin); fflush(stdin);
     loop_valor_funcionario(funcionario->salaraio);
     funcionario->status = 'v';
+    funcionario->id[0]=0;funcionario->id[1]=0;funcionario->id[2]=0;funcionario->id[3]=0;funcionario->id[4]=0;funcionario->id[5]=0;
     return funcionario;
 }
 

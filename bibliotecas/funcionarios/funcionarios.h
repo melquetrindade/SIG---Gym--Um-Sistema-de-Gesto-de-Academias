@@ -8,6 +8,7 @@ struct funcionario{
     char data_nas[100];
     char salaraio[20];
     char status;
+    int id[6];
 };
 
 void cadastrar_funcionario(void);

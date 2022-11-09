@@ -84,7 +84,7 @@ void recuperar_clientes(void){ // Função de recuperar Clientes
         }
         else{
             system("clear||cls");
-            recupera_cliente(arquivo_cliente, cliente);
+            recupera_cliente(arquivo_cliente, cliente, arq_registro1, arq_mensalidade1);
         }
     }
     free(cliente);
@@ -208,6 +208,7 @@ Cliente* preenche_cliente(char *arquivo){
     fgets(cliente->plano, 20, stdin); fflush(stdin);
     loop_valor_cliente(cliente->plano);
     cliente->status = 'v';
+    cliente->id[0]=0;cliente->id[1]=0;cliente->id[2]=0;cliente->id[3]=0;cliente->id[4]=0;cliente->id[5]=0;
     return cliente;
 }
 
@@ -349,13 +350,15 @@ void cfrm_exclu_clnt_etp2(char *mensa_cpf, char *op, char *arq2, FILE *arq, Clie
                 fwrite(mensa_busca, sizeof(Mensalidade), 1, arq_mensa);
             }
         }
-        fclose(arq_mensa);
-        free(mensa_busca);
-        deleta_frequencia(arq3, freq_cpf);
+        deleta_frequencia(arq3, freq_cpf,mensa_busca->data_pg);
+        cliente_teste->id[0]=mensa_busca->data_pg[0];cliente_teste->id[1]=mensa_busca->data_pg[1];cliente_teste->id[2]=mensa_busca->data_pg[2];cliente_teste->id[3]=mensa_busca->data_pg[3];cliente_teste->id[4]=mensa_busca->data_pg[4];cliente_teste->id[5]=mensa_busca->data_pg[5];
         cliente_teste->status = 'x';
+        printf("para cliente: ano: %d, mes: %d, dia: %d, hora %d, min: %d, seg: %d",cliente_teste->id[0],cliente_teste->id[1],cliente_teste->id[2],cliente_teste->id[3],cliente_teste->id[4],cliente_teste->id[5]);
         fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
         fwrite(cliente_teste, sizeof(Cliente), 1, arq);
         printf("\n\tCLIENTE EXCLUÍDO COM SUCESSO!");
+        fclose(arq_mensa);
+        free(mensa_busca);
     }
     else{
         printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
@@ -413,7 +416,7 @@ Cliente* busca_clnt_excluido(char *arquivo, char *cpf_busca){
 }
 
 // Verifica se todos os dados de um determinado cliente são compatíves com o cliente que quero recuperar
-void recupera_cliente(char *arquivo, Cliente *cliente){
+void recupera_cliente(char *arquivo, Cliente *cliente, char *arq_frenq, char *arq_mensa){
     Cliente *cliente_teste;
     FILE *arq;
     arq = fopen(arquivo, "r+b");
@@ -434,6 +437,8 @@ void recupera_cliente(char *arquivo, Cliente *cliente){
                                 if(cliente_teste->status == 'x' && cliente->status == 'v'){
                                     achou = 1;
                                     cliente_teste->status = 'v';
+                                    recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente_teste->id);
+                                    recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente_teste->id);
                                     fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
                                     fwrite(cliente_teste, sizeof(Cliente), 1, arq);
                                     printf("\n\tCLIENTE RECUPERADO COM SUCESSO!\n");
