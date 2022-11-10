@@ -12,7 +12,6 @@ struct salario{
 void realizar_pagamentos(void);
 void listar_pagamentos(void);
 void pesquisar_pagamentos(void);
-void deletar_pagamentos(void);
 void pagamentos_pendentes(void);
 Salario* busca_salario(char*, char*);
 Salario* preenche_salario(char*, char*, char*);
@@ -21,5 +20,4 @@ void confirma_salario(char*, Salario*);
 void ler_arquivo_salario(char*, char);
 Salario* pesquisa_salario(char*, char*);
 void exibe_salario(const Salario*);
-void deleta_salario(char*, Salario*);
-void confirma_exclucao_salario(Salario*, char*, FILE*);
+void recupera_salario(char *arquivo, char *cpf, int*data);

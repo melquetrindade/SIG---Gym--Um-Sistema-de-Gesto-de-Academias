@@ -200,8 +200,8 @@ int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é v
 }
 
 int verifica_opcao_2(int opcao){     // Verifica se a opção escolhida é válida
-    int opcoes[6] = {1,2,3,4,9};    // para os módulos 3 e 4
-    for(int i = 0; i<=5; i++){
+    int opcoes[5] = {1,2,3,4,9};    // para os módulos 3 e 4
+    for(int i = 0; i<=4; i++){
         if(opcao == opcoes[i]){
             return opcao;
         }

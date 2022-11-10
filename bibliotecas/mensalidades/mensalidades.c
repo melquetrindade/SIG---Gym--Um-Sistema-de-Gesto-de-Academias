@@ -107,32 +107,6 @@ void pesquisar_mensalidade(void){ // Função de pesquisar mensalidades
     system("clear||cls");
 }
 
-void deletar_mensalidades(void){ // Função de deletar mensalidades
-    system("clear||cls");
-    Mensalidade *mensalidade;
-
-    printf("\t======================================\n");
-    printf("\t|   Módulo de Deletar Mensalidades   |\n");
-    printf("\t======================================\n");
-
-    char cpf[100];
-
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
-    loop_cpf(cpf);
-    mensalidade = pesquisa_mensalidade(arq_mensalidade, cpf);
-    if(mensalidade == NULL){
-        printf("\n\tNÃO EXISTE NENHUMA MENSALIDADE CADASTRADO COM ESTE CPF NO SISTEMA!");
-    }
-    else{
-        deleta_mensalidade(arq_mensalidade, mensalidade);
-    }
-    free(mensalidade);
-
-    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
-    getchar();
-    system("clear||cls");
-}
-
 void mensalidades_pendentes(void){ // Função de listar apenas as mensalidades atrasadas
     system("clear||cls");
     char status = 'x';
@@ -288,65 +262,6 @@ void exibe_mensalidade(const Mensalidade* mensalidade){ // Função exibe o clie
     printf("\tPLANO: %s", mensalidade->plano);
     printf("\n\tÚLTIMO PAGAMENTO: %d/%d/%d", mensalidade->data_pg[2],mensalidade->data_pg[1],mensalidade->data_pg[0]);
     printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", mensalidade->prox_data[0],mensalidade->prox_data[1],mensalidade->prox_data[2]);
-}
-
-void deleta_mensalidade(char *arquivo, Mensalidade *mensalidade){
-    Mensalidade *mensa_teste;
-    FILE *arq;
-    arq = fopen(arquivo, "r+b");
-    if (arq == NULL) {
-        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-        exit(1);
-    }
-    mensa_teste = (Mensalidade*) malloc(sizeof(Mensalidade));
-    int achou = 0;
-    while((!feof(arq)) && (achou == 0)) {
-        fread(mensa_teste, sizeof(Mensalidade), 1, arq);
-        if((strcmp(mensa_teste->cpf, mensalidade->cpf) == 0) && (mensa_teste->status != 'x')) {
-            achou = 1;
-            int atraso = cal_atraso(mensa_teste->data_pg[2], mensa_teste->data_pg[1], mensa_teste->data_pg[0]);
-            if(atraso == 1){
-                char op[15];
-                int dif_mes = 0;
-                cal_atraso_etp2(mensa_teste->data_pg[2], mensa_teste->data_pg[1], mensa_teste->data_pg[0], &dif_mes);
-                printf("\n\tA SEGUINTE MENSALIDADE SERÁ EXCLUÍDA:");
-                exibe_mensalidade(mensa_teste);
-                printf("\n\tOBS: CLIENTE EM ATRASO! TOTAL DE MESES EM ATRASO: %d", dif_mes);
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
-                confirma_exclucao_mensa(mensa_teste, op, arq);
-            }
-            else{
-                char op[15];
-                printf("\n\tA SEGUINTE MENSALIDADE SERÁ EXCLUÍDA:");
-                exibe_mensalidade(mensa_teste);
-                printf("\n\tOBS: NÃO HÁ MENSALIDADES PENDENTES PARA ESTE CLIENTE!");
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
-                confirma_exclucao_mensa(mensa_teste, op, arq);
-            }
-        }
-    }
-    fclose(arq);
-    free(mensa_teste);
-}
-
-void confirma_exclucao_mensa(Mensalidade *mensalidade, char *op, FILE *arq){
-    int op1 = atoi(op);
-    while((op1 < 1) || (op1 > 2)){
-        system("clear||cls");
-        printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
-        char op_aux[10];
-        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
-        op1 = atoi(op_aux);
-    }
-    if(op1 == 1){
-        mensalidade->status = 'x';
-        fseek(arq, -1*sizeof(Mensalidade), SEEK_CUR);
-        fwrite(mensalidade, sizeof(Mensalidade), 1, arq);
-        printf("\n\tMENSALIDADE EXCLUÍDA COM SUCESSO!\n");
-    }
-    else{
-        printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
-    }
 }
 
 void recupera_mensalidade(char *arquivo, char *cpf, int*data){

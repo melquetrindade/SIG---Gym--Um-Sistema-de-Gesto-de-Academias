@@ -71,7 +71,7 @@ void recuperar_funcionario(void){ // Função de recuperar funcionários
 
     printf("\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
-    funcionario = busca_func_excluido(arquivo_funcionario, cpf);
+    funcionario = busca_clnt_excluido1(arquivo_funcionario, cpf);
     if(funcionario == NULL){
         printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO NA LIXEIRA DO SISTEMA COM ESTE CPF!");
     }
@@ -81,13 +81,13 @@ void recuperar_funcionario(void){ // Função de recuperar funcionários
             printf("\n\tJÁ EXISTE UM FUNCIONAŔIO CADASTRADO COM ESTE CPF NO SISTEMA!");
         }
         else{
-            exibe_funcionario(funcionario);
-            recupera_funcionario(arquivo_funcionario, funcionario);
+            system("clear||cls");
+            recupera_funcionario(arquivo_funcionario, funcionario, arq_salario1);
         }
     }
     free(funcionario);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -266,32 +266,6 @@ Funcionario* busca_funcionario(char *arquivo, char *cpf_busca){
 }
 
 // Função que deleta cliente
-// void deleta_funcionario(char *arquivo, Funcionario *funcionario){
-//     Funcionario *funcionario_teste;
-//     FILE *arq;
-//     arq = fopen(arquivo, "r+b");
-//     if (arq == NULL) {
-//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-//         exit(1);
-//     }
-//     funcionario_teste = (Funcionario*) malloc(sizeof(Funcionario));
-//     int achou = 0;
-//     while((!feof(arq)) && (achou == 0)) {
-//         fread(funcionario_teste, sizeof(Funcionario), 1, arq);
-//         if((strcmp(funcionario_teste->cpf, funcionario->cpf) == 0) && (funcionario_teste->status != 'x')) {
-//             achou = 1;
-//             funcionario->status = 'x';
-//             fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
-//             fwrite(funcionario_teste, sizeof(Funcionario), 1, arq);
-//             printf("\n\tFUNCIONÁRIO EXCLUÍDO COM SUCESSO!\n");
-//         }
-//     }
-//     fclose(arq);
-//     free(funcionario_teste);
-    
-// }
-
-// Função que deleta cliente
 void deleta_funcionario(char *arquivo, Funcionario *funcionario){
     Funcionario *func_teste;
     FILE *arq;
@@ -300,7 +274,7 @@ void deleta_funcionario(char *arquivo, Funcionario *funcionario){
         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
         exit(1);
     }
-    func_teste = (Funcionario*) malloc(sizeof(Funcionario));
+    func_teste= (Funcionario*) malloc(sizeof(Funcionario));
     int achou = 0;
     while((!feof(arq)) && (achou == 0)) {
         fread(func_teste, sizeof(Funcionario), 1, arq);
@@ -314,70 +288,71 @@ void deleta_funcionario(char *arquivo, Funcionario *funcionario){
     
 }
 
-void confir_excl_func(Funcionario *func_teste, FILE *arq, char *arq_salario1){
+void confir_excl_func(Funcionario *func_teste, FILE *arq, char *arq_salario){
     Salario *salario_teste;
-    salario_teste = pesquisa_salario(arq_salario1, func_teste->cpf);
+    salario_teste = pesquisa_salario(arq_salario, func_teste->cpf);
     if(salario_teste == NULL){
         printf("\n\tERRO, NÃO FOI POSSÍVEL CONTINUAR COM A OPERAÇÃO!");
-        printf("\n\tO FUNCIONÁRIO PRECISA TER UMA CONTA SALARIAL");
+        printf("\n\tO CLIENTE PRECISA TER UMA CONTA E UMA FICHA DE FREQUÊNCIA");
     }
     else{
-        int atraso = cal_atraso(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0]);
+        int atraso = cal_atraso(salario_teste->data_pg[2],salario_teste->data_pg[1],salario_teste->data_pg[0]);
         if(atraso == 1){
             char op[15];
             int dif_mes = 0;
-            cal_atraso_etp2(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0], &dif_mes);
+            cal_atraso_etp2(salario_teste->data_pg[2],salario_teste->data_pg[1],salario_teste->data_pg[0], &dif_mes);
             system("clear||cls");
             exibe_funcionario(func_teste);
-            printf("\n\tOBS: FUNCIONÁRIO ESTÁ COM SALÁRIO EM ATRASO! TOTAL DE SALÁRIOS EM ATRASO: %d", dif_mes);
-            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
-            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario1, arq, func_teste);
+            printf("\n\tOBS: CLIENTE EM ATRASO! TOTAL DE MESES EM ATRASO: %d", dif_mes);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
+            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario, arq,func_teste);
         }
         else{
             char op[15];
             system("clear||cls");
             exibe_funcionario(func_teste);
-            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op, 15, stdin); fflush(stdin);
-            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario1, arq, func_teste);
+            printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 15, stdin); fflush(stdin);
+            cfrm_exclu_func_etp2(salario_teste->cpf, op, arq_salario, arq,func_teste);
         }
     }
     free(salario_teste);
 }
 
-void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq2, FILE *arq, Funcionario *func_teste){
+void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq_s, FILE *arq, Funcionario *func_teste){
     int op1 = atoi(op);
-    while((op1 < 0) || (op1 > 1)){
+    while((op1 < 1) || (op1 > 2)){
         system("clear||cls");
         printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
         char op_aux[10];
-        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
         op1 = atoi(op_aux);
     }
     if(op1 == 1){
-        FILE *arq_salari;
+        FILE *arq_salario;
         Salario *salario_busca;
-        arq_salari = fopen(arq2, "r+b");
-        if(arq_salari == NULL){
+        arq_salario = fopen(arq_s, "r+b");
+        if(arq_salario == NULL){
             printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
             exit(1);
         }
         salario_busca = (Salario*) malloc(sizeof(Salario));
         int achou = 0;
-        while((!feof(arq_salari)) && (achou == 0)) {
-            fread(salario_busca, sizeof(Salario), 1, arq_salari);
+        while((!feof(arq_salario)) && (achou == 0)) {
+            fread(salario_busca, sizeof(Salario), 1, arq_salario);
             if((strcmp(salario_busca->cpf, salario_cpf) == 0) && (salario_busca->status != 'x')) {
                 achou = 1;
                 salario_busca->status = 'x';
-                fseek(arq_salari, -1*sizeof(Salario), SEEK_CUR);
-                fwrite(salario_busca, sizeof(Salario), 1, arq_salari);
+                fseek(arq_salario, -1*sizeof(Salario), SEEK_CUR);
+                fwrite(salario_busca, sizeof(Salario), 1, arq_salario);
             }
         }
-        fclose(arq_salari);
-        free(salario_busca);
+        func_teste->id[0]=salario_busca->data_pg[0];func_teste->id[1]=salario_busca->data_pg[1];func_teste->id[2]=salario_busca->data_pg[2];func_teste->id[3]=salario_busca->data_pg[3];func_teste->id[4]=salario_busca->data_pg[4];func_teste->id[5]=salario_busca->data_pg[5];
         func_teste->status = 'x';
         fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
         fwrite(func_teste, sizeof(Funcionario), 1, arq);
-        printf("\n\tFUNCIONÁRIO EXCLUÍDO COM SUCESSO!");
+        printf("\n\tCLIENTE EXCLUÍDO COM SUCESSO!");
+        fclose(arq_salario);
+        free(salario_busca);
     }
     else{
         printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
@@ -385,7 +360,57 @@ void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq2, FILE *arq, Fu
 }
 
 // Função que procura por algum cliente excluído e garante que ele não está ativo antes de fazer a recuperação
-Funcionario* busca_func_excluido(char *arquivo, char *cpf_busca){
+// Funcionario* busca_func_excluido(char *arquivo, char *cpf_busca){
+//     FILE *arq;
+//     Funcionario *funcionario;
+//     arq = fopen(arquivo, "rb");
+//     if(arq == NULL){
+//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+//         exit(1);
+//     }
+//     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+//     while(!feof(arq)){
+//         if(fread(funcionario, sizeof(Funcionario), 1, arq)){
+//             if(strcmp(funcionario->cpf, cpf_busca) == 0){
+//                 if(funcionario->status == 'v'){
+//                     fclose(arq);
+//                     return funcionario;
+//                 }else{
+//                     int recebe = verifica_2_cpfs_func(arquivo,funcionario);
+//                     if(recebe == 0){
+//                         fclose(arq);
+//                         return funcionario;
+//                     }else{
+//                         exibe_funcionario(funcionario);
+//                         char op[10];
+//                         printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?");
+//                         system("clear||cls");
+//                         exibe_funcionario(funcionario);
+//                         printf("\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
+//                         int op1 = atoi(op);
+//                         while((op1 < 1) || (op1 > 2)){
+//                             system("clear||cls");
+//                             printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
+//                             printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?\n");
+//                             exibe_funcionario(funcionario);
+//                             char op_aux[10];
+//                             printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+//                             op1 = atoi(op_aux);
+//                         }if(op1 == 1){
+//                             funcionario->status = 'v';
+//                             fclose(arq);
+//                             return funcionario;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     fclose(arq);
+//     return NULL;
+//}
+
+Funcionario* busca_clnt_excluido1(char *arquivo, char *cpf_busca){
     FILE *arq;
     Funcionario *funcionario;
     arq = fopen(arquivo, "rb");
@@ -398,28 +423,29 @@ Funcionario* busca_func_excluido(char *arquivo, char *cpf_busca){
         if(fread(funcionario, sizeof(Funcionario), 1, arq)){
             if(strcmp(funcionario->cpf, cpf_busca) == 0){
                 if(funcionario->status == 'v'){
+                    // exibe_funcionario(funcionario);
                     fclose(arq);
                     return funcionario;
-                }else{
+                }
+                else{
                     int recebe = verifica_2_cpfs_func(arquivo,funcionario);
                     if(recebe == 0){
                         fclose(arq);
                         return funcionario;
                     }else{
-                        char op[10];
-                        printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?");
                         system("clear||cls");
+                        printf("\n\tESSE É O CLIENTE QUE VOCÊ DESEJA RECUPERAR?\n");
                         exibe_funcionario(funcionario);
-                        printf("\n\t1-(SIM) OU 0-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
+                        char op[10];
+                        printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
                         int op1 = atoi(op);
-                        printf("%d", op1);
-                        while((op1 < 0) || (op1 > 1)){
+                        while((op1 < 1) || (op1 > 2)){
                             system("clear||cls");
                             printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
-                            printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?\n");
+                            printf("\n\tESSE É O CLIENTE QUE VOCÊ DESEJA RECUPERAR?\n");
                             exibe_funcionario(funcionario);
                             char op_aux[10];
-                            printf("\n\n\t1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+                            printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
                             op1 = atoi(op_aux);
                         }if(op1 == 1){
                             funcionario->status = 'v';
@@ -436,7 +462,7 @@ Funcionario* busca_func_excluido(char *arquivo, char *cpf_busca){
 }
 
 // Verifica se todos os dados de um determinado cliente são compatíves com o cliente que quero recuperar
-void recupera_funcionario(char *arquivo, Funcionario *funcionario){
+void recupera_funcionario(char *arquivo, Funcionario *funcionario, char *arq_salaraio){
     Funcionario *funcionario_teste;
     FILE *arq;
     arq = fopen(arquivo, "r+b");
@@ -457,6 +483,7 @@ void recupera_funcionario(char *arquivo, Funcionario *funcionario){
                                 if(funcionario_teste->status == 'x' && funcionario->status == 'v'){
                                     achou = 1;
                                     funcionario_teste->status = 'v';
+                                    recupera_salario(arq_salaraio, funcionario_teste->cpf, funcionario_teste->id);
                                     fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
                                     fwrite(funcionario_teste, sizeof(Funcionario), 1, arq);
                                     printf("\n\tFUNCIONÁRIO RECUPERADO COM SUCESSO!\n");
@@ -486,13 +513,13 @@ int verifica_2_cpfs_func(char *arquivo, Funcionario *funcionario){
         if(fread(funcionario_teste, sizeof(Funcionario), 1, arq)){
             if((strcmp(funcionario_teste->cpf, funcionario->cpf) == 0) && (funcionario_teste->status == 'v')){
                 fclose(arq);
-                free(funcionario);
+                free(funcionario_teste);
                 return 0;
             }
         }
     }
     fclose(arq);
-    free(funcionario);
+    free(funcionario_teste);
     return 1;
 }
 

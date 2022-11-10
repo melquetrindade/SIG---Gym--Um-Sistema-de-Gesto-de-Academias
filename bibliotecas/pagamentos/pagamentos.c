@@ -107,32 +107,6 @@ void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
     system("clear||cls");
 }
 
-void deletar_pagamentos(void){ // Função de deletar pagamentos 
-    system("clear||cls");
-    Salario *salario;
-
-    printf("\t======================================\n");
-    printf("\t|    Módulo de Deletar Pagamentos    |\n");
-    printf("\t======================================\n");
-
-    char cpf[100];
-
-    printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
-    loop_cpf(cpf);
-    salario = pesquisa_salario(arq_salario, cpf);
-    if(salario == NULL){
-        printf("\n\tNÃO EXISTE NENHUM SALÁRIO CADASTRADO COM ESTE CPF NO SISTEMA!");
-    }
-    else{
-        deleta_salario(arq_salario, salario);
-    }
-    free(salario);
-
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
-    getchar();
-    system("clear||cls");
-}
-
 void pagamentos_pendentes(void){ // Função de listar apenas os salários atrasados
     system("clear||cls");
     char status = 'x';
@@ -290,61 +264,25 @@ void exibe_salario(const Salario* salario){ // Função exibe o cliente cadastra
     printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", salario->prox_data[0],salario->prox_data[1],salario->prox_data[2]);
 }
 
-void deleta_salario(char *arquivo, Salario *salario){
-    Salario *salario_teste;
-    FILE *arq;
-    arq = fopen(arquivo, "r+b");
-    if (arq == NULL) {
+void recupera_salario(char *arquivo, char *cpf, int*data){
+    FILE *arq_salario;
+    Salario *salario_busca;
+    arq_salario = fopen(arquivo, "r+b");
+    if(arq_salario == NULL){
         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
         exit(1);
     }
-    salario_teste = (Salario*) malloc(sizeof(Salario));
+    salario_busca = (Salario*) malloc(sizeof(Salario));
     int achou = 0;
-    while((!feof(arq)) && (achou == 0)) {
-        fread(salario_teste, sizeof(Salario), 1, arq);
-        if((strcmp(salario_teste->cpf, salario->cpf) == 0) && (salario_teste->status != 'x')) {
+    while((!feof(arq_salario) && (achou == 0))){
+        fread(salario_busca, sizeof(Salario), 1, arq_salario);
+        if((strcmp(salario_busca->cpf,cpf) == 0) && (salario_busca->status == 'x') && (salario_busca->data_pg[0]=data[0]) && (salario_busca->data_pg[1]=data[1]) && (salario_busca->data_pg[2]=data[2]) && (salario_busca->data_pg[3]=data[3]) && (salario_busca->data_pg[4]=data[4]) && (salario_busca->data_pg[5]=data[5])){
             achou = 1;
-            int atraso = cal_atraso(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0]);
-            if(atraso == 1){
-                char op[15];
-                int dif_mes = 0;
-                cal_atraso_etp2(salario_teste->data_pg[2], salario_teste->data_pg[1], salario_teste->data_pg[0], &dif_mes);
-                printf("\n\tO SEGUINTE SALAŔIO SERÁ EXCLUÍDO:");
-                exibe_salario(salario_teste);
-                printf("\n\tOBS: O FUNCIONÁRIO TEM SALÁRIO EM ATRASO! TOTAL DE MESES EM ATRASO: %d", dif_mes);
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
-                confirma_exclucao_salario(salario_teste, op, arq);
-            }
-            else{
-                char op[15];
-                printf("\n\tO SEGUINTE SALÁRIO SERÁ EXCLUÍDO:");
-                exibe_salario(salario_teste);
-                printf("\n\tOBS: NÃO HÁ SALÁRIO PENDENTE PARA ESTE FUNCIONÁRIO!");
-                printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op,15,stdin); fflush(stdin);
-                confirma_exclucao_salario(salario_teste, op, arq);
-            }
+            salario_busca->status = 'v';
+            fseek(arq_salario, -1*sizeof(Salario), SEEK_CUR);
+            fwrite(salario_busca, sizeof(Salario), 1, arq_salario);
         }
     }
-    fclose(arq);
-    free(salario_teste);
-}
-
-void confirma_exclucao_salario(Salario *salario, char *op, FILE *arq){
-    int op1 = atoi(op);
-    while((op1 < 0) || (op1 > 1)){
-        system("clear||cls");
-        printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
-        char op_aux[10];
-        printf("\n\n\tDESEJA REALMENTE EXCLUIR? 1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
-        op1 = atoi(op_aux);
-    }
-    if(op1 == 1){
-        salario->status = 'x';
-        fseek(arq, -1*sizeof(Salario), SEEK_CUR);
-        fwrite(salario, sizeof(salario), 1, arq);
-        printf("\n\tSALAŔIO EXCLUÍDO COM SUCESSO!\n");
-    }
-    else{
-        printf("\n\tA EXCLUÇÃO FOI CANCELADA!");
-    }
+    fclose(arq_salario);
+    free(salario_busca);
 }

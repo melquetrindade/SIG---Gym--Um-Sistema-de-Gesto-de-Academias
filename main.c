@@ -103,9 +103,6 @@ int main(){
                 pesquisar_mensalidade();
             }
             else if(op_menu_mensalidades == 4){
-                deletar_mensalidades();
-            }
-            else if(op_menu_mensalidades == 5){
                 mensalidades_pendentes();
             }
             else if(op_menu_mensalidades == 9){
@@ -131,9 +128,6 @@ int main(){
                 pesquisar_pagamentos();
             }
             else if(op_menu_pagamentos == 4){
-                deletar_pagamentos();
-            }
-            else if(op_menu_pagamentos == 5){
                 pagamentos_pendentes();
             }
             else if(op_menu_pagamentos == 9){

@@ -89,7 +89,7 @@ void recuperar_clientes(void){ // Função de recuperar Clientes
     }
     free(cliente);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -390,15 +390,15 @@ Cliente* busca_clnt_excluido(char *arquivo, char *cpf_busca){
                         system("clear||cls");
                         printf("\n\tESSE É O CLIENTE QUE VOCÊ DESEJA RECUPERAR?\n");
                         exibe_cliente(cliente);
-                        printf("\n\n\t1-(SIM) OU 0-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
+                        printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
                         int op1 = atoi(op);
-                        while((op1 < 0) || (op1 > 1)){
+                        while((op1 < 1) || (op1 > 2)){
                             system("clear||cls");
                             printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
                             printf("\n\tESSE É O CLIENTE QUE VOCÊ DESEJA RECUPERAR?\n");
                             exibe_cliente(cliente);
                             char op_aux[10];
-                            printf("\n\n\t1-(SIM) OU 0-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
+                            printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
                             op1 = atoi(op_aux);
                         }if(op1 == 1){
                             cliente->status = 'v';
