@@ -15,13 +15,10 @@ char arq_funcionario[] = {"arq_funcionario.dat"};
 void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcionários
     system("clear||cls");
     Salario *salario;
-
     printf("\t========================================\n");
     printf("\t|      Módulo de Registrar Salário     |\n");
     printf("\t========================================\n");
-
     char cpf[100];
-
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
     salario = busca_salario(arq_salario,cpf);
@@ -60,7 +57,6 @@ void realizar_pagamentos(void){ // Função de realizar Pagamentos dos Funcioná
         }
     }
     free(salario);
-
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -122,6 +118,7 @@ void pagamentos_pendentes(void){ // Função de listar apenas os salários atras
     system("clear||cls");
 }
 
+// Função que verifica se já existe algum salário ativo correspondente ao cpf informado
 Salario* busca_salario(char *arquivo, char *cpf_busca){
     FILE *arq;
     int abriu = 1;
@@ -146,6 +143,7 @@ Salario* busca_salario(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função que preenche o salário
 Salario* preenche_salario(char *cpf, char*nome, char *plano){
     Salario *salario;
     salario = (Salario*) malloc(sizeof(Salario));
@@ -169,6 +167,7 @@ void salvar_no_arq_salario(const Salario *salario, char *arquivo){
     fclose(arq);
 }
 
+// Função que realiza o pagamento do salário
 void confirma_salario(char *arquivo, Salario *salario_novo){
     Salario *salario_teste;
     FILE *arq;
@@ -199,6 +198,7 @@ void confirma_salario(char *arquivo, Salario *salario_novo){
     free(salario_teste);
 }
 
+// Função que faz a leitura do arquivo de salário
 void ler_arquivo_salario(char *arquivo, char statu){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -235,6 +235,7 @@ void ler_arquivo_salario(char *arquivo, char statu){
     free(salario1);
 }
 
+// Função que pesquisa por um salário específico 
 Salario* pesquisa_salario(char *arquivo, char *cpf_busca){
     FILE *arq;
     Salario *salario;
@@ -256,6 +257,7 @@ Salario* pesquisa_salario(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função que exibe o salário
 void exibe_salario(const Salario* salario){ // Função exibe o cliente cadastrado
     printf("\n\tCPF: %s", salario->cpf);
     printf("\tNOME: %s", salario->nome);
@@ -264,6 +266,7 @@ void exibe_salario(const Salario* salario){ // Função exibe o cliente cadastra
     printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", salario->prox_data[0],salario->prox_data[1],salario->prox_data[2]);
 }
 
+// Função que recupe o salário
 void recupera_salario(char *arquivo, char *cpf, int*data){
     FILE *arq_salario;
     Salario *salario_busca;

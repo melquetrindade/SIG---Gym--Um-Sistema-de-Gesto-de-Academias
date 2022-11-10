@@ -14,13 +14,10 @@ char arq_registro[] = {"arq_registro.dat"};
 void registrar_frequencia(void){ // Função de registrar acesso
     system("clear||cls");
     Registro *frequencia;
-
     printf("\t======================================\n");
     printf("\t|     Módulo de Registrar Acesso     |\n");
     printf("\t======================================\n");
-
     char cpf[100];
-
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
     frequencia = busca_frequencia(arq_registro, cpf);
@@ -49,7 +46,6 @@ void registrar_frequencia(void){ // Função de registrar acesso
         printf("\n\tREGISTRO REALIZADO COM SUCESSO!");
     }
     free(frequencia);
-
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -69,6 +65,7 @@ void listar_frequencia(void){ // Função de listar frequência
     system("clear||cls");
 }
 
+// Função que verifica se já existe uma ficha de frequência com o cpf informado
 Registro* busca_frequencia(char *arquivo, char *cpf_busca){
     FILE *arq;
     int abriu = 1;
@@ -93,6 +90,7 @@ Registro* busca_frequencia(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função que preenche a ficha de clientes
 Registro* preenche_frequencia(char *cpf, char*nome){
     Registro *frequencia;
     frequencia = (Registro*) malloc(sizeof(Registro));
@@ -104,6 +102,7 @@ Registro* preenche_frequencia(char *cpf, char*nome){
     return frequencia;
 }
 
+// Função que salva no arquivo de registro
 void salvar_no_arq_registro(const Registro *frequencia, char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "ab");
@@ -115,6 +114,7 @@ void salvar_no_arq_registro(const Registro *frequencia, char *arquivo){
     fclose(arq);
 }
 
+// Função que faz a leitura do arquivo de registro
 void ler_arquivo_registro(char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -143,6 +143,7 @@ void ler_arquivo_registro(char *arquivo){
     free(frequencia);
 }
 
+// Função que realiza a confirmação do acesso do cliente a academia 
 void confirma_acesso(char *arquivo, Registro *frequencia_novo){
     Registro *frequencia_teste;
     FILE *arq;
@@ -169,6 +170,7 @@ void confirma_acesso(char *arquivo, Registro *frequencia_novo){
     free(frequencia_teste);
 }
 
+// Função que pesquisa por uma ficha em específica
 Registro* pesquisa_frequencia(char *arquivo, char *cpf_busca){
     FILE *arq;
     Registro *frequencia;
@@ -190,6 +192,7 @@ Registro* pesquisa_frequencia(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função que deleta a ficha de frequência
 void deleta_frequencia(char *arquivo, char *cpf, int*data){
     FILE *arq_frequencia;
     Registro *frequencia_busca;
@@ -214,6 +217,7 @@ void deleta_frequencia(char *arquivo, char *cpf, int*data){
     free(frequencia_busca);
 }
 
+// Função que recupera a ficha de frequência
 void recupera_frequencia(char *arquivo, char *cpf, int*data){
     FILE *arq_frequencia;
     Registro *frequencia_busca;

@@ -27,7 +27,7 @@ int main(){
 
     while(entrada != false){
         op_menu_principal = menu_principal();
-        if(op_menu_principal == 1){
+        if(op_menu_principal == 1){ // Entra no módulo de clientes
             system("clear||cls");
             op_menu_clientes = clientes();
             op_menu_clientes = verifica_opcao_1(op_menu_clientes);
@@ -58,7 +58,7 @@ int main(){
                 printf("\n");
             }
         }
-        else if(op_menu_principal == 2){
+        else if(op_menu_principal == 2){ // Entra no módulo de funcionários
             system("clear||cls");
             op_menu_funcionarios = funcionarios();
             op_menu_funcionarios = verifica_opcao_1(op_menu_funcionarios);
@@ -89,7 +89,7 @@ int main(){
                 printf("\n");
             }
         }
-        else if(op_menu_principal == 3){
+        else if(op_menu_principal == 3){ // Entra no módulo de mensalidades
             system("clear||cls");
             op_menu_mensalidades = mensalidades();
             op_menu_mensalidades = verifica_opcao_2(op_menu_mensalidades);
@@ -114,7 +114,7 @@ int main(){
                 printf("Opção Inválida, Tente Novamente:\n");
             }
         }
-        else if(op_menu_principal == 4){
+        else if(op_menu_principal == 4){ // Entra no módulo de salários
             system("clear||cls");
             op_menu_pagamentos = pagamentos();
             op_menu_pagamentos = verifica_opcao_2(op_menu_pagamentos);
@@ -140,7 +140,7 @@ int main(){
             }
 
         }
-        else if(op_menu_principal == 5){
+        else if(op_menu_principal == 5){ // Entra no módulo de registrar acesso
             system("clear||cls");
             op_menu_reg_acesso = registrar_acesso();
             op_menu_reg_acesso = verifica_opcao_3(op_menu_reg_acesso);
@@ -160,10 +160,10 @@ int main(){
             }
 
         }
-        else if(op_menu_principal == 6){
+        else if(op_menu_principal == 6){ // Entra no módulo de informes
             informes();
         }
-        else if(op_menu_principal == 9){
+        else if(op_menu_principal == 9){ // Encerra o sistema
             system("clear||cls");
             printf("Módulo de Encerramento!\n");
             entrada = false;

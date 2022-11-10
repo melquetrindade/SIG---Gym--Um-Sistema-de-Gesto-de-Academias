@@ -15,13 +15,10 @@ char arq_cliente[] = {"arq_cliente.dat"};
 void registrar_mensalidade(void){ // Função de Registrar Mensalidades
     system("clear||cls");
     Mensalidade *mensalidade;
-
     printf("\t=======================================\n");
     printf("\t|   Módulo de Registrar Mensalidades  |\n");
     printf("\t=======================================\n");
-
     char cpf[100];
-
     printf("\n\tINFORME O CPF: (APENAS NÚMEROS) >>> "); fgets(cpf, 100, stdin); fflush(stdin);
     loop_cpf(cpf);
     mensalidade = busca_mensalidade(arq_mensalidade,cpf);
@@ -60,7 +57,6 @@ void registrar_mensalidade(void){ // Função de Registrar Mensalidades
         }
     }
     free(mensalidade);
-
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
@@ -122,6 +118,7 @@ void mensalidades_pendentes(void){ // Função de listar apenas as mensalidades 
     system("clear||cls");
 }
 
+// Função de buscar mensalidades
 Mensalidade* busca_mensalidade(char *arquivo, char *cpf_busca){
     FILE *arq;
     int abriu = 1;
@@ -146,6 +143,7 @@ Mensalidade* busca_mensalidade(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função de preencher mensalidades
 Mensalidade* preenche_mensalidade(char *cpf, char*nome, char *plano){
     Mensalidade *mensalidade;
     mensalidade = (Mensalidade*) malloc(sizeof(Mensalidade));
@@ -158,6 +156,7 @@ Mensalidade* preenche_mensalidade(char *cpf, char*nome, char *plano){
     return mensalidade;
 }
 
+// Função de salvar no arquivo de mensalidades
 void salvar_no_arq_mensalidade(const Mensalidade *mensalidade, char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "ab");
@@ -169,6 +168,7 @@ void salvar_no_arq_mensalidade(const Mensalidade *mensalidade, char *arquivo){
     fclose(arq);
 }
 
+// Função de realiza o pagamento da mensalidade
 void confirma_pagamento(char *arquivo, Mensalidade *mensa_novo){
     Mensalidade *mensa_teste;
     FILE *arq;
@@ -199,6 +199,7 @@ void confirma_pagamento(char *arquivo, Mensalidade *mensa_novo){
     free(mensa_teste);
 }
 
+// Função que faz a leitura do arquivo de mensalidades
 void ler_arquivo_mensalidade(char *arquivo, char statu){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -235,6 +236,7 @@ void ler_arquivo_mensalidade(char *arquivo, char statu){
     free(mensalidade1);
 }
 
+// Função que pesquisa por uma mensalidade específica
 Mensalidade* pesquisa_mensalidade(char *arquivo, char *cpf_busca){
     FILE *arq;
     Mensalidade *mensalidade;
@@ -256,6 +258,7 @@ Mensalidade* pesquisa_mensalidade(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
+// Função que exibe a mensalidade
 void exibe_mensalidade(const Mensalidade* mensalidade){ // Função exibe o cliente cadastrado
     printf("\n\tCPF: %s", mensalidade->cpf);
     printf("\tNOME: %s", mensalidade->nome);
@@ -264,6 +267,7 @@ void exibe_mensalidade(const Mensalidade* mensalidade){ // Função exibe o clie
     printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", mensalidade->prox_data[0],mensalidade->prox_data[1],mensalidade->prox_data[2]);
 }
 
+// Função que recupera a mensalidade
 void recupera_mensalidade(char *arquivo, char *cpf, int*data){
     FILE *arq_mensalidade;
     Mensalidade *mensa_busca;

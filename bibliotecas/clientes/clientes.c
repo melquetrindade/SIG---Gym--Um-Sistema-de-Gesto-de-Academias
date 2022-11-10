@@ -169,7 +169,8 @@ void listar_clientes(void){ // Função de listar clientes
     system("clear||cls");
 }
 
-void exibe_cliente(const Cliente* cliente){ // Função exibe o cliente cadastrado
+// Função exibe o cliente cadastrado
+void exibe_cliente(const Cliente* cliente){
     printf("\n\tCPF: %s", cliente->cpf);
     printf("\tNOME: %s", cliente->nome);
     printf("\tE-MAIL: %s", cliente->email);
@@ -178,6 +179,7 @@ void exibe_cliente(const Cliente* cliente){ // Função exibe o cliente cadastra
     printf("\tPLANO: R$ %s", cliente->plano);
 }
 
+// Função que salva no arquivo de clientes
 void salvar_no_arq_cliente(const Cliente *cliente, char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "ab");
@@ -189,6 +191,7 @@ void salvar_no_arq_cliente(const Cliente *cliente, char *arquivo){
     fclose(arq);
 }
 
+// Função que preenche os dados do cliente
 Cliente* preenche_cliente(char *arquivo){
     Cliente *cliente;
     cliente = (Cliente*) malloc(sizeof(Cliente));
@@ -212,6 +215,7 @@ Cliente* preenche_cliente(char *arquivo){
     return cliente;
 }
 
+// Função que faz a leitura do arquivo clientes
 void ler_arquivo_cliente(char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -289,6 +293,7 @@ void deleta_cliente(char *arquivo, Cliente *cliente){
     
 }
 
+// Função auxiliar de deleta cliente etapa 1
 void confir_excl_cliente(Cliente *cliente_teste, FILE *arq, char *arq_mensa, char *arq3){
     Mensalidade *mensa_teste;
     mensa_teste = pesquisa_mensalidade(arq_mensa, cliente_teste->cpf);
@@ -322,6 +327,7 @@ void confir_excl_cliente(Cliente *cliente_teste, FILE *arq, char *arq_mensa, cha
     free(frequencia);
 }
 
+// Função auxiliar de deleta cliente etapa 2
 void cfrm_exclu_clnt_etp2(char *mensa_cpf, char *op, char *arq2, FILE *arq, Cliente *cliente_teste, char *arq3, char *freq_cpf){
     int op1 = atoi(op);
     while((op1 < 1) || (op1 > 2)){
@@ -477,7 +483,7 @@ int verifica_2_cpfs(char *arquivo, Cliente *cliente){
     free(cliente);
 }
 
-//Função que verifica se o cpf já esta sendo utilizado antes que cadastrar algum cliente
+//Função que verifica se o cpf já esta sendo utilizado antes de cadastrar algum cliente
 void verifica_pessoa_cliente(char *arquivo, char *cpf){
     int taOk = 1;
     FILE *arq;
@@ -509,6 +515,7 @@ void verifica_pessoa_cliente(char *arquivo, char *cpf){
     }
 }
 
+// Função de atualizar cliente
 void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
     Cliente *cliente_teste;
     FILE *arq;

@@ -163,7 +163,7 @@ int valida_format_data(char *data){
     return 1;
 }
 
-// Função que quebra a data string em data inteiro
+// Função que quebra a data string em data inteiro em dia, mês e ano.
 void divide_data_inteiro(char *data_teste, int *vetorData){
     char copia_data[40];
     char *pt;
@@ -257,7 +257,7 @@ void cal_atraso_etp2(int dia, int mes, int ano, int *diferenca){
     }
 }
 
-// Função que calcula se houve atraso na mensalidade 
+// Função que calcula se houve atraso na mensalidade/salário
 int cal_atraso(int dia, int mes, int ano){
     int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
     if(bissexto(ano)){
@@ -297,7 +297,7 @@ int cal_atraso(int dia, int mes, int ano){
     }
 }
 
-// Função que retira caracteres diferentes de números
+// Função que retira caracteres diferentes de números no cpf
 void cpf_inteiro(char *fone_teste){ 
     char cpf[30] = {""};
     char *pt;
@@ -330,7 +330,7 @@ void loop_fone(char *fone_teste){
     }
 }
 
-// Função que retira caracteres diferentes de números
+// Função que retira caracteres diferentes de números no telefone
 void fone_inteiro(char *fone_teste){ 
     char fone[100] = {""};
     char *pt;
@@ -370,7 +370,7 @@ int valida_dd(char *fone_teste){
     return 0;
 }
 
-//Função Verifica se a quantidade de carcacter está certo
+//Função Verifica se a quantidade de carcacter está certo para o telefone 
 int fone_valida_etp2(char *fone_teste){
     int tam = strlen(fone_teste);
     if(tam != 12){
@@ -386,7 +386,7 @@ int fone_valida_etp2(char *fone_teste){
     }
     return 1;
 }
-// Função que quebra o email em duas partes;
+// Função que quebra o email em duas partes: domínio e local
 void quebra_email(char *email_teste, char *prt_local, char *prt_dominio){
     char copia_email[200] = {""};
     strcpy(copia_email, email_teste);
@@ -539,7 +539,7 @@ void loop_email(char *email_teste){
     }
 }
 
-// Função verica se existe outro que não seja letras
+// Função verica se existe outro caracter que não seja letras
 int verifica_caracter(char *nome){
     int tam = strlen(nome);
     for(int i = 0; i < (tam-1); i++){
@@ -576,7 +576,7 @@ void loop_nome(char *nome_teste){
     }
 }
 
-// Função retira todos os caracteres de espaçamento
+// Função retira todos os caracteres de espaçamento para nome
 void formata_nome(char *nome_teste){
     char *pt;
     char nome[100] = {""};
@@ -604,7 +604,7 @@ int valida_caracter_valor_cliente(char *valor){
     return 0;
 }
 
-// Função retira todos os caracteres de espaçamento
+// Função retira todos os caracteres de espaçamento para plano de mensalidade e salário de funcionário
 void valor_inteiro(char *plano_teste){
     char plano[20] = {""};
     char *pt;

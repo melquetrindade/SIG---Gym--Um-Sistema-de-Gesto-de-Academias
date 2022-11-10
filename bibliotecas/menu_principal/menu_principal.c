@@ -29,11 +29,11 @@ int menu_principal(void){ // Tela principal
     return x;
 }
 
-int clientes(void){ // Tela de Clientes
+int clientes(void){ // Tela do módulo de Clientes
     setlocale(LC_ALL,"Portuguese");
     char numero[20];
     printf("--------------------------------------------------------\n");
-    printf("|                       MENU CLIENTES                  |\n");
+    printf("|                     MENU CLIENTES                    |\n");
     printf("--------------------------------------------------------\n");
     printf("|   -------------      -----------      -------------  |\n");
     printf("| 1-| CADASTRAR |    2-| DELETAR |    3-| RECUPERAR |  |\n");
@@ -101,19 +101,19 @@ int mensalidades(void){ // Tela do módulo de mensalidades
     setlocale(LC_ALL,"Portuguese");
     char op[20];
 
-    printf("----------------------------------------------------------------------\n");
-    printf("|                         MENU MENSALIDADES                          |\n");
-    printf("----------------------------------------------------------------------\n");
-    printf("|   -----------------------       ---------------------              |\n");
-    printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |              |\n");
-    printf("|   -----------------------       ---------------------              |\n");
-    printf("|   -----------------------       --------------------------         |\n");
-    printf("| 3-| PESQUISAR PAGAMENTO |     4-| MENSALIDADES PENDENTES |         |\n");
-    printf("|   -----------------------       --------------------------         |\n");
-    printf("|   --------------------------------                                 |\n");
-    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                                 |\n");
-    printf("|   --------------------------------                                 |\n");
-    printf("----------------------------------------------------------------------\n");
+    printf("-------------------------------------------------------------------\n");
+    printf("|                         MENU MENSALIDADES                       |\n");
+    printf("-------------------------------------------------------------------\n");
+    printf("|   -----------------------       ---------------------           |\n");
+    printf("| 1-| REGISTRAR PAGAMENTO |     2-| LISTAR PAGAMENTOS |           |\n");
+    printf("|   -----------------------       ---------------------           |\n");
+    printf("|   -----------------------       --------------------------      |\n");
+    printf("| 3-| PESQUISAR PAGAMENTO |     4-| MENSALIDADES PENDENTES |      |\n");
+    printf("|   -----------------------       --------------------------      |\n");
+    printf("|   --------------------------------                              |\n");
+    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                              |\n");
+    printf("|   --------------------------------                              |\n");
+    printf("-------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);

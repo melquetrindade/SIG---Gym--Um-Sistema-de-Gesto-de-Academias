@@ -167,7 +167,8 @@ void listar_funcionario(void){ // Função de listar funcionários
     system("clear||cls");
 }
 
-void exibe_funcionario(const Funcionario* funcionario){// Função exibe o funcionário cadastrado
+// Função exibe o funcionário cadastrado
+void exibe_funcionario(const Funcionario* funcionario){
     printf("\n\tCPF: %s", funcionario->cpf);
     printf("\tNOME: %s", funcionario->nome);
     printf("\tE-MAIL: %s", funcionario->email);
@@ -176,6 +177,7 @@ void exibe_funcionario(const Funcionario* funcionario){// Função exibe o funci
     printf("\tSALÁRIO: R$ %s", funcionario->salaraio);
 }
 
+// Função que preenche o funcionário
 Funcionario* preenche_funcionario(void){
     Funcionario *funcionario;
     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
@@ -200,6 +202,7 @@ Funcionario* preenche_funcionario(void){
     return funcionario;
 }
 
+// Função que salva no arquivo funcionário
 void salvar_no_arq_func(const Funcionario *funcionario, char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "ab");
@@ -211,6 +214,7 @@ void salvar_no_arq_func(const Funcionario *funcionario, char *arquivo){
     fclose(arq);
 }
 
+// Função que faz a leitura do arquivo funcionário
 void ler_arquivo_func(char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -243,7 +247,7 @@ void ler_arquivo_func(char *arquivo){
     free(funcionario);
 }
 
-// Função que busca cliente
+// Função que busca funcionário
 Funcionario* busca_funcionario(char *arquivo, char *cpf_busca){
     FILE *arq;
     Funcionario *funcionario;
@@ -265,7 +269,7 @@ Funcionario* busca_funcionario(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
-// Função que deleta cliente
+// Função que deleta funcionário
 void deleta_funcionario(char *arquivo, Funcionario *funcionario){
     Funcionario *func_teste;
     FILE *arq;
@@ -288,6 +292,7 @@ void deleta_funcionario(char *arquivo, Funcionario *funcionario){
     
 }
 
+// Função auxiliar de deleta funcionário etapa 1
 void confir_excl_func(Funcionario *func_teste, FILE *arq, char *arq_salario){
     Salario *salario_teste;
     salario_teste = pesquisa_salario(arq_salario, func_teste->cpf);
@@ -318,6 +323,7 @@ void confir_excl_func(Funcionario *func_teste, FILE *arq, char *arq_salario){
     free(salario_teste);
 }
 
+// Função auxiliar de deleta funcionário etapa 2
 void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq_s, FILE *arq, Funcionario *func_teste){
     int op1 = atoi(op);
     while((op1 < 1) || (op1 > 2)){
@@ -359,57 +365,7 @@ void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq_s, FILE *arq, F
     }
 }
 
-// Função que procura por algum cliente excluído e garante que ele não está ativo antes de fazer a recuperação
-// Funcionario* busca_func_excluido(char *arquivo, char *cpf_busca){
-//     FILE *arq;
-//     Funcionario *funcionario;
-//     arq = fopen(arquivo, "rb");
-//     if(arq == NULL){
-//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-//         exit(1);
-//     }
-//     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
-//     while(!feof(arq)){
-//         if(fread(funcionario, sizeof(Funcionario), 1, arq)){
-//             if(strcmp(funcionario->cpf, cpf_busca) == 0){
-//                 if(funcionario->status == 'v'){
-//                     fclose(arq);
-//                     return funcionario;
-//                 }else{
-//                     int recebe = verifica_2_cpfs_func(arquivo,funcionario);
-//                     if(recebe == 0){
-//                         fclose(arq);
-//                         return funcionario;
-//                     }else{
-//                         exibe_funcionario(funcionario);
-//                         char op[10];
-//                         printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?");
-//                         system("clear||cls");
-//                         exibe_funcionario(funcionario);
-//                         printf("\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op, 10, stdin); fflush(stdin);
-//                         int op1 = atoi(op);
-//                         while((op1 < 1) || (op1 > 2)){
-//                             system("clear||cls");
-//                             printf("\n\tOPÇÃO INVÁLIDA! TENTE NOVAMENTE:");
-//                             printf("\n\tESSE É O FUNCIONÁRIO QUE VOCÊ DESEJA RECUPERAR?\n");
-//                             exibe_funcionario(funcionario);
-//                             char op_aux[10];
-//                             printf("\n\n\t1-(SIM) OU 2-(NÃO) >>> "); fgets(op_aux, 10, stdin); fflush(stdin);
-//                             op1 = atoi(op_aux);
-//                         }if(op1 == 1){
-//                             funcionario->status = 'v';
-//                             fclose(arq);
-//                             return funcionario;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-//     fclose(arq);
-//     return NULL;
-//}
-
+// Função que procura por algum funcionário excluído e garante que ele não está ativo antes de fazer a recuperação
 Funcionario* busca_clnt_excluido1(char *arquivo, char *cpf_busca){
     FILE *arq;
     Funcionario *funcionario;
@@ -461,7 +417,7 @@ Funcionario* busca_clnt_excluido1(char *arquivo, char *cpf_busca){
     return NULL;
 }
 
-// Verifica se todos os dados de um determinado cliente são compatíves com o cliente que quero recuperar
+// Verifica se todos os dados de um determinado funcionário são compatíves com o funcionário que quero recuperar
 void recupera_funcionario(char *arquivo, Funcionario *funcionario, char *arq_salaraio){
     Funcionario *funcionario_teste;
     FILE *arq;
@@ -523,7 +479,7 @@ int verifica_2_cpfs_func(char *arquivo, Funcionario *funcionario){
     return 1;
 }
 
-// Função que verifica se o cpf já esta sendo utilizado antes que cadastrar algum cliente
+// Função que verifica se o cpf já esta sendo utilizado antes que cadastrar algum funcionário
 void verifica_pessoa_func(char *arquivo, char *cpf){
     int taOk = 1;
     FILE *arq;
@@ -555,6 +511,7 @@ void verifica_pessoa_func(char *arquivo, char *cpf){
     }
 }
 
+// Função que atualiza funcionário
 void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
     Funcionario *func_teste;
     FILE *arq;
