@@ -540,6 +540,7 @@ void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
             printf("\n\t>>> SELECIONE UM SALÁRIO: ");
             fgets(func_teste->salaraio, 20, stdin); fflush(stdin);
             loop_valor_funcionario(func_teste->salaraio);
+            atualiza_salario(arq_salario1,func_teste->cpf,func_teste->nome,func_teste->salaraio);
             func_teste->status = 'v';
             fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
             fwrite(func_teste, sizeof(Funcionario), 1, arq);

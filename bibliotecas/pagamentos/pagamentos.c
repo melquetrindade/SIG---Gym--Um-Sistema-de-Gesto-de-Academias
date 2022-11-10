@@ -98,7 +98,7 @@ void pesquisar_pagamentos(void){ // Função de Pesquisar por pagamentos
     }
     free(salario);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -288,4 +288,28 @@ void recupera_salario(char *arquivo, char *cpf, int*data){
     }
     fclose(arq_salario);
     free(salario_busca);
+}
+
+void atualiza_salario(char *arq_salario, char *func_cpf, char *func_nome, char *func_salario){
+    FILE *arq_sal;
+    arq_sal = fopen(arq_salario, "r+b");
+    if(arq_sal==NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    int achou = 0;
+    Salario *salario;
+    salario = (Salario*) malloc(sizeof(Salario));
+    while(!feof(arq_sal) && (achou == 0)){
+        fread(salario, sizeof(Salario), 1, arq_sal);
+        if((strcmp(salario->cpf,func_cpf) == 0) && salario->status != 'x'){
+            achou = 1;
+            strcpy(salario->nome,func_nome);
+            strcpy(salario->salario,func_salario);
+            fseek(arq_sal, -1*sizeof(Salario), SEEK_CUR);
+            fwrite(salario, sizeof(Salario), 1, arq_sal);
+        }
+    }
+    fclose(arq_sal);
+    free(salario);
 }

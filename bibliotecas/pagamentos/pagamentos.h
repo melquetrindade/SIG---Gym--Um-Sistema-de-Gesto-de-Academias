@@ -20,4 +20,5 @@ void confirma_salario(char*, Salario*);
 void ler_arquivo_salario(char*, char);
 Salario* pesquisa_salario(char*, char*);
 void exibe_salario(const Salario*);
-void recupera_salario(char *arquivo, char *cpf, int*data);
+void recupera_salario(char*, char*, int*);
+void atualiza_salario(char*, char*, char*, char*);
