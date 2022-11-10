@@ -9,6 +9,7 @@ struct salario{
     char status;
 };
 
+// Assinaturas
 void realizar_pagamentos(void);
 void listar_pagamentos(void);
 void pesquisar_pagamentos(void);

@@ -543,6 +543,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
             printf("\n\t>>> SELECIONE UM PLANO: ");
             fgets(cliente_teste->plano, 20, stdin); fflush(stdin);
             loop_valor_cliente(cliente_teste->plano);
+            atualiza_mensalidade(arq_mensalidade1,cliente_teste->cpf,cliente_teste->nome, cliente_teste->plano);
             cliente_teste->status = 'v';
             fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
             fwrite(cliente_teste, sizeof(Cliente), 1, arq);

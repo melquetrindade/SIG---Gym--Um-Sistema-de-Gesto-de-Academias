@@ -1,3 +1,4 @@
+// Assinaturas
 int menu_principal(void);
 int clientes(void);
 int funcionarios(void);

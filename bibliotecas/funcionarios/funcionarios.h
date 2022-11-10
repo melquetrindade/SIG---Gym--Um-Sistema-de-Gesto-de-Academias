@@ -11,6 +11,7 @@ struct funcionario{
     int id[6];
 };
 
+// Assinaturas
 void cadastrar_funcionario(void);
 void deletar_funcionario(void);
 void recuperar_funcionario(void);
@@ -22,7 +23,6 @@ Funcionario* preenche_funcionario(void);
 void salvar_no_arq_func(const Funcionario *, char *);
 void ler_arquivo_func(char *);
 Funcionario* busca_funcionario(char *, char *);
-// Funcionario* busca_func_excluido(char *, char *);
 void recupera_funcionario(char *, Funcionario *, char*);
 int verifica_2_cpfs_func(char *, Funcionario *);
 void verifica_pessoa_func(char *, char *);

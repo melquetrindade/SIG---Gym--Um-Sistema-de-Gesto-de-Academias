@@ -8,6 +8,7 @@ struct registro{
     int id[6];
 };
 
+// Assinaturas
 void registrar_frequencia(void);
 void listar_frequencia(void);
 Registro* busca_frequencia(char *, char *);

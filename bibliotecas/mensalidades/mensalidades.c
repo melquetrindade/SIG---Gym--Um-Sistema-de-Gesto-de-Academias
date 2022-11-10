@@ -290,3 +290,28 @@ void recupera_mensalidade(char *arquivo, char *cpf, int*data){
     fclose(arq_mensalidade);
     free(mensa_busca);
 }
+
+// Função que atualiza mensalidade
+void atualiza_mensalidade(char *arq_mensa, char *cliente_cpf, char *cliente_nome, char *cliente_plano){
+    FILE *arq_mensalidade1;
+    arq_mensalidade1 = fopen(arq_mensa, "r+b");
+    if(arq_mensalidade1 == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    int achou = 0;
+    Mensalidade *mensa_teste;
+    mensa_teste = (Mensalidade*) malloc(sizeof(Mensalidade));
+    while(!feof(arq_mensalidade1) && (achou == 0)){
+        fread(mensa_teste, sizeof(Mensalidade), 1, arq_mensalidade1);
+        if((strcmp(mensa_teste->cpf,cliente_cpf) == 0) && mensa_teste->status != 'x'){
+            achou = 1;
+            strcpy(mensa_teste->nome,cliente_nome);
+            strcpy(mensa_teste->plano,cliente_plano);
+            fseek(arq_mensalidade1, -1*sizeof(Mensalidade), SEEK_CUR);
+            fwrite(mensa_teste, sizeof(Mensalidade), 1, arq_mensalidade1);
+        }
+    }
+    fclose(arq_mensalidade1);
+    free(mensa_teste);
+}

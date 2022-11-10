@@ -1,1 +1,2 @@
+// Assinatura
 void informes(void);

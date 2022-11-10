@@ -21,3 +21,4 @@ void ler_arquivo_mensalidade(char *, char);
 Mensalidade* pesquisa_mensalidade(char *, char *);
 void exibe_mensalidade(const Mensalidade*);
 void recupera_mensalidade(char*, char*, int*);
+void atualiza_mensalidade(char*, char*, char*, char*);

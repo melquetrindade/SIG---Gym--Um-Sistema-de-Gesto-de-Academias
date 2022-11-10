@@ -11,6 +11,7 @@ struct cliente{
     int id[6];
 };
 
+// Assinaturas
 void cadastrar_clientes(void);
 void deletar_clientes(void);
 void recuperar_clientes(void);

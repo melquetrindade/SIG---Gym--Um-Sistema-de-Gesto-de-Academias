@@ -156,6 +156,7 @@ Salario* preenche_salario(char *cpf, char*nome, char *plano){
     return salario;
 }
 
+// Função que salva em arquivo salário
 void salvar_no_arq_salario(const Salario *salario, char *arquivo){
     FILE *arq;
     arq = fopen(arquivo, "ab");
@@ -290,6 +291,7 @@ void recupera_salario(char *arquivo, char *cpf, int*data){
     free(salario_busca);
 }
 
+// Função que atualiza salário
 void atualiza_salario(char *arq_salario, char *func_cpf, char *func_nome, char *func_salario){
     FILE *arq_sal;
     arq_sal = fopen(arq_salario, "r+b");

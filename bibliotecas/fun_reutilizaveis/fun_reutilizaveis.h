@@ -1,3 +1,4 @@
+// Assinaturas 
 void loop_cpf(char *);
 int valida_cpf(char *);
 void loop_de_validacao_data(char *);
