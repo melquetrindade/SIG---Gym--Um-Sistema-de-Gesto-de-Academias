@@ -647,7 +647,8 @@ void lista_clientes(char *arquivo){
     }
     else if(op1 == 2){
         printf("\n\tainda vou fazer");
-        lista_idade(arquivo);
+        int idade = 20;
+        lista_idade(arquivo, idade);
     }
     else if(op1 == 3){
         lista_plano(arquivo);
@@ -657,7 +658,7 @@ void lista_clientes(char *arquivo){
     }
 }
 
-void lista_idade(char *arquivo){
+void lista_idade(char *arquivo, int idade){
     FILE *arq;
     arq = fopen(arquivo, "rb");
     if (arq == NULL){
@@ -667,31 +668,51 @@ void lista_idade(char *arquivo){
     Cliente *cliente;
     cliente = (Cliente*) malloc(sizeof(Cliente));
     int cont1 = 0;
+    int cont2 = 0;
     while(!feof(arq)){
         if(fread(cliente, sizeof(Cliente),1,arq)){
             if(cliente->status == 'v'){
                 calcula_idade(cliente->idade,cliente->data_nas);
-                if(cliente->idade == idade)
-                cont+=1;
-
+                //printf("aqui -%d", cliente->idade);
+                if(cliente->idade <= idade){
+                    printf("\n\tCLIENTE %d:\n",cont2+1);
+                    printf("\n\tCPF: %s", cliente->cpf);
+                    printf("\tNOME: %s", cliente->nome);
+                    printf("\tE-MAIL: %s", cliente->email);
+                    printf("\tTELEFONE: +55 %s", cliente->fone);
+                    printf("\tDATA DE NASCIMENTO: %s", cliente->data_nas);
+                    printf("\tPLANO: R$ %s", cliente->plano);
+                    printf("\n\t===================================\n");
+                    cont2 += 1;
+                }
+                cont1+=1;
             }
         }
     }
-    printf("-%d", cont);
-    if(cont = 0){
+    //printf("-%d", cont);
+    if(cont1 == 0){
         printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
     }
+    if(cont2 == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+    }
+    fclose(arq);
+    free(cliente);
 }
 
-void calcula_idade(int idade, char *data_nasc){
+int calcula_idade(int idade, char *data_nasc){
     int vetor_nas[3];
     divide_data_inteiro(data_nasc, vetor_nas);
     int dia = vetor_nas[0];
     int mes = vetor_nas[1];
     int ano = vetor_nas[2];
+    printf("\n\tidade antes: %d", idade);
+    printf("\n\tdata de nasc: %d/%d/%d", dia, mes, ano);
     int vetor_atual[6];
     pegaData(vetor_atual);
+    printf("\n\tdata atual: %d/%d/%d", vetor_atual[2], vetor_atual[1], vetor_atual[0]);
     int dif_ano = (vetor_atual[0]-1) - ano;
+    printf("\n\tdiferença de idade: %d", dif_ano);
 
     if(mes == 1){
         if(vetor_atual[1] > mes){
@@ -738,4 +759,5 @@ void calcula_idade(int idade, char *data_nasc){
     if(idade < 0){
         idade = 0;
     }
+    printf("\n\tidade: %d", idade);
 }
