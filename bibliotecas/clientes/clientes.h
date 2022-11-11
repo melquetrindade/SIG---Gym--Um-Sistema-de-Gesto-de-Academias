@@ -9,6 +9,7 @@ struct cliente{
     char plano[20];
     char status;
     int id[6];
+    int idade;
 };
 
 // Assinaturas
@@ -34,3 +35,4 @@ void cfrm_exclu_clnt_etp2(char*, char *, char *, FILE *, Cliente *, char *, char
 void ler_por_plano(char *, char* );
 void lista_plano(char *);
 void lista_clientes(char *);
+void lista_idade(char *);

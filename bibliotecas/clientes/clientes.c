@@ -211,6 +211,7 @@ Cliente* preenche_cliente(char *arquivo){
     fgets(cliente->plano, 20, stdin); fflush(stdin);
     loop_valor_cliente(cliente->plano);
     cliente->status = 'v';
+    cliente->idade = 0;
     cliente->id[0]=0;cliente->id[1]=0;cliente->id[2]=0;cliente->id[3]=0;cliente->id[4]=0;cliente->id[5]=0;
     return cliente;
 }
@@ -546,6 +547,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
             loop_valor_cliente(cliente_teste->plano);
             atualiza_mensalidade(arq_mensalidade1,cliente_teste->cpf,cliente_teste->nome, cliente_teste->plano);
             cliente_teste->status = 'v';
+            cliente_teste->idade = 0;
             fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
             fwrite(cliente_teste, sizeof(Cliente), 1, arq);
         }
@@ -645,11 +647,95 @@ void lista_clientes(char *arquivo){
     }
     else if(op1 == 2){
         printf("\n\tainda vou fazer");
+        lista_idade(arquivo);
     }
     else if(op1 == 3){
         lista_plano(arquivo);
     }
     else{
         printf("\n\tainda vou fazer");
+    }
+}
+
+void lista_idade(char *arquivo){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    int cont1 = 0;
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if(cliente->status == 'v'){
+                calcula_idade(cliente->idade,cliente->data_nas);
+                if(cliente->idade == idade)
+                cont+=1;
+
+            }
+        }
+    }
+    printf("-%d", cont);
+    if(cont = 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+    }
+}
+
+void calcula_idade(int idade, char *data_nasc){
+    int vetor_nas[3];
+    divide_data_inteiro(data_nasc, vetor_nas);
+    int dia = vetor_nas[0];
+    int mes = vetor_nas[1];
+    int ano = vetor_nas[2];
+    int vetor_atual[6];
+    pegaData(vetor_atual);
+    int dif_ano = (vetor_atual[0]-1) - ano;
+
+    if(mes == 1){
+        if(vetor_atual[1] > mes){
+            idade = dif_ano + 1;
+        }
+        else{
+            if(vetor_atual[2] >= dia){
+                idade = dif_ano + 1;
+            }
+            else{
+                idade = dif_ano;
+            }
+        }
+    }
+    else if(mes == 12){
+        if(vetor_atual[1] < mes){
+            idade = dif_ano;
+        }
+        else{
+            if(vetor_atual[2] < dia){
+                idade = dif_ano;
+            }
+            else{
+                idade = dif_ano + 1;
+            }
+        }
+    }
+    else{
+        if(vetor_atual[1] < mes){
+            idade = dif_ano;
+        }
+        else if(vetor_atual[1] > mes){
+            idade = dif_ano + 1;
+        }
+        else{
+            if(vetor_atual[2] < dia){
+                idade = dif_ano;
+            }
+            else{
+                idade = dif_ano + 1;
+            }
+        }
+    }
+    if(idade < 0){
+        idade = 0;
     }
 }

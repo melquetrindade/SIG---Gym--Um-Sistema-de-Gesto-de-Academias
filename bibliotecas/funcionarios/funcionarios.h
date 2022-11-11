@@ -9,6 +9,7 @@ struct funcionario{
     char salaraio[20];
     char status;
     int id[6];
+    int idade;
 };
 
 // Assinaturas
