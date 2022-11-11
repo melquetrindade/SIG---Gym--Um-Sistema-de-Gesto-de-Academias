@@ -31,3 +31,6 @@ void verifica_pessoa_cliente(char * ,char *);
 void atualiza_cliente(char *, Cliente *);
 void confir_excl_cliente(Cliente *, FILE *, char *, char*);
 void cfrm_exclu_clnt_etp2(char*, char *, char *, FILE *, Cliente *, char *, char*);
+void ler_por_plano(char *, char* );
+void lista_plano(char *);
+void lista_clientes(char *);

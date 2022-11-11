@@ -162,7 +162,7 @@ void listar_clientes(void){ // Função de listar clientes
     printf("\t|         Módulo de Listagem      |\n");
     printf("\t===================================\n");
 
-    ler_arquivo_cliente(arquivo_cliente);
+    lista_clientes(arquivo_cliente);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -217,6 +217,7 @@ Cliente* preenche_cliente(char *arquivo){
 
 // Função que faz a leitura do arquivo clientes
 void ler_arquivo_cliente(char *arquivo){
+    system("clear||cls");
     FILE *arq;
     arq = fopen(arquivo, "rb");
     if (arq == NULL){
@@ -551,4 +552,104 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
     }
     fclose(arq);
     free(cliente_teste);
+}
+
+void lista_plano(char *arquivo){
+    system("clear||cls");
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t##############################");
+        printf("\n\t#   1- BÁSICO  ->  R$ 59,99  #");
+        printf("\n\t#   2- MÉDIO   ->  R$ 69,99  #");
+        printf("\n\t#   3- PREMIUM ->  R$ 79,99  #");
+        printf("\n\t##############################");
+        printf("\n\n\tSELECIONE O TIPO DE PLANO QUE DESEJA LISTAR >>> "); fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 3){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+
+        }
+    }while(op1 < 1 || op1 > 3);
+    if(op1 == 1){
+        system("clear||cls");
+        char basico[] = {"59,99"};
+        ler_por_plano(arquivo,basico);
+    }
+    else if(op1 == 2){
+        system("clear||cls");
+        char medio[] = {"69,99"};
+        ler_por_plano(arquivo,medio);
+    }
+    else{
+        system("clear||cls");
+        char premium[] = {"79,99"};
+        ler_por_plano(arquivo,premium);
+    }
+}
+
+void ler_por_plano(char *arquivo, char* plano){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if(strcmp(cliente->plano,plano) == 0){
+                printf("\n\tCLIENTE %d:\n",cont+1);
+                printf("\n\tCPF: %s", cliente->cpf);
+                printf("\tNOME: %s", cliente->nome);
+                printf("\tE-MAIL: %s", cliente->email);
+                printf("\tTELEFONE: +55 %s", cliente->fone);
+                printf("\tDATA DE NASCIMENTO: %s", cliente->data_nas);
+                printf("\tPLANO: R$ %s", cliente->plano);
+                printf("\n\t===================================\n");
+                cont+=1;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+    }
+    fclose(arq);
+    free(cliente);
+}
+
+void lista_clientes(char *arquivo){
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t#####################################");
+        printf("\n\t#   1- LISTAR TODOS                 #");
+        printf("\n\t#   2- LISTAR POR FAIXA ETÁRIA      #");
+        printf("\n\t#   3- LISTAR POR PLANOS            #");
+        printf("\n\t#   4- LISTAR POR ORDEM ALFABÉTICA  #");
+        printf("\n\t#####################################");
+        printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); 
+        fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 4){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+
+        }
+    }while(op1 < 1 || op1 > 4);
+    if(op1 == 1){
+        ler_arquivo_cliente(arquivo);
+    }
+    else if(op1 == 2){
+        printf("\n\tainda vou fazer");
+    }
+    else if(op1 == 3){
+        lista_plano(arquivo);
+    }
+    else{
+        printf("\n\tainda vou fazer");
+    }
 }
