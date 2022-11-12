@@ -629,17 +629,16 @@ void lista_clientes(char *arquivo){
         printf("\n\t#   1- LISTAR TODOS                 #");
         printf("\n\t#   2- LISTAR POR FAIXA ETÁRIA      #");
         printf("\n\t#   3- LISTAR POR PLANOS            #");
-        printf("\n\t#   4- LISTAR POR ORDEM ALFABÉTICA  #");
         printf("\n\t#####################################");
         printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); 
         fgets(op,15,stdin); fflush(stdin);
         op1 = atoi(op);
-        if(op1 < 1 || op1 > 4){
+        if(op1 < 1 || op1 > 3){
             system("clear||cls");
             printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
 
         }
-    }while(op1 < 1 || op1 > 4);
+    }while(op1 < 1 || op1 > 3);
     if(op1 == 1){
         ler_arquivo_cliente(arquivo);
     }
@@ -648,11 +647,8 @@ void lista_clientes(char *arquivo){
         escolhe_idade(vetor_faixa);
         lista_idade(arquivo, vetor_faixa);
     }
-    else if(op1 == 3){
-        lista_plano(arquivo);
-    }
     else{
-        printf("\n\tainda vou fazer");
+        lista_plano(arquivo);
     }
 }
 
