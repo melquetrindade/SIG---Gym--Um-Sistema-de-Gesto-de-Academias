@@ -683,3 +683,98 @@ int valida_caracter_valor_funcionario(char *valor){
     }
     return 0;
 }
+
+int calcula_idade(char *data_nasc){ //
+    int idade = 0;
+    int vetor_nas[3];
+    divide_data_inteiro(data_nasc, vetor_nas);
+    int dia = vetor_nas[0];
+    int mes = vetor_nas[1];
+    int ano = vetor_nas[2];
+    int vetor_atual[6];
+    pegaData(vetor_atual);
+
+    int dif_ano = (vetor_atual[0]-1) - ano;
+
+    if(mes == 1){
+        if(vetor_atual[1] > mes){
+            idade = dif_ano + 1;
+        }
+        else{
+            if(vetor_atual[2] >= dia){
+                idade = dif_ano + 1;
+            }
+            else{
+                idade = dif_ano;
+            }
+        }
+    }
+    else if(mes == 12){
+        if(vetor_atual[1] < mes){
+            idade = dif_ano;
+        }
+        else{
+            if(vetor_atual[2] < dia){
+                idade = dif_ano;
+            }
+            else{
+                idade = dif_ano + 1;
+            }
+        }
+    }
+    else{
+        if(vetor_atual[1] < mes){
+            idade = dif_ano;
+        }
+        else if(vetor_atual[1] > mes){
+            idade = dif_ano + 1;
+        }
+        else{
+            if(vetor_atual[2] < dia){
+                idade = dif_ano;
+            }
+            else{
+                idade = dif_ano + 1;
+            }
+        }
+    }
+    if(idade < 0){
+        idade = 0;
+    }
+    return idade;
+}
+
+void escolhe_idade(int *faixa){ //
+    system("clear||cls");
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t##############################");
+        printf("\n\t#   1- ATÉ 18 ANOS           #");
+        printf("\n\t#   2- ENTRE 19 E 60 ANOS    #");
+        printf("\n\t#   3- MAIORES QUE 60 AOS    #");
+        printf("\n\t##############################");
+        printf("\n\n\tSELECIONE A FAIXA ETÁRIA QUE DESEJA LISTAR >>> "); 
+        fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 3){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+
+        }
+    }while(op1 < 1 || op1 > 3);
+    int data_atual[6];
+    pegaData(data_atual);
+    if(op1 == 1){
+        faixa[0] = 0;
+        faixa[1] = 18;
+    }
+    else if(op1 == 2){
+        faixa[0] = 19;
+        faixa[1] = 60;
+    }
+    else{
+        faixa[0] = 61;
+        faixa[1] = data_atual[0];
+    }
+}

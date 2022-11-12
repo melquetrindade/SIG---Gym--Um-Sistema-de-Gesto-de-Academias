@@ -160,7 +160,7 @@ void listar_funcionario(void){ // Função de listar funcionários
     printf("\t|         Módulo de Listagem      |\n");
     printf("\t===================================\n");
 
-    ler_arquivo_func(arquivo_funcionario);
+    lista_funcionario(arquivo_funcionario);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -198,7 +198,6 @@ Funcionario* preenche_funcionario(void){
     fgets(funcionario->salaraio, 20, stdin); fflush(stdin);
     loop_valor_funcionario(funcionario->salaraio);
     funcionario->status = 'v';
-    funcionario->idade = 0;
     funcionario->id[0]=0;funcionario->id[1]=0;funcionario->id[2]=0;funcionario->id[3]=0;funcionario->id[4]=0;funcionario->id[5]=0;
     return funcionario;
 }
@@ -217,6 +216,7 @@ void salvar_no_arq_func(const Funcionario *funcionario, char *arquivo){
 
 // Função que faz a leitura do arquivo funcionário
 void ler_arquivo_func(char *arquivo){
+    system("clear||cls");
     FILE *arq;
     arq = fopen(arquivo, "rb");
     if (arq == NULL){
@@ -543,11 +543,159 @@ void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
             loop_valor_funcionario(func_teste->salaraio);
             atualiza_salario(arq_salario1,func_teste->cpf,func_teste->nome,func_teste->salaraio);
             func_teste->status = 'v';
-            func_teste->idade = 0;
             fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
             fwrite(func_teste, sizeof(Funcionario), 1, arq);
         }
     }
     fclose(arq);
     free(func_teste);
+}
+
+void lista_salario(char *arquivo){
+    system("clear||cls");
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t#######################################");
+        printf("\n\t#   1- MEIO SALÁRIO  ->  R$ 606,00    #");
+        printf("\n\t#   2- UM SALÁRIO    ->  R$ 1.212,00  #");
+        printf("\n\t#   3- DOIS SALÁRIOS ->  R$ 2.424,00  #");
+        printf("\n\t#   4- TRÊS SALÁRIOS ->  R$ 3.636,00  #");
+        printf("\n\t#######################################");
+        printf("\n\n\tSELECIONE O TIPO DE PLANO QUE DESEJA LISTAR >>> "); fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 4){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+
+        }
+    }while(op1 < 1 || op1 > 4);
+    if(op1 == 1){
+        system("clear||cls");
+        char meio[] = {"606,00"};
+        ler_por_salario(arquivo,meio);
+    }
+    else if(op1 == 2){
+        system("clear||cls");
+        char um[] = {"1.212,00"};
+        ler_por_salario(arquivo,um);
+    }
+    else if(op1 == 3){
+        system("clear||cls");
+        char dois[] = {"2.424,00"};
+        ler_por_salario(arquivo,dois);
+    }
+    else{
+        system("clear||cls");
+        char tres[] = {"3.636,00"};
+        ler_por_salario(arquivo,tres);
+    }
+}
+
+void ler_por_salario(char *arquivo, char* salario){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Funcionario *funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(funcionario, sizeof(Funcionario),1,arq)){
+            if(strcmp(funcionario->salaraio,salario) == 0){
+                printf("\n\tCLIENTE %d:\n",cont+1);
+                printf("\n\tCPF: %s", funcionario->cpf);
+                printf("\tNOME: %s", funcionario->nome);
+                printf("\tE-MAIL: %s", funcionario->email);
+                printf("\tTELEFONE: +55 %s", funcionario->fone);
+                printf("\tDATA DE NASCIMENTO: %s", funcionario->data_nas);
+                printf("\tSALÁRIO: R$ %s", funcionario->salaraio);
+                printf("\n\t===================================\n");
+                cont+=1;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTE SALÁRIO!\n");
+    }
+    fclose(arq);
+    free(funcionario);
+}
+
+void lista_funcionario(char *arquivo){
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t#####################################");
+        printf("\n\t#   1- LISTAR TODOS                 #");
+        printf("\n\t#   2- LISTAR POR FAIXA ETÁRIA      #");
+        printf("\n\t#   3- LISTAR POR SALÁRIOS          #");
+        printf("\n\t#   4- LISTAR POR ORDEM ALFABÉTICA  #");
+        printf("\n\t#####################################");
+        printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); 
+        fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 4){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+
+        }
+    }while(op1 < 1 || op1 > 4);
+    if(op1 == 1){
+        ler_arquivo_func(arquivo);
+    }
+    else if(op1 == 2){
+        int vetor_faixa[2];
+        escolhe_idade(vetor_faixa);
+        lista_idade_func(arquivo, vetor_faixa);
+    }
+    else if(op1 == 3){
+        lista_salario(arquivo);
+    }
+    else{
+        printf("\n\tainda vou fazer");
+    }
+}
+
+void lista_idade_func(char *arquivo, int *idade){
+    system("clear||cls");
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Funcionario *funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+    int cont1 = 0;
+    int cont2 = 0;
+    while(!feof(arq)){
+        if(fread(funcionario, sizeof(Funcionario),1,arq)){
+            if(funcionario->status == 'v'){
+                int idade_cal = calcula_idade(funcionario->data_nas);
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1])){
+                    printf("\n\tCLIENTE %d:\n",cont2+1);
+                    printf("\n\tCPF: %s", funcionario->cpf);
+                    printf("\tNOME: %s", funcionario->nome);
+                    printf("\tE-MAIL: %s", funcionario->email);
+                    printf("\tTELEFONE: +55 %s", funcionario->fone);
+                    printf("\tDATA DE NASCIMENTO: %s", funcionario->data_nas);
+                    printf("\tSALÁRIO: R$ %s", funcionario->salaraio);
+                    printf("\n\t===================================\n");
+                    cont2 += 1;
+                }
+                cont1+=1;
+            }
+        }
+    }
+    if(cont1 == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
+    }
+    if(cont2 == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+    }
+    fclose(arq);
+    free(funcionario);
 }

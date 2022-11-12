@@ -211,7 +211,6 @@ Cliente* preenche_cliente(char *arquivo){
     fgets(cliente->plano, 20, stdin); fflush(stdin);
     loop_valor_cliente(cliente->plano);
     cliente->status = 'v';
-    cliente->idade = 0;
     cliente->id[0]=0;cliente->id[1]=0;cliente->id[2]=0;cliente->id[3]=0;cliente->id[4]=0;cliente->id[5]=0;
     return cliente;
 }
@@ -547,7 +546,6 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
             loop_valor_cliente(cliente_teste->plano);
             atualiza_mensalidade(arq_mensalidade1,cliente_teste->cpf,cliente_teste->nome, cliente_teste->plano);
             cliente_teste->status = 'v';
-            cliente_teste->idade = 0;
             fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
             fwrite(cliente_teste, sizeof(Cliente), 1, arq);
         }
@@ -646,9 +644,9 @@ void lista_clientes(char *arquivo){
         ler_arquivo_cliente(arquivo);
     }
     else if(op1 == 2){
-        printf("\n\tainda vou fazer");
-        int idade = 20;
-        lista_idade(arquivo, idade);
+        int vetor_faixa[2];
+        escolhe_idade(vetor_faixa);
+        lista_idade(arquivo, vetor_faixa);
     }
     else if(op1 == 3){
         lista_plano(arquivo);
@@ -658,7 +656,8 @@ void lista_clientes(char *arquivo){
     }
 }
 
-void lista_idade(char *arquivo, int idade){
+void lista_idade(char *arquivo, int *idade){
+    system("clear||cls");
     FILE *arq;
     arq = fopen(arquivo, "rb");
     if (arq == NULL){
@@ -672,9 +671,8 @@ void lista_idade(char *arquivo, int idade){
     while(!feof(arq)){
         if(fread(cliente, sizeof(Cliente),1,arq)){
             if(cliente->status == 'v'){
-                calcula_idade(cliente->idade,cliente->data_nas);
-                //printf("aqui -%d", cliente->idade);
-                if(cliente->idade <= idade){
+                int idade_cal = calcula_idade(cliente->data_nas);
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1])){
                     printf("\n\tCLIENTE %d:\n",cont2+1);
                     printf("\n\tCPF: %s", cliente->cpf);
                     printf("\tNOME: %s", cliente->nome);
@@ -689,7 +687,6 @@ void lista_idade(char *arquivo, int idade){
             }
         }
     }
-    //printf("-%d", cont);
     if(cont1 == 0){
         printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
     }
@@ -698,66 +695,4 @@ void lista_idade(char *arquivo, int idade){
     }
     fclose(arq);
     free(cliente);
-}
-
-int calcula_idade(int idade, char *data_nasc){
-    int vetor_nas[3];
-    divide_data_inteiro(data_nasc, vetor_nas);
-    int dia = vetor_nas[0];
-    int mes = vetor_nas[1];
-    int ano = vetor_nas[2];
-    printf("\n\tidade antes: %d", idade);
-    printf("\n\tdata de nasc: %d/%d/%d", dia, mes, ano);
-    int vetor_atual[6];
-    pegaData(vetor_atual);
-    printf("\n\tdata atual: %d/%d/%d", vetor_atual[2], vetor_atual[1], vetor_atual[0]);
-    int dif_ano = (vetor_atual[0]-1) - ano;
-    printf("\n\tdiferença de idade: %d", dif_ano);
-
-    if(mes == 1){
-        if(vetor_atual[1] > mes){
-            idade = dif_ano + 1;
-        }
-        else{
-            if(vetor_atual[2] >= dia){
-                idade = dif_ano + 1;
-            }
-            else{
-                idade = dif_ano;
-            }
-        }
-    }
-    else if(mes == 12){
-        if(vetor_atual[1] < mes){
-            idade = dif_ano;
-        }
-        else{
-            if(vetor_atual[2] < dia){
-                idade = dif_ano;
-            }
-            else{
-                idade = dif_ano + 1;
-            }
-        }
-    }
-    else{
-        if(vetor_atual[1] < mes){
-            idade = dif_ano;
-        }
-        else if(vetor_atual[1] > mes){
-            idade = dif_ano + 1;
-        }
-        else{
-            if(vetor_atual[2] < dia){
-                idade = dif_ano;
-            }
-            else{
-                idade = dif_ano + 1;
-            }
-        }
-    }
-    if(idade < 0){
-        idade = 0;
-    }
-    printf("\n\tidade: %d", idade);
 }

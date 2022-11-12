@@ -9,7 +9,6 @@ struct funcionario{
     char salaraio[20];
     char status;
     int id[6];
-    int idade;
 };
 
 // Assinaturas
@@ -34,3 +33,7 @@ void deleta_funcionario(char *, Funcionario *);
 void confir_excl_func(Funcionario *, FILE *, char *);
 void cfrm_exclu_func_etp2(char *, char *, char *, FILE *,Funcionario *);
 Funcionario* busca_clnt_excluido1(char *, char *);
+void lista_salario(char *);
+void ler_por_salario(char *, char*);
+void lista_funcionario(char *);
+void lista_idade_func(char *, int *);

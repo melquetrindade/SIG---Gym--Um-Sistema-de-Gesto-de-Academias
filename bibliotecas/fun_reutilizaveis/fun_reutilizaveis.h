@@ -29,3 +29,5 @@ void valor_inteiro(char *);
 void loop_valor_cliente(char *);
 void loop_valor_funcionario(char *);
 int valida_caracter_valor_funcionario(char *);
+int calcula_idade(char *);
+void escolhe_idade(int *);
