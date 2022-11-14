@@ -19,3 +19,7 @@ void confirma_acesso(char *, Registro *);
 Registro* pesquisa_frequencia(char *, char *);
 void deleta_frequencia(char *, char *, int*);
 void recupera_frequencia(char*, char*, int*);
+int cal_tempo(int *);
+void ler_por_tempo(char *, int);
+void lista_tempo(char *);
+void ler_por_tempo2(char *, int);

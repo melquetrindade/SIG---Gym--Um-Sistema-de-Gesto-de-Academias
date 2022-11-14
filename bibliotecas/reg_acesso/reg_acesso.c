@@ -58,7 +58,7 @@ void listar_frequencia(void){ // Função de listar frequência
     printf("\t|       Módulo de Listar Acessos      |\n");
     printf("\t=======================================\n");
 
-    ler_arquivo_registro(arq_registro);
+    lista_tempo(arq_registro);
 
     printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -241,4 +241,166 @@ void recupera_frequencia(char *arquivo, char *cpf, int*data){
     }
     fclose(arq_frequencia);
     free(frequencia_busca);
+}
+
+// Função que calcula há quanto tempo o cliente não visita a academia
+int cal_tempo(int *data){
+    int meses[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    int vetor[6];
+    pegaData(vetor);
+    if(bissexto(vetor[0])){
+        meses[1] = 29;
+    }
+    int dia = data[2];
+    int mes = data[1];
+    int ano = data[0];
+    int tempo = 0;
+    int dif_ano = vetor[0] - ano;
+
+    if(dif_ano == 0){
+        int dif_mes = vetor[1] - mes;
+        if(dif_mes == 1){
+            int soma_dia = vetor[2] + (meses[mes-1] - dia);
+            if(soma_dia < 32){
+                tempo = soma_dia;
+            }
+            else{
+                tempo = 32;;
+            }
+        }
+        else if(dif_mes > 1){
+            tempo = 32;
+        }
+        else{
+            int dif_dia = vetor[2] - dia;
+            tempo = dif_dia;
+        }
+    }
+    else{
+        if(vetor[1] == 1 && mes == 12){
+            int soma_dia = vetor[2] + (meses[mes-1] - dia);
+            if(soma_dia < 32){
+                tempo = soma_dia;
+            }
+            else{
+                tempo = 32;;
+            }
+        }
+        else{
+            tempo = 32;
+        }
+    }
+    return tempo;
+}
+
+// Função que exibe as opções de listagem das frequência
+void lista_tempo(char *arquivo){
+    system("clear||cls");
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t########################################");
+        printf("\n\t#   1- ACESSADO HOJE                   #");
+        printf("\n\t#   2- ACESSADO ESTA SEMANA            #");
+        printf("\n\t#   3- ACESSADO NAS ÚLTIMAS 2 SEMANAS  #");
+        printf("\n\t#   4- ACESSADO ESTE MÊS               #");
+        printf("\n\t#   5- ACESSADO HÁ MAIS DE 1 MÊS       #");
+        printf("\n\t#   6- LISTAR TODOS OS ACESSOS         #");
+        printf("\n\t########################################");
+        printf("\n\n\tSELECIONE O PERÍODO QUE DESEJA LISTAR >>> "); fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 6){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+        }
+    }while(op1 < 1 || op1 > 6);
+    if(op1 == 1){
+        system("clear||cls");
+        int hoje = 0;
+        ler_por_tempo(arquivo,hoje);
+    }
+    else if(op1 == 2){
+        system("clear||cls");
+        int semana = 7;
+        ler_por_tempo(arquivo,semana);
+    }
+    else if(op1 == 3){
+        system("clear||cls");
+        int duas_semana = 14;
+        ler_por_tempo(arquivo,duas_semana);
+    }
+    else if(op1 == 4){
+        system("clear||cls");
+        int mes = 31;
+        ler_por_tempo(arquivo,mes);
+    }
+    else if(op1 == 5){
+        system("clear||cls");
+        int duas_mes = 31;
+        ler_por_tempo2(arquivo,duas_mes);
+    }
+    else{
+        system("clear||cls");
+        ler_arquivo_registro(arquivo);
+    }
+}
+
+// Função que exibe os clientes com base na faixa de período selecionado
+void ler_por_tempo(char *arquivo, int tempo){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Registro *frequencia;
+    frequencia = (Registro*) malloc(sizeof(Registro));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(frequencia, sizeof(Registro),1,arq)){
+            int tempo_rec = cal_tempo(frequencia->ult_data);
+            if(tempo_rec <= tempo){
+                printf("\n\tFICHA %d:\n",cont+1);
+                printf("\n\tNOME: %s", frequencia->nome);
+                printf("\tÚLTIMO ACESSO EM: %d/%d/%d às %d:%d:%d", frequencia->ult_data[2],frequencia->ult_data[1],frequencia->ult_data[0],frequencia->ult_data[3],frequencia->ult_data[4],frequencia->ult_data[5]);
+                printf("\n\t==========================================\n");
+                cont += 1;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+    }
+    fclose(arq);
+    free(frequencia);
+}
+
+// Função que exibe os clientes com base na faixa de período de mais de 2 meses sem visita
+void ler_por_tempo2(char *arquivo, int tempo){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Registro *frequencia;
+    frequencia = (Registro*) malloc(sizeof(Registro));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(frequencia, sizeof(Registro),1,arq)){
+            int tempo_rec = cal_tempo(frequencia->ult_data);
+            if(tempo_rec > tempo){
+                printf("\n\tFICHA %d:\n",cont+1);
+                printf("\n\tNOME: %s", frequencia->nome);
+                printf("\tÚLTIMO ACESSO EM: %d/%d/%d às %d:%d:%d", frequencia->ult_data[2],frequencia->ult_data[1],frequencia->ult_data[0],frequencia->ult_data[3],frequencia->ult_data[4],frequencia->ult_data[5]);
+                printf("\n\t==========================================\n");
+                cont += 1;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+    }
+    fclose(arq);
+    free(frequencia);
 }
