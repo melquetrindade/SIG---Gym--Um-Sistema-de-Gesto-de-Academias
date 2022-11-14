@@ -444,8 +444,8 @@ void recupera_cliente(char *arquivo, Cliente *cliente, char *arq_frenq, char *ar
                                     if((cliente_teste->id[0]==cliente->id[0]) && (cliente_teste->id[1]==cliente->id[1]) && (cliente_teste->id[2]==cliente->id[2]) && (cliente_teste->id[3]==cliente->id[3]) && (cliente_teste->id[4]==cliente->id[4]) && (cliente_teste->id[5]==cliente->id[5])){
                                         achou = 1;
                                         cliente_teste->status = 'v';
-                                        // recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente->id);
-                                        // recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente->id);
+                                        recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente->id);
+                                        recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente->id);
                                         fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
                                         fwrite(cliente_teste, sizeof(Cliente), 1, arq);
                                         printf("\n\tCLIENTE RECUPERADO COM SUCESSO!\n");
@@ -458,8 +458,6 @@ void recupera_cliente(char *arquivo, Cliente *cliente, char *arq_frenq, char *ar
             }
         }
     }
-    recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente->id);
-    recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente->id);
     fclose(arq);
     free(cliente_teste);
 }
