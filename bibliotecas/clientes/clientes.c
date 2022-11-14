@@ -441,13 +441,15 @@ void recupera_cliente(char *arquivo, Cliente *cliente, char *arq_frenq, char *ar
                         if(strcmp(cliente_teste->nome, cliente->nome) == 0){
                             if(strcmp(cliente_teste->plano, cliente->plano) == 0){
                                 if(cliente_teste->status == 'x' && cliente->status == 'v'){
-                                    achou = 1;
-                                    cliente_teste->status = 'v';
-                                    recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente_teste->id);
-                                    recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente_teste->id);
-                                    fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
-                                    fwrite(cliente_teste, sizeof(Cliente), 1, arq);
-                                    printf("\n\tCLIENTE RECUPERADO COM SUCESSO!\n");
+                                    if((cliente_teste->id[0]==cliente->id[0]) && (cliente_teste->id[1]==cliente->id[1]) && (cliente_teste->id[2]==cliente->id[2]) && (cliente_teste->id[3]==cliente->id[3]) && (cliente_teste->id[4]==cliente->id[4]) && (cliente_teste->id[5]==cliente->id[5])){
+                                        achou = 1;
+                                        cliente_teste->status = 'v';
+                                        // recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente->id);
+                                        // recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente->id);
+                                        fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
+                                        fwrite(cliente_teste, sizeof(Cliente), 1, arq);
+                                        printf("\n\tCLIENTE RECUPERADO COM SUCESSO!\n");
+                                    }
                                 }
                             }
                         }
@@ -456,6 +458,8 @@ void recupera_cliente(char *arquivo, Cliente *cliente, char *arq_frenq, char *ar
             }
         }
     }
+    recupera_frequencia(arq_frenq, cliente_teste->cpf, cliente->id);
+    recupera_mensalidade(arq_mensa, cliente_teste->cpf, cliente->id);
     fclose(arq);
     free(cliente_teste);
 }
@@ -554,6 +558,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
     free(cliente_teste);
 }
 
+// Função que seleciona qual o tipo de mensalidade vai ser listado
 void lista_plano(char *arquivo){
     system("clear||cls");
     int op1 = 0;
@@ -589,6 +594,7 @@ void lista_plano(char *arquivo){
     }
 }
 
+// Função que exibe os clientes com base na faixa de mensalidade selecionada
 void ler_por_plano(char *arquivo, char* plano){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -621,6 +627,7 @@ void ler_por_plano(char *arquivo, char* plano){
     free(cliente);
 }
 
+// Função que seleciona qual tipo de listagem vai ser exibido
 void lista_clientes(char *arquivo){
     int op1 = 0;
     do{
@@ -652,6 +659,7 @@ void lista_clientes(char *arquivo){
     }
 }
 
+// Função que exibe os clientes com base na faixa etária selecionada
 void lista_idade(char *arquivo, int *idade){
     system("clear||cls");
     FILE *arq;

@@ -684,6 +684,7 @@ int valida_caracter_valor_funcionario(char *valor){
     return 0;
 }
 
+// Função que calcula a idade 
 int calcula_idade(char *data_nasc){ //
     int idade = 0;
     int vetor_nas[3];
@@ -744,6 +745,7 @@ int calcula_idade(char *data_nasc){ //
     return idade;
 }
 
+// Função que seleciona a faixa etária desejada para listagem
 void escolhe_idade(int *faixa){ //
     system("clear||cls");
     int op1 = 0;

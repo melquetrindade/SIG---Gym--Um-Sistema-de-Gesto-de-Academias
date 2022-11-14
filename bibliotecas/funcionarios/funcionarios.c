@@ -148,7 +148,7 @@ void atualizar_funcionario(void){ // Função de atualizar funcionários
     }
     free(funcionario);
 
-    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    printf("\n\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
     system("clear||cls");
 }
@@ -551,6 +551,7 @@ void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
     free(func_teste);
 }
 
+// Função que seleciona qual o tipo de salário vai ser listado
 void lista_salario(char *arquivo){
     system("clear||cls");
     int op1 = 0;
@@ -592,6 +593,7 @@ void lista_salario(char *arquivo){
     }
 }
 
+// Função que exibe os funcionários com base na faixa de salários selecionada
 void ler_por_salario(char *arquivo, char* salario){
     FILE *arq;
     arq = fopen(arquivo, "rb");
@@ -624,6 +626,7 @@ void ler_por_salario(char *arquivo, char* salario){
     free(funcionario);
 }
 
+// Função que seleciona qual tipo de listagem vai ser exibido
 void lista_funcionario(char *arquivo){
     int op1 = 0;
     do{
@@ -655,6 +658,7 @@ void lista_funcionario(char *arquivo){
     }
 }
 
+// Função que exibe os funcionários com base na faixa etária selecionada
 void lista_idade_func(char *arquivo, int *idade){
     system("clear||cls");
     FILE *arq;

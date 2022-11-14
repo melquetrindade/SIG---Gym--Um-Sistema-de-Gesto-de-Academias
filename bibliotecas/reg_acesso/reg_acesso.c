@@ -230,11 +230,13 @@ void recupera_frequencia(char *arquivo, char *cpf, int*data){
     int achou = 0;
     while((!feof(arq_frequencia) && (achou == 0))){
         fread(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
-        if((strcmp(frequencia_busca->cpf,cpf) == 0) && (frequencia_busca->status == 'x') && (frequencia_busca->id[0]=data[0]) && (frequencia_busca->id[1]=data[1]) && (frequencia_busca->id[2]=data[2]) && (frequencia_busca->id[3]=data[3]) && (frequencia_busca->id[4]=data[4]) && (frequencia_busca->id[5]=data[5])){
-            achou = 1;
-            frequencia_busca->status = 'v';
-            fseek(arq_frequencia, -1*sizeof(Registro), SEEK_CUR);
-            fwrite(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
+        if((strcmp(frequencia_busca->cpf,cpf) == 0) && (frequencia_busca->status == 'x')){
+            if((frequencia_busca->id[0]=data[0]) && (frequencia_busca->id[1]=data[1]) && (frequencia_busca->id[2]=data[2]) && (frequencia_busca->id[3]=data[3]) && (frequencia_busca->id[4]=data[4]) && (frequencia_busca->id[5]=data[5])){
+                achou = 1;
+                frequencia_busca->status = 'v';
+                fseek(arq_frequencia, -1*sizeof(Registro), SEEK_CUR);
+                fwrite(frequencia_busca, sizeof(Registro), 1, arq_frequencia);
+            }
         }
     }
     fclose(arq_frequencia);
