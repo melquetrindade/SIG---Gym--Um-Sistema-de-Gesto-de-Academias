@@ -346,15 +346,15 @@ void cfrm_exclu_func_etp2(char *salario_cpf, char *op, char *arq_s, FILE *arq, F
         int achou = 0;
         while((!feof(arq_salario)) && (achou == 0)) {
             fread(salario_busca, sizeof(Salario), 1, arq_salario);
-            if((strcmp(salario_busca->cpf, salario_cpf) == 0) && (salario_busca->status != 'x')) {
+            if((strcmp(salario_busca->cpf, salario_cpf) == 0) && (salario_busca->status != 'x')){
                 achou = 1;
+                func_teste->id[0]=salario_busca->data_pg[0];func_teste->id[1]=salario_busca->data_pg[1];func_teste->id[2]=salario_busca->data_pg[2];func_teste->id[3]=salario_busca->data_pg[3];func_teste->id[4]=salario_busca->data_pg[4];func_teste->id[5]=salario_busca->data_pg[5];
+                func_teste->status = 'x';
                 salario_busca->status = 'x';
                 fseek(arq_salario, -1*sizeof(Salario), SEEK_CUR);
                 fwrite(salario_busca, sizeof(Salario), 1, arq_salario);
             }
         }
-        func_teste->id[0]=salario_busca->data_pg[0];func_teste->id[1]=salario_busca->data_pg[1];func_teste->id[2]=salario_busca->data_pg[2];func_teste->id[3]=salario_busca->data_pg[3];func_teste->id[4]=salario_busca->data_pg[4];func_teste->id[5]=salario_busca->data_pg[5];
-        func_teste->status = 'x';
         fseek(arq, -1*sizeof(Funcionario), SEEK_CUR);
         fwrite(func_teste, sizeof(Funcionario), 1, arq);
         printf("\n\tCLIENTE EXCLUÍDO COM SUCESSO!");
