@@ -304,7 +304,7 @@ void lista_tempo(char *arquivo){
         printf("\n\t#   2- ACESSADO ESTA SEMANA            #");
         printf("\n\t#   3- ACESSADO NAS ÚLTIMAS 2 SEMANAS  #");
         printf("\n\t#   4- ACESSADO ESTE MÊS               #");
-        printf("\n\t#   5- ACESSADO HÁ MAIS DE 1 MÊS       #");
+        printf("\n\t#   5- NÃO ACESSA HÁ MAIS DE 1 MÊS     #");
         printf("\n\t#   6- LISTAR TODOS OS ACESSOS         #");
         printf("\n\t########################################");
         printf("\n\n\tSELECIONE O PERÍODO QUE DESEJA LISTAR >>> "); fgets(op,15,stdin); fflush(stdin);
@@ -359,7 +359,7 @@ void ler_por_tempo(char *arquivo, int tempo){
     while(!feof(arq)){
         if(fread(frequencia, sizeof(Registro),1,arq)){
             int tempo_rec = cal_tempo(frequencia->ult_data);
-            if(tempo_rec <= tempo){
+            if((tempo_rec <= tempo) && (frequencia->status != 'x')){
                 printf("\n\tFICHA %d:\n",cont+1);
                 printf("\n\tNOME: %s", frequencia->nome);
                 printf("\tÚLTIMO ACESSO EM: %d/%d/%d às %d:%d:%d", frequencia->ult_data[2],frequencia->ult_data[1],frequencia->ult_data[0],frequencia->ult_data[3],frequencia->ult_data[4],frequencia->ult_data[5]);
@@ -369,7 +369,7 @@ void ler_por_tempo(char *arquivo, int tempo){
         }
     }
     if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA NESTE PERÍODO!\n");
     }
     fclose(arq);
     free(frequencia);
@@ -389,7 +389,7 @@ void ler_por_tempo2(char *arquivo, int tempo){
     while(!feof(arq)){
         if(fread(frequencia, sizeof(Registro),1,arq)){
             int tempo_rec = cal_tempo(frequencia->ult_data);
-            if(tempo_rec > tempo){
+            if((tempo_rec > tempo) && (frequencia->status != 'x')){
                 printf("\n\tFICHA %d:\n",cont+1);
                 printf("\n\tNOME: %s", frequencia->nome);
                 printf("\tÚLTIMO ACESSO EM: %d/%d/%d às %d:%d:%d", frequencia->ult_data[2],frequencia->ult_data[1],frequencia->ult_data[0],frequencia->ult_data[3],frequencia->ult_data[4],frequencia->ult_data[5]);
@@ -399,8 +399,32 @@ void ler_por_tempo2(char *arquivo, int tempo){
         }
     }
     if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PERÍODO!\n");
     }
     fclose(arq);
     free(frequencia);
+}
+
+// Função que atualiza a ficha de frequência
+void atualiza_registro(char *arq_registro, char *cliente_cpf, char *cliente_nome){
+    FILE *arq_registro1;
+    arq_registro1 = fopen(arq_registro, "r+b");
+    if(arq_registro1 == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    int achou = 0;
+    Registro *frequencia_teste;
+    frequencia_teste = (Registro*) malloc(sizeof(Registro));
+    while(!feof(arq_registro1) && (achou == 0)){
+        fread(frequencia_teste, sizeof(Registro), 1, arq_registro1);
+        if((strcmp(frequencia_teste->cpf,cliente_cpf) == 0) && frequencia_teste->status != 'x'){
+            achou = 1;
+            strcpy(frequencia_teste->nome,cliente_nome);
+            fseek(arq_registro1, -1*sizeof(Registro), SEEK_CUR);
+            fwrite(frequencia_teste, sizeof(Registro), 1, arq_registro1);
+        }
+    }
+    fclose(arq_registro1);
+    free(frequencia_teste);
 }

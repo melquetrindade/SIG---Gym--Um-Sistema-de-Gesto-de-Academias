@@ -547,6 +547,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
             fgets(cliente_teste->plano, 20, stdin); fflush(stdin);
             loop_valor_cliente(cliente_teste->plano);
             atualiza_mensalidade(arq_mensalidade1,cliente_teste->cpf,cliente_teste->nome, cliente_teste->plano);
+            atualiza_registro(arq_registro1,cliente_teste->cpf,cliente_teste->nome);
             cliente_teste->status = 'v';
             fseek(arq, -1*sizeof(Cliente), SEEK_CUR);
             fwrite(cliente_teste, sizeof(Cliente), 1, arq);
@@ -605,7 +606,7 @@ void ler_por_plano(char *arquivo, char* plano){
     int cont = 0;
     while(!feof(arq)){
         if(fread(cliente, sizeof(Cliente),1,arq)){
-            if(strcmp(cliente->plano,plano) == 0){
+            if((strcmp(cliente->plano,plano) == 0) && (cliente->status != 'x')){
                 printf("\n\tCLIENTE %d:\n",cont+1);
                 printf("\n\tCPF: %s", cliente->cpf);
                 printf("\tNOME: %s", cliente->nome);
@@ -674,7 +675,7 @@ void lista_idade(char *arquivo, int *idade){
         if(fread(cliente, sizeof(Cliente),1,arq)){
             if(cliente->status == 'v'){
                 int idade_cal = calcula_idade(cliente->data_nas);
-                if((idade[0] <= idade_cal) && (idade_cal <= idade[1])){
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (cliente->status != 'x')){
                     printf("\n\tCLIENTE %d:\n",cont2+1);
                     printf("\n\tCPF: %s", cliente->cpf);
                     printf("\tNOME: %s", cliente->nome);

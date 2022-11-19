@@ -23,3 +23,4 @@ int cal_tempo(int *);
 void ler_por_tempo(char *, int);
 void lista_tempo(char *);
 void ler_por_tempo2(char *, int);
+void atualiza_registro(char*, char*, char*);

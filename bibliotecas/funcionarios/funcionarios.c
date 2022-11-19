@@ -606,7 +606,7 @@ void ler_por_salario(char *arquivo, char* salario){
     int cont = 0;
     while(!feof(arq)){
         if(fread(funcionario, sizeof(Funcionario),1,arq)){
-            if(strcmp(funcionario->salaraio,salario) == 0){
+            if((strcmp(funcionario->salaraio,salario) == 0) && (funcionario->status != 'x')){
                 printf("\n\tCLIENTE %d:\n",cont+1);
                 printf("\n\tCPF: %s", funcionario->cpf);
                 printf("\tNOME: %s", funcionario->nome);
@@ -675,7 +675,7 @@ void lista_idade_func(char *arquivo, int *idade){
         if(fread(funcionario, sizeof(Funcionario),1,arq)){
             if(funcionario->status == 'v'){
                 int idade_cal = calcula_idade(funcionario->data_nas);
-                if((idade[0] <= idade_cal) && (idade_cal <= idade[1])){
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (funcionario->status != 'x')){
                     printf("\n\tCLIENTE %d:\n",cont2+1);
                     printf("\n\tCPF: %s", funcionario->cpf);
                     printf("\tNOME: %s", funcionario->nome);
