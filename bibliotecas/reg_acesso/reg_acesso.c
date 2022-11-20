@@ -301,7 +301,7 @@ void lista_tempo(char *arquivo){
         char op[15];
         printf("\n\t########################################");
         printf("\n\t#   1- ACESSADO HOJE                   #");
-        printf("\n\t#   2- ACESSADO ESTA SEMANA            #");
+        printf("\n\t#   2- ACESSADO NOS ÚLTIMOS 7 DIAS     #");
         printf("\n\t#   3- ACESSADO NAS ÚLTIMAS 2 SEMANAS  #");
         printf("\n\t#   4- ACESSADO ESTE MÊS               #");
         printf("\n\t#   5- NÃO ACESSA HÁ MAIS DE 1 MÊS     #");
@@ -369,7 +369,7 @@ void ler_por_tempo(char *arquivo, int tempo){
         }
     }
     if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA NESTE PERÍODO!\n");
+        printf("\n\tNÃO EXISTE NENHUMA FICHA DE FREQUÊNCIA NO SISTEMA NESTE PERÍODO!\n");
     }
     fclose(arq);
     free(frequencia);
