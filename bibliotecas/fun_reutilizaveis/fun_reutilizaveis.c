@@ -549,8 +549,11 @@ int verifica_caracter(char *nome){
         else if(nome[i] >= 123 && nome[i] <= 126){
             return 0;
         }
-        else{
+        else if((nome[i] >= 'a' && nome[i] <= 'z') || (nome[i] >= 'A' && nome[i] <= 'Z') || (nome[i] == 10)){
             continue;
+        }
+        else{
+            return 0;
         }
     }
     if(tam == 2){
