@@ -699,3 +699,59 @@ void lista_idade(char *arquivo, int *idade){
     fclose(arq);
     free(cliente);
 }
+
+void relatorio_comple(char *arquivo, char *arq_mensa, char *arq_freq){
+    system("clear||cls");
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if(cliente->status == 'v'){
+                int taOK = 0;
+                Mensalidade *mensalidade;
+                mensalidade = pesquisa_mensalidade(arq_mensa, cliente->cpf);
+                if(mensalidade == NULL){
+                    taOK = 1;
+                }
+                Registro *registro;
+                registro = pesquisa_frequencia(arq_freq, cliente->cpf);
+                if(registro == NULL){
+                    taOK = 1;
+                }
+                if(taOK == 0){
+                    exibe_clnt_cplt(cliente, registro->ult_data, mensalidade->data_pg, mensalidade->prox_data, cont);
+                    cont += 1;
+                }
+                free(mensalidade);
+                free(registro);
+                taOK = 0;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+    }
+    fclose(arq);
+    free(cliente);
+}
+
+void exibe_clnt_cplt(const Cliente *cliente, int *acesso, int *data_pg, int *prox_data, int cont1){
+    printf("\n\tCLIENTE %d:\n",cont1+1);
+    printf("\n\tCPF: %s", cliente->cpf);
+    printf("\tNOME: %s", cliente->nome);
+    printf("\tE-MAIL: %s", cliente->email);
+    printf("\tTELEFONE: +55 %s", cliente->fone);
+    printf("\tDATA DE NASCIMENTO: %s", cliente->data_nas);
+    printf("\tPLANO: R$ %s", cliente->plano);
+    printf("\tÚLTIMO ACESSO: %d/%d/%d ás %d/%d/%d", acesso[2],acesso[1],acesso[0],acesso[3],acesso[4],acesso[5]);
+    printf("\nÚLTIMA MENSALIDADE PAGA: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
+    print("\nPRÓXIMA MENSALIDADE: %d/%d/%d", prox_data[2], prox_data[1], prox_data[0]);
+    printf("\n\t============================================================\n");
+}
