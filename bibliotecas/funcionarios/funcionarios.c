@@ -159,8 +159,22 @@ void listar_funcionario(void){ // Função de listar funcionários
     printf("\t===================================\n");
     printf("\t|         Módulo de Listagem      |\n");
     printf("\t===================================\n");
+    int chave = 0;
+    lista_funcionario(arquivo_funcionario, chave, arq_salario1);
 
-    lista_funcionario(arquivo_funcionario);
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void relatorio_funcionarios(void){ // Função de listar clientes
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Relatório     |\n");
+    printf("\t===================================\n");
+    int chave = 1;
+    lista_funcionario(arquivo_funcionario, chave, arq_salario1);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -552,7 +566,7 @@ void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
 }
 
 // Função que seleciona qual o tipo de salário vai ser listado
-void lista_salario(char *arquivo){
+void lista_salario(char *arquivo, int chave){
     system("clear||cls");
     int op1 = 0;
     do{
@@ -574,22 +588,42 @@ void lista_salario(char *arquivo){
     if(op1 == 1){
         system("clear||cls");
         char meio[] = {"606,00"};
-        ler_por_salario(arquivo,meio);
+        if(chave == 0){
+            ler_por_salario(arquivo,meio);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else if(op1 == 2){
         system("clear||cls");
         char um[] = {"1.212,00"};
-        ler_por_salario(arquivo,um);
+        if(chave == 0){
+            ler_por_salario(arquivo,um);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else if(op1 == 3){
         system("clear||cls");
         char dois[] = {"2.424,00"};
-        ler_por_salario(arquivo,dois);
+        if(chave == 0){
+            ler_por_salario(arquivo,dois);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else{
         system("clear||cls");
         char tres[] = {"3.636,00"};
-        ler_por_salario(arquivo,tres);
+        if(chave == 0){
+            ler_por_salario(arquivo,tres);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
 }
 
@@ -627,7 +661,7 @@ void ler_por_salario(char *arquivo, char* salario){
 }
 
 // Função que seleciona qual tipo de listagem vai ser exibido
-void lista_funcionario(char *arquivo){
+void lista_funcionario(char *arquivo, int chave, char *salario){
     int op1 = 0;
     do{
         char op[15];
@@ -646,15 +680,25 @@ void lista_funcionario(char *arquivo){
         }
     }while(op1 < 1 || op1 > 3);
     if(op1 == 1){
-        ler_arquivo_func(arquivo);
+        if(chave == 0){
+            ler_arquivo_func(arquivo);
+        }
+        else{
+            relatorio_comple_func(arquivo, salario);
+        }
     }
     else if(op1 == 2){
         int vetor_faixa[2];
         escolhe_idade(vetor_faixa);
-        lista_idade_func(arquivo, vetor_faixa);
+        if(chave == 0){
+            lista_idade_func(arquivo, vetor_faixa);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else{
-        lista_salario(arquivo);
+        lista_salario(arquivo, chave);
     }
 }
 
@@ -698,4 +742,53 @@ void lista_idade_func(char *arquivo, int *idade){
     }
     fclose(arq);
     free(funcionario);
+}
+
+void relatorio_comple_func(char *arquivo, char *arq_salario){
+    system("clear||cls");
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Funcionario *funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(funcionario, sizeof(Funcionario),1,arq)){
+            if(funcionario->status == 'v'){
+                int taOK = 0;
+                Salario *salario;
+                salario = pesquisa_salario(arq_salario, funcionario->cpf);
+                if(funcionario == NULL){
+                    taOK = 1;
+                }
+                if(taOK == 0){
+                    exibe_func_cplt(funcionario, salario->data_pg, salario->prox_data, cont);
+                    cont += 1;
+                }
+                free(salario);
+                taOK = 0;
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
+    }
+    fclose(arq);
+    free(funcionario);
+}
+
+void exibe_func_cplt(const Funcionario *funcionario, int *data_pg, int *prox_data, int cont1){
+    printf("\n\tFUNCIONÁRIO %d:\n",cont1+1);
+    printf("\n\tCPF: %s", funcionario->cpf);
+    printf("\tNOME: %s", funcionario->nome);
+    printf("\tE-MAIL: %s", funcionario->email);
+    printf("\tTELEFONE: +55 %s", funcionario->fone);
+    printf("\tDATA DE NASCIMENTO: %s", funcionario->data_nas);
+    printf("\tSALÁRIO: R$ %s", funcionario->salaraio);
+    printf("\n\tÚLTIMO SALÁRIO PAGO: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
+    printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", prox_data[0], prox_data[1], prox_data[2]);
+    printf("\n\t=====================================================\n");
 }

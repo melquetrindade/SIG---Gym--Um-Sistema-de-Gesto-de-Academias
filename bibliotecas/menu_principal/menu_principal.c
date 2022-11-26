@@ -32,19 +32,19 @@ int menu_principal(void){ // Tela principal
 int clientes(void){ // Tela do módulo de Clientes
     setlocale(LC_ALL,"Portuguese");
     char numero[20];
-    printf("--------------------------------------------------------\n");
-    printf("|                     MENU CLIENTES                    |\n");
-    printf("--------------------------------------------------------\n");
-    printf("|   -------------      -----------      -------------  |\n");
-    printf("| 1-| CADASTRAR |    2-| DELETAR |    3-| RECUPERAR |  |\n");
-    printf("|   -------------      -----------      -------------  |\n");
-    printf("|   -------------      -------------    -------------  |\n");
-    printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
-    printf("|   ------------       -------------    -------------  |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("--------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------\n");
+    printf("|                            MENU CLIENTES                      |\n");
+    printf("----------------------------------------------------------------- \n");
+    printf("|   -------------         -------------       -------------     |\n");
+    printf("| 1-| CADASTRAR |       2-|  DELETAR  |     3-| RECUPERAR |     |\n");
+    printf("|   -------------         -------------       -------------     |\n");
+    printf("|   -------------         -------------       -------------     |\n");
+    printf("| 4-| PESQUISAR |       5-| ATUALIZAR |     6-|  LISTAR   |     |\n");
+    printf("|   ------------          -------------       -------------     |\n");
+    printf("|   ----------------------     -------------------------------- |\n");
+    printf("| 7-| RELATÓRIO CLIENTES |   9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("|   ----------------------     -------------------------------- |\n");
+    printf("-----------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA SUA OPÇÃO: "); fgets(numero, 20, stdin); fflush(stdin);
     int x = atoi(numero);
@@ -56,19 +56,19 @@ int funcionarios(void){ // Tela do módulo de funcionários
     setlocale(LC_ALL,"Portuguese");
     char op[20];
 
-    printf("--------------------------------------------------------\n");
-    printf("|                   MENU FUNCIONÁRIOS                  |\n");
-    printf("--------------------------------------------------------\n");
-    printf("|   -------------      -----------      -------------  |\n");
-    printf("| 1-| CADASTRAR |    2-| DELETAR |    3-| RECUPERAR |  |\n");
-    printf("|   -------------      -----------      -------------  |\n");
-    printf("|   -------------      -------------    -------------  |\n");
-    printf("| 4-| PESQUISAR |    5-| ATUALIZAR |  6-|  LISTAR   |  |\n");
-    printf("|   ------------       -------------    -------------  |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("| 9-| VOLTAR PARA O MENU PRINCIPAL |                   |\n");
-    printf("|   --------------------------------                   |\n");
-    printf("--------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------\n");
+    printf("|                           MENU FUNCIONÁRIOS                       |\n");
+    printf("---------------------------------------------------------------------\n");
+    printf("|   -------------          -------------         -------------      |\n");
+    printf("| 1-| CADASTRAR |        2-|  DELETAR  |       3-| RECUPERAR |      |\n");
+    printf("|   -------------          -------------         -------------      |\n");
+    printf("|   -------------          -------------         -------------      |\n");
+    printf("| 4-| PESQUISAR |        5-| ATUALIZAR |       6-|  LISTAR   |      |\n");
+    printf("|   ------------           -------------         -------------      |\n");
+    printf("|   --------------------------     -------------------------------- |\n");
+    printf("| 7-| RELATÓRIO FUNCIONÁRIOS |   9-| VOLTAR PARA O MENU PRINCIPAL | |\n");
+    printf("|   --------------------------     -------------------------------- |\n");
+    printf("---------------------------------------------------------------------\n");
     printf("\n");
     printf(">>> ESCOLHA UMA OPÇÃO: "); fgets(op, 20, stdin); fflush(stdin);
     int x = atoi(op);
@@ -189,8 +189,8 @@ void tela_equipe(void){ // Tela sobre o desenvolvedor
 }
 
 int verifica_opcao_1(int opcao){         // Verifica se a opção escolhida é válida
-    int opcoes[7] = {1,2,3,4,5,6,9};    // para os módulos 1 e 2
-    for(int i = 0; i<=6; i++){
+    int opcoes[8] = {1,2,3,4,5,6,7,9};   // para os módulos 1 e 2
+    for(int i = 0; i<=7; i++){
         if(opcao == opcoes[i]){
             return opcao;
         }

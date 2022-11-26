@@ -161,8 +161,22 @@ void listar_clientes(void){ // Função de listar clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Listagem      |\n");
     printf("\t===================================\n");
+    int chave = 0;
+    lista_clientes(arquivo_cliente, chave, arq_mensalidade1, arq_registro1);
 
-    lista_clientes(arquivo_cliente);
+    printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
+    getchar();
+    system("clear||cls");
+}
+
+void relatorio_clientes(void){ // Função de listar clientes
+    system("clear||cls");
+
+    printf("\t===================================\n");
+    printf("\t|         Módulo de Relatório     |\n");
+    printf("\t===================================\n");
+    int chave = 1;
+    lista_clientes(arquivo_cliente, chave, arq_mensalidade1, arq_registro1);
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -558,7 +572,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
 }
 
 // Função que seleciona qual o tipo de mensalidade vai ser listado
-void lista_plano(char *arquivo){
+void lista_plano(char *arquivo, int chave){
     system("clear||cls");
     int op1 = 0;
     do{
@@ -579,17 +593,32 @@ void lista_plano(char *arquivo){
     if(op1 == 1){
         system("clear||cls");
         char basico[] = {"59,99"};
-        ler_por_plano(arquivo,basico);
+        if(chave == 0){
+            ler_por_plano(arquivo,basico);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else if(op1 == 2){
         system("clear||cls");
         char medio[] = {"69,99"};
-        ler_por_plano(arquivo,medio);
+        if(chave == 0){
+            ler_por_plano(arquivo,medio);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else{
         system("clear||cls");
         char premium[] = {"79,99"};
-        ler_por_plano(arquivo,premium);
+        if(chave == 0){
+            ler_por_plano(arquivo,premium);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
 }
 
@@ -627,7 +656,7 @@ void ler_por_plano(char *arquivo, char* plano){
 }
 
 // Função que seleciona qual tipo de listagem vai ser exibido
-void lista_clientes(char *arquivo){
+void lista_clientes(char *arquivo, int chave, char *arq_mensalidade, char *arq_registro){
     int op1 = 0;
     do{
         char op[15];
@@ -646,15 +675,25 @@ void lista_clientes(char *arquivo){
         }
     }while(op1 < 1 || op1 > 3);
     if(op1 == 1){
-        ler_arquivo_cliente(arquivo);
+        if(chave == 0){
+            ler_arquivo_cliente(arquivo);
+        }
+        else{
+            relatorio_comple(arquivo, arq_mensalidade, arq_registro);
+        }
     }
     else if(op1 == 2){
         int vetor_faixa[2];
         escolhe_idade(vetor_faixa);
-        lista_idade(arquivo, vetor_faixa);
+        if(chave == 0){
+            lista_idade(arquivo, vetor_faixa);
+        }
+        else{
+            printf("ainda vou fazer");
+        }
     }
     else{
-        lista_plano(arquivo);
+        lista_plano(arquivo, chave);
     }
 }
 
@@ -750,8 +789,8 @@ void exibe_clnt_cplt(const Cliente *cliente, int *acesso, int *data_pg, int *pro
     printf("\tTELEFONE: +55 %s", cliente->fone);
     printf("\tDATA DE NASCIMENTO: %s", cliente->data_nas);
     printf("\tPLANO: R$ %s", cliente->plano);
-    printf("\tÚLTIMO ACESSO: %d/%d/%d ás %d/%d/%d", acesso[2],acesso[1],acesso[0],acesso[3],acesso[4],acesso[5]);
-    printf("\nÚLTIMA MENSALIDADE PAGA: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
-    print("\nPRÓXIMA MENSALIDADE: %d/%d/%d", prox_data[2], prox_data[1], prox_data[0]);
-    printf("\n\t============================================================\n");
+    printf("\n\tÚLTIMO ACESSO À ACADEMIA: %d/%d/%d ás %d:%d:%d", acesso[2],acesso[1],acesso[0],acesso[3],acesso[4],acesso[5]);
+    printf("\n\tÚLTIMA MENSALIDADE PAGA: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
+    printf("\n\tPRÓXIMA MENSALIDADE: %d/%d/%d", prox_data[0], prox_data[1], prox_data[2]);
+    printf("\n\t=====================================================\n");
 }

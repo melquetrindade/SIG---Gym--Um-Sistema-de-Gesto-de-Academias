@@ -49,6 +49,9 @@ int main(){
             else if(op_menu_clientes == 6){
                 listar_clientes();
             }
+            else if(op_menu_clientes == 7){
+                relatorio_clientes();
+            }
             else if(op_menu_clientes == 9){
                 system("clear||cls");
                 printf("Voltando para o menu principal...\n");
@@ -79,6 +82,9 @@ int main(){
             }
             else if(op_menu_funcionarios == 6){
                 listar_funcionario();
+            }
+            else if(op_menu_clientes == 7){
+                relatorio_funcionarios();
             }
             else if(op_menu_funcionarios == 9){
                 system("clear||cls");
