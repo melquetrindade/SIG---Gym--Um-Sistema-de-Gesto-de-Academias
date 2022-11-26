@@ -566,7 +566,7 @@ void atualiza_funcionario(char *arquivo, Funcionario *func_novo){
 }
 
 // Função que seleciona qual o tipo de salário vai ser listado
-void lista_salario(char *arquivo, int chave){
+void lista_salario(char *arquivo, int chave, char *arq_salario){
     system("clear||cls");
     int op1 = 0;
     do{
@@ -582,7 +582,6 @@ void lista_salario(char *arquivo, int chave){
         if(op1 < 1 || op1 > 4){
             system("clear||cls");
             printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
-
         }
     }while(op1 < 1 || op1 > 4);
     if(op1 == 1){
@@ -592,7 +591,7 @@ void lista_salario(char *arquivo, int chave){
             ler_por_salario(arquivo,meio);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_salario(arquivo, meio, arq_salario);
         }
     }
     else if(op1 == 2){
@@ -602,7 +601,7 @@ void lista_salario(char *arquivo, int chave){
             ler_por_salario(arquivo,um);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_salario(arquivo, um, arq_salario);
         }
     }
     else if(op1 == 3){
@@ -612,7 +611,7 @@ void lista_salario(char *arquivo, int chave){
             ler_por_salario(arquivo,dois);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_salario(arquivo,dois, arq_salario);
         }
     }
     else{
@@ -622,7 +621,7 @@ void lista_salario(char *arquivo, int chave){
             ler_por_salario(arquivo,tres);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_salario(arquivo, tres, arq_salario);
         }
     }
 }
@@ -694,11 +693,11 @@ void lista_funcionario(char *arquivo, int chave, char *salario){
             lista_idade_func(arquivo, vetor_faixa);
         }
         else{
-            printf("ainda vou fazer");
+            relatorio_idade_func(arquivo, vetor_faixa, salario);
         }
     }
     else{
-        lista_salario(arquivo, chave);
+        lista_salario(arquivo, chave, salario);
     }
 }
 
@@ -795,4 +794,63 @@ void processo_relatorio_func(Funcionario *funcionario, char *arq_salario, int *c
     }
     free(salario);
     taOK = 0;
+}
+
+// Função que exibe os funcionários com base na faixa de salários selecionada
+void rel_por_salario(char *arquivo, char* salario, char *arq_salario){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Funcionario *funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(funcionario, sizeof(Funcionario),1,arq)){
+            if((strcmp(funcionario->salaraio,salario) == 0) && (funcionario->status != 'x')){
+                processo_relatorio_func(funcionario, arq_salario, &cont, cont);
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTE SALÁRIO!\n");
+    }
+    fclose(arq);
+    free(funcionario);
+}
+
+// Função que exibe os clientes com base na faixa etária selecionada
+void relatorio_idade_func(char *arquivo, int *idade, char *arq_salario){
+    system("clear||cls");
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Funcionario *funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
+    int cont1 = 0;
+    int cont2 = 0;
+    while(!feof(arq)){
+        if(fread(funcionario, sizeof(Funcionario),1,arq)){
+            if(funcionario->status == 'v'){
+                int idade_cal = calcula_idade(funcionario->data_nas);
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (funcionario->status != 'x')){
+                   processo_relatorio_func(funcionario, arq_salario, &cont2, cont2);
+                }
+                cont1+=1;
+            }
+        }
+    }
+    if(cont1 == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
+    }
+    if(cont2 == 0){
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+    }
+    fclose(arq);
+    free(funcionario);
 }
