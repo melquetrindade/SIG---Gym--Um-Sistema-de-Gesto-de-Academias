@@ -758,18 +758,7 @@ void relatorio_comple_func(char *arquivo, char *arq_salario){
     while(!feof(arq)){
         if(fread(funcionario, sizeof(Funcionario),1,arq)){
             if(funcionario->status == 'v'){
-                int taOK = 0;
-                Salario *salario;
-                salario = pesquisa_salario(arq_salario, funcionario->cpf);
-                if(funcionario == NULL){
-                    taOK = 1;
-                }
-                if(taOK == 0){
-                    exibe_func_cplt(funcionario, salario->data_pg, salario->prox_data, cont);
-                    cont += 1;
-                }
-                free(salario);
-                taOK = 0;
+                processo_relatorio_func(funcionario, arq_salario, &cont, cont);
             }
         }
     }
@@ -791,4 +780,19 @@ void exibe_func_cplt(const Funcionario *funcionario, int *data_pg, int *prox_dat
     printf("\n\tÚLTIMO SALÁRIO PAGO: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
     printf("\n\tPRÓXIMO PAGAMENTO: %d/%d/%d", prox_data[0], prox_data[1], prox_data[2]);
     printf("\n\t=====================================================\n");
+}
+
+void processo_relatorio_func(Funcionario *funcionario, char *arq_salario, int *cont, int cont2){
+    int taOK = 0;
+    Salario *salario;
+    salario = pesquisa_salario(arq_salario, funcionario->cpf);
+    if(funcionario == NULL){
+        taOK = 1;
+    }
+    if(taOK == 0){
+        exibe_func_cplt(funcionario, salario->data_pg, salario->prox_data, cont2);
+        *cont += 1;
+    }
+    free(salario);
+    taOK = 0;
 }

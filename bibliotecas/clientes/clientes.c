@@ -572,7 +572,7 @@ void atualiza_cliente(char *arquivo, Cliente *cliente_novo){
 }
 
 // Função que seleciona qual o tipo de mensalidade vai ser listado
-void lista_plano(char *arquivo, int chave){
+void lista_plano(char *arquivo, int chave, char *arq_mensalidade, char *arq_registro){
     system("clear||cls");
     int op1 = 0;
     do{
@@ -597,7 +597,7 @@ void lista_plano(char *arquivo, int chave){
             ler_por_plano(arquivo,basico);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_plano(arquivo, basico, arq_mensalidade, arq_registro);
         }
     }
     else if(op1 == 2){
@@ -607,7 +607,7 @@ void lista_plano(char *arquivo, int chave){
             ler_por_plano(arquivo,medio);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_plano(arquivo, medio, arq_mensalidade, arq_registro);
         }
     }
     else{
@@ -617,7 +617,7 @@ void lista_plano(char *arquivo, int chave){
             ler_por_plano(arquivo,premium);
         }
         else{
-            printf("ainda vou fazer");
+            rel_por_plano(arquivo, premium, arq_mensalidade, arq_registro);
         }
     }
 }
@@ -689,11 +689,11 @@ void lista_clientes(char *arquivo, int chave, char *arq_mensalidade, char *arq_r
             lista_idade(arquivo, vetor_faixa);
         }
         else{
-            printf("ainda vou fazer");
+            relatorio_idade(arquivo, vetor_faixa, arq_mensalidade, arq_registro);
         }
     }
     else{
-        lista_plano(arquivo, chave);
+        lista_plano(arquivo, chave, arq_mensalidade, arq_registro);
     }
 }
 
@@ -753,24 +753,7 @@ void relatorio_comple(char *arquivo, char *arq_mensa, char *arq_freq){
     while(!feof(arq)){
         if(fread(cliente, sizeof(Cliente),1,arq)){
             if(cliente->status == 'v'){
-                int taOK = 0;
-                Mensalidade *mensalidade;
-                mensalidade = pesquisa_mensalidade(arq_mensa, cliente->cpf);
-                if(mensalidade == NULL){
-                    taOK = 1;
-                }
-                Registro *registro;
-                registro = pesquisa_frequencia(arq_freq, cliente->cpf);
-                if(registro == NULL){
-                    taOK = 1;
-                }
-                if(taOK == 0){
-                    exibe_clnt_cplt(cliente, registro->ult_data, mensalidade->data_pg, mensalidade->prox_data, cont);
-                    cont += 1;
-                }
-                free(mensalidade);
-                free(registro);
-                taOK = 0;
+                processo_relatorio(cliente, arq_mensa, arq_freq, &cont, cont);
             }
         }
     }
@@ -793,4 +776,83 @@ void exibe_clnt_cplt(const Cliente *cliente, int *acesso, int *data_pg, int *pro
     printf("\n\tÚLTIMA MENSALIDADE PAGA: %d/%d/%d", data_pg[2], data_pg[1], data_pg[0]);
     printf("\n\tPRÓXIMA MENSALIDADE: %d/%d/%d", prox_data[0], prox_data[1], prox_data[2]);
     printf("\n\t=====================================================\n");
+}
+
+void rel_por_plano(char *arquivo, char* plano, char *arq_mensa, char *arq_freq){
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    int cont = 0;
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if((strcmp(cliente->plano,plano) == 0) && (cliente->status != 'x')){
+                processo_relatorio(cliente, arq_mensa, arq_freq, &cont, cont);
+            }
+        }
+    }
+    if(cont == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+    }
+    fclose(arq);
+    free(cliente);
+}
+
+// Função que exibe os clientes com base na faixa etária selecionada
+void relatorio_idade(char *arquivo, int *idade, char *arq_mensa, char *arq_relatorio){
+    system("clear||cls");
+    FILE *arq;
+    arq = fopen(arquivo, "rb");
+    if (arq == NULL){
+        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
+        exit(1);
+    }
+    Cliente *cliente;
+    cliente = (Cliente*) malloc(sizeof(Cliente));
+    int cont1 = 0;
+    int cont2 = 0;
+    while(!feof(arq)){
+        if(fread(cliente, sizeof(Cliente),1,arq)){
+            if(cliente->status == 'v'){
+                int idade_cal = calcula_idade(cliente->data_nas);
+                if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (cliente->status != 'x')){
+                    processo_relatorio(cliente, arq_mensa, arq_relatorio, &cont2, cont2);
+                }
+                cont1+=1;
+            }
+        }
+    }
+    if(cont1 == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+    }
+    if(cont2 == 0){
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+    }
+    fclose(arq);
+    free(cliente);
+}
+
+void processo_relatorio(Cliente *cliente, char *arq_mensa, char *arq_freq, int *cont, int cont2){
+    int taOK = 0;
+    Mensalidade *mensalidade;
+    mensalidade = pesquisa_mensalidade(arq_mensa, cliente->cpf);
+    if(mensalidade == NULL){
+        taOK = 1;
+    }
+    Registro *registro;
+    registro = pesquisa_frequencia(arq_freq, cliente->cpf);
+    if(registro == NULL){
+        taOK = 1;
+    }
+    if(taOK == 0){
+        exibe_clnt_cplt(cliente, registro->ult_data, mensalidade->data_pg, mensalidade->prox_data, cont2);
+        *cont += 1;
+    }
+    free(mensalidade);
+    free(registro);
+    taOK = 0;
 }

@@ -83,7 +83,7 @@ int main(){
             else if(op_menu_funcionarios == 6){
                 listar_funcionario();
             }
-            else if(op_menu_clientes == 7){
+            else if(op_menu_funcionarios == 7){
                 relatorio_funcionarios();
             }
             else if(op_menu_funcionarios == 9){
