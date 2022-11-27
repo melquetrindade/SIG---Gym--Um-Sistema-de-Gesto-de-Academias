@@ -896,23 +896,25 @@ void lista_dinamica(void){
 	while(!feof(arq)){
         novoFunc = (Funcionario*) malloc(sizeof(Funcionario));
         if(fread(novoFunc, sizeof(Funcionario),1,arq)){
-            if (lista == NULL){
+            if(novoFunc->status != 'x'){
+                if (lista == NULL){
                 lista = novoFunc;
                 novoFunc->prox = NULL;
-            }
-            else if(strcmp(novoFunc->nome,lista->nome) < 0){
-                novoFunc->prox = lista;
-                lista = novoFunc;
-            }
-            else{
-                Funcionario* anter = lista;
-                Funcionario* atual = lista->prox;
-                while((atual != NULL) && strcmp(atual->nome,novoFunc->nome) < 0){
-                    anter = atual;
-                    atual = atual->prox;
                 }
-                anter->prox = novoFunc;
-                novoFunc->prox = atual;
+                else if(strcmp(novoFunc->nome,lista->nome) < 0){
+                    novoFunc->prox = lista;
+                    lista = novoFunc;
+                }
+                else{
+                    Funcionario* anter = lista;
+                    Funcionario* atual = lista->prox;
+                    while((atual != NULL) && strcmp(atual->nome,novoFunc->nome) < 0){
+                        anter = atual;
+                        atual = atual->prox;
+                    }
+                    anter->prox = novoFunc;
+                    novoFunc->prox = atual;
+                }
             }
         }
 	}
@@ -920,11 +922,15 @@ void lista_dinamica(void){
 
     printf("\nConteúdo do Arquivo em Ordem Alfabética\n");
 	novoFunc = lista;
-	i = 1;
+	i = 0;
 	while (novoFunc != NULL) {
-		printf("Funcionário %d: %s", i, novoFunc->nome);
+		// printf("Funcionário %d: %s", i, novoFunc->nome);
+        Salario *salario;
+        salario = pesquisa_salario(arq_salario1, novoFunc->cpf);
+        exibe_func_cplt(novoFunc, salario->data_pg, salario->prox_data, i);
 		novoFunc = novoFunc->prox;
 		i++;
+        free(salario);
 	}
 
     novoFunc = lista;
