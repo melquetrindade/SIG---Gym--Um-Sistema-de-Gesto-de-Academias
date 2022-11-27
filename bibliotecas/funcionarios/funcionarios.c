@@ -173,8 +173,12 @@ void relatorio_funcionarios(void){ // Função de listar clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Relatório     |\n");
     printf("\t===================================\n");
+    // int op = op_relatorio();
+    // if(op == 1){
     int chave = 1;
     lista_funcionario(arquivo_funcionario, chave, arq_salario1);
+    //}
+    
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -855,21 +859,21 @@ void relatorio_idade_func(char *arquivo, int *idade, char *arq_salario){
     free(funcionario);
 }
 
-int op_relatorio(void){
-    system("clear||cls");
-    int op1 = 0;
-    do{
-        char op[15];
-        printf("\n\t#############################################");
-        printf("\n\t#   1- EXIBIR LISTAGEM SEM LISTA DINÂMICA   #");
-        printf("\n\t#   2- EXIBIR LISTAGEM COM LISTA DINÂMICA   #");
-        printf("\n\t#############################################");
-        printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); fgets(op,15,stdin); fflush(stdin);
-        op1 = atoi(op);
-        if(op1 < 1 || op1 > 2){
-            system("clear||cls");
-            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
-        }
-    }while(op1 < 1 || op1 > 2);
-    return op1;
-}
+// int op_relatorio(void){
+//     system("clear||cls");
+//     int op1 = 0;
+//     do{
+//         char op[15];
+//         printf("\n\t##############################################");
+//         printf("\n\t#   1- EXIBIR RELATÓRIO SEM LISTA DINÂMICA   #");
+//         printf("\n\t#   2- EXIBIR RELATÓRIO COM LISTA DINÂMICA   #");
+//         printf("\n\t##############################################");
+//         printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); fgets(op,15,stdin); fflush(stdin);
+//         op1 = atoi(op);
+//         if(op1 < 1 || op1 > 2){
+//             system("clear||cls");
+//             printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+//         }
+//     }while(op1 < 1 || op1 > 2);
+//     return op1;
+// }
