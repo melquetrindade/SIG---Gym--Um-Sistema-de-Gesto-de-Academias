@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "fun_reutilizaveis.h"
 #include "../clientes/clientes.h"
 #include "../menu_principal/menu_principal.h"
@@ -549,7 +550,7 @@ int verifica_caracter(char *nome){
         else if(nome[i] >= 123 && nome[i] <= 126){
             return 0;
         }
-        else if((nome[i] >= 'a' && nome[i] <= 'z') || (nome[i] >= 'A' && nome[i] <= 'Z') || (nome[i] == 10)){
+        else if((nome[i] >= 'a' && nome[i] <= 'z') || (nome[i] >= 'A' && nome[i] <= 'Z') || (nome[i] == 10) || (nome[i] == 32)){
             continue;
         }
         else{
@@ -585,6 +586,7 @@ void formata_nome(char *nome_teste){
     char nome[100] = {""};
     pt = strtok(nome_teste, " ");
     while(pt){
+        pt[0] = toupper(pt[0]);
         strcat(nome, pt);
         strcat(nome, " ");
         pt = strtok(NULL, " ");

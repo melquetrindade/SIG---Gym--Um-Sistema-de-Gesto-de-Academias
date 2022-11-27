@@ -9,6 +9,7 @@ struct funcionario{
     char salaraio[20];
     char status;
     int id[6];
+    Funcionario *prox;
 };
 
 // Assinaturas
@@ -43,3 +44,5 @@ void relatorio_comple_func(char*, char*);
 void processo_relatorio_func(Funcionario*, char*, int*, int);
 void rel_por_salario(char*, char*, char*);
 void relatorio_idade_func(char*, int*, char*);
+void lista_dinamica(void);
+int op_relatorio(void);

@@ -173,12 +173,14 @@ void relatorio_funcionarios(void){ // Função de listar clientes
     printf("\t===================================\n");
     printf("\t|         Módulo de Relatório     |\n");
     printf("\t===================================\n");
-    // int op = op_relatorio();
-    // if(op == 1){
-    int chave = 1;
-    lista_funcionario(arquivo_funcionario, chave, arq_salario1);
-    //}
-    
+    int op = op_relatorio();
+    if(op == 1){
+        int chave = 1;
+        lista_funcionario(arquivo_funcionario, chave, arq_salario1);
+    }
+    else{
+        lista_dinamica();
+    }
 
     printf("\n\tPresione <ENTER> para voltar ao menu principal >>> ");
     getchar();
@@ -217,6 +219,7 @@ Funcionario* preenche_funcionario(void){
     loop_valor_funcionario(funcionario->salaraio);
     funcionario->status = 'v';
     funcionario->id[0]=0;funcionario->id[1]=0;funcionario->id[2]=0;funcionario->id[3]=0;funcionario->id[4]=0;funcionario->id[5]=0;
+    funcionario->prox = NULL;
     return funcionario;
 }
 
@@ -859,21 +862,75 @@ void relatorio_idade_func(char *arquivo, int *idade, char *arq_salario){
     free(funcionario);
 }
 
-// int op_relatorio(void){
-//     system("clear||cls");
-//     int op1 = 0;
-//     do{
-//         char op[15];
-//         printf("\n\t##############################################");
-//         printf("\n\t#   1- EXIBIR RELATÓRIO SEM LISTA DINÂMICA   #");
-//         printf("\n\t#   2- EXIBIR RELATÓRIO COM LISTA DINÂMICA   #");
-//         printf("\n\t##############################################");
-//         printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); fgets(op,15,stdin); fflush(stdin);
-//         op1 = atoi(op);
-//         if(op1 < 1 || op1 > 2){
-//             system("clear||cls");
-//             printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
-//         }
-//     }while(op1 < 1 || op1 > 2);
-//     return op1;
-// }
+int op_relatorio(void){
+    system("clear||cls");
+    int op1 = 0;
+    do{
+        char op[15];
+        printf("\n\t##############################################");
+        printf("\n\t#   1- EXIBIR RELATÓRIO SEM LISTA DINÂMICA   #");
+        printf("\n\t#   2- EXIBIR RELATÓRIO COM LISTA DINÂMICA   #");
+        printf("\n\t##############################################");
+        printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); fgets(op,15,stdin); fflush(stdin);
+        op1 = atoi(op);
+        if(op1 < 1 || op1 > 2){
+            system("clear||cls");
+            printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
+        }
+    }while(op1 < 1 || op1 > 2);
+    return op1;
+}
+
+void lista_dinamica(void){
+    FILE *arq;
+    int i;
+	Funcionario* novoFunc;
+	Funcionario* lista;
+
+	arq = fopen("arq_funcionario.dat","rb");
+	if(arq == NULL){
+		printf("Erro na abertura do arquivo\n!");
+		exit(1);
+	}
+	lista = NULL;
+	while(!feof(arq)){
+        novoFunc = (Funcionario*) malloc(sizeof(Funcionario));
+        if(fread(novoFunc, sizeof(Funcionario),1,arq)){
+            if (lista == NULL){
+                lista = novoFunc;
+                novoFunc->prox = NULL;
+            }
+            else if(strcmp(novoFunc->nome,lista->nome) < 0){
+                novoFunc->prox = lista;
+                lista = novoFunc;
+            }
+            else{
+                Funcionario* anter = lista;
+                Funcionario* atual = lista->prox;
+                while((atual != NULL) && strcmp(atual->nome,novoFunc->nome) < 0){
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novoFunc;
+                novoFunc->prox = atual;
+            }
+        }
+	}
+	fclose(arq);
+
+    printf("\nConteúdo do Arquivo em Ordem Alfabética\n");
+	novoFunc = lista;
+	i = 1;
+	while (novoFunc != NULL) {
+		printf("Funcionário %d: %s", i, novoFunc->nome);
+		novoFunc = novoFunc->prox;
+		i++;
+	}
+
+    novoFunc = lista;
+	while (lista != NULL) {
+		lista = lista->prox;
+		free(novoFunc);
+		novoFunc = lista;
+	}
+}
