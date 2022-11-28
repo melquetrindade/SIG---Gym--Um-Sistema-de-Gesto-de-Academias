@@ -592,7 +592,8 @@ void lista_salario(char *arquivo, int chave, char *arq_salario){
             ler_por_salario(arquivo,meio);
         }
         else{
-            rel_por_salario(arquivo, meio, arq_salario);
+            int op = 2;
+            lista_dinamica_direta(chave, op, meio);
         }
     }
     else if(op1 == 2){
@@ -613,7 +614,8 @@ void lista_salario(char *arquivo, int chave, char *arq_salario){
             ler_por_salario(arquivo,dois);
         }
         else{
-            rel_por_salario(arquivo,dois, arq_salario);
+            int op = 2;
+            lista_dinamica_direta(chave, op, dois);
         }
     }
     else{
@@ -623,7 +625,8 @@ void lista_salario(char *arquivo, int chave, char *arq_salario){
             ler_por_salario(arquivo,tres);
         }
         else{
-            rel_por_salario(arquivo, tres, arq_salario);
+            int op = 3;
+            lista_dinamica_direta(chave, op, tres);
         }
     }
 }
@@ -705,12 +708,7 @@ void lista_funcionario(char *arquivo, int chave, char *salario){
         lista_salario(arquivo, chave, salario);
     }
     else{
-        if(chave == 0){
-            printf("ainda vou fazer!");
-        }
-        else{
-            lista_dinamica(chave);
-        }
+        lista_dinamica(chave);
     }
 }
 
@@ -786,31 +784,6 @@ void processo_relatorio_func(Funcionario *funcionario, char *arq_salario, int *c
     taOK = 0;
 }
 
-// Função que exibe os funcionários com base na faixa de salários selecionada
-void rel_por_salario(char *arquivo, char* salario, char *arq_salario){
-    FILE *arq;
-    arq = fopen(arquivo, "rb");
-    if (arq == NULL){
-        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-        exit(1);
-    }
-    Funcionario *funcionario;
-    funcionario = (Funcionario*) malloc(sizeof(Funcionario));
-    int cont = 0;
-    while(!feof(arq)){
-        if(fread(funcionario, sizeof(Funcionario),1,arq)){
-            if((strcmp(funcionario->salaraio,salario) == 0) && (funcionario->status != 'x')){
-                processo_relatorio_func(funcionario, arq_salario, &cont, cont);
-            }
-        }
-    }
-    if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTE SALÁRIO!\n");
-    }
-    fclose(arq);
-    free(funcionario);
-}
-
 // Função que organiza a lista dinâmica em ordem alfabética
 void lista_dinamica(int chave){
     system("clear||cls");
@@ -855,7 +828,7 @@ void lista_dinamica(int chave){
     processo_lista_dmc(chave, cont1, novoFunc, lista);
 }
 
-// Função que exibe e limpa as listas dinâmicas referente a listagem de ordem alfabética, listar todos e por salários.
+// Função que exibe e limpa as listas dinâmicas referente a listagem de ordem alfabética
 void processo_lista_dmc(int chave, int cont1, Funcionario *novoFunc, Funcionario *lista){
     if(chave == 1){
         if(cont1 != 0){
@@ -877,7 +850,26 @@ void processo_lista_dmc(int chave, int cont1, Funcionario *novoFunc, Funcionario
         }
     }
     else{
-        printf("ainda vou fazer!");
+        if(cont1 != 0){
+            novoFunc = lista;
+            int i = 0;
+            while(novoFunc != NULL){
+                printf("\n\tFUNCIONÁRIO %d:\n",i+1);
+                exibe_funcionario(novoFunc);
+                printf("\n\t========================================\n");
+                novoFunc = novoFunc->prox;
+                i += 1;
+            }
+            novoFunc = lista;
+            while(lista != NULL){
+                lista = lista->prox;
+                free(novoFunc);
+                novoFunc = lista;
+            }
+        }
+        else{
+            printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
+        }
     }
 }
 
@@ -918,7 +910,7 @@ void lista_dinamica_direta(int chave, int op, char *salario){
         processo_lista_dmc(chave, cont1, novoFunc, lista);
     }
     else{
-        printf("ainda vou fazer");
+        lista_dmc_salario(cont1, novoFunc, lista, salario);
     }
 }
 
@@ -989,6 +981,43 @@ void lista_dmc_idade(int cont1, Funcionario *novoFunc, Funcionario *lista, int *
         }
         if(i == 0){
             printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+        }
+    }
+    else{
+        printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
+    }
+}
+
+// Função que exibe os funcionários com base na faixa de salário selecionada.
+void lista_dmc_salario(int cont1, Funcionario *novoFunc, Funcionario *lista, char *salario){
+    if(cont1 != 0){
+        novoFunc = lista;
+        int i = 0;
+        while(novoFunc != NULL){
+            if((strcmp(novoFunc->salaraio,salario) == 0) && (novoFunc->status != 'x')){
+                int taOK = 0;
+                Salario *salario;
+                salario = pesquisa_salario(arq_salario1, novoFunc->cpf);
+                if(salario == NULL){
+                    taOK = 1;
+                }
+                if(taOK == 0){
+                    exibe_func_cplt(novoFunc, salario->data_pg, salario->prox_data, i);
+                    i += 1;
+                }
+                free(salario);
+                taOK = 0;
+            }
+            novoFunc = novoFunc->prox;
+        }
+        novoFunc = lista;
+        while(lista != NULL){
+            lista = lista->prox;
+            free(novoFunc);
+            novoFunc = lista;
+        }
+        if(i == 0){
+            printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTE SALÁRIO!\n");
         }
     }
     else{
