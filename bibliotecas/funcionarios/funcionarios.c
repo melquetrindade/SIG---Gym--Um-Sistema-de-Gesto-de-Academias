@@ -602,7 +602,8 @@ void lista_salario(char *arquivo, int chave, char *arq_salario){
             ler_por_salario(arquivo,um);
         }
         else{
-            rel_por_salario(arquivo, um, arq_salario);
+            int op = 2;
+            lista_dinamica_direta(chave, op,um);
         }
     }
     else if(op1 == 3){
@@ -686,7 +687,8 @@ void lista_funcionario(char *arquivo, int chave, char *salario){
         }
         else{
             int op = 1;
-            lista_dinamica_direta(chave, op);
+            char vazio[] = {""};
+            lista_dinamica_direta(chave, op, vazio);
         }
     }
     else if(op1 == 2){
@@ -754,31 +756,7 @@ void lista_idade_func(char *arquivo, int *idade){
     free(funcionario);
 }
 
-// void relatorio_comple_func(char *arquivo, char *arq_salario){
-//     system("clear||cls");
-//     FILE *arq;
-//     arq = fopen(arquivo, "rb");
-//     if (arq == NULL){
-//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-//         exit(1);
-//     }
-//     Funcionario *funcionario;
-//     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
-//     int cont = 0;
-//     while(!feof(arq)){
-//         if(fread(funcionario, sizeof(Funcionario),1,arq)){
-//             if(funcionario->status == 'v'){
-//                 processo_relatorio_func(funcionario, arq_salario, &cont, cont);
-//             }
-//         }
-//     }
-//     if(cont == 0){
-//         printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
-//     }
-//     fclose(arq);
-//     free(funcionario);
-// }
-
+// Função que exibe o relatório combinatório de funcionário
 void exibe_func_cplt(const Funcionario *funcionario, int *data_pg, int *prox_data, int cont1){
     printf("\n\tFUNCIONÁRIO %d:\n",cont1+1);
     printf("\n\tCPF: %s", funcionario->cpf);
@@ -792,6 +770,7 @@ void exibe_func_cplt(const Funcionario *funcionario, int *data_pg, int *prox_dat
     printf("\n\t=====================================================\n");
 }
 
+// Função que faz a junção dos arquivos refentes ao funcionário.
 void processo_relatorio_func(Funcionario *funcionario, char *arq_salario, int *cont, int cont2){
     int taOK = 0;
     Salario *salario;
@@ -832,41 +811,9 @@ void rel_por_salario(char *arquivo, char* salario, char *arq_salario){
     free(funcionario);
 }
 
-// Função que exibe os clientes com base na faixa etária selecionada
-// void relatorio_idade_func(char *arquivo, int *idade, char *arq_salario){
-//     system("clear||cls");
-//     FILE *arq;
-//     arq = fopen(arquivo, "rb");
-//     if (arq == NULL){
-//         printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-//         exit(1);
-//     }
-//     Funcionario *funcionario;
-//     funcionario = (Funcionario*) malloc(sizeof(Funcionario));
-//     int cont1 = 0;
-//     int cont2 = 0;
-//     while(!feof(arq)){
-//         if(fread(funcionario, sizeof(Funcionario),1,arq)){
-//             if(funcionario->status == 'v'){
-//                 int idade_cal = calcula_idade(funcionario->data_nas);
-//                 if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (funcionario->status != 'x')){
-//                    processo_relatorio_func(funcionario, arq_salario, &cont2, cont2);
-//                 }
-//                 cont1+=1;
-//             }
-//         }
-//     }
-//     if(cont1 == 0){
-//         printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA!\n");
-//     }
-//     if(cont2 == 0){
-//         printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
-//     }
-//     fclose(arq);
-//     free(funcionario);
-// }
-
+// Função que organiza a lista dinâmica em ordem alfabética
 void lista_dinamica(int chave){
+    system("clear||cls");
     FILE *arq;
 	Funcionario* novoFunc;
 	Funcionario* lista;
@@ -908,6 +855,7 @@ void lista_dinamica(int chave){
     processo_lista_dmc(chave, cont1, novoFunc, lista);
 }
 
+// Função que exibe e limpa as listas dinâmicas referente a listagem de ordem alfabética, listar todos e por salários.
 void processo_lista_dmc(int chave, int cont1, Funcionario *novoFunc, Funcionario *lista){
     if(chave == 1){
         if(cont1 != 0){
@@ -933,7 +881,9 @@ void processo_lista_dmc(int chave, int cont1, Funcionario *novoFunc, Funcionario
     }
 }
 
-void lista_dinamica_direta(int chave, int op){
+// Função que cria as listas dinâmicas para os retórios de listar todos e listar por salários
+void lista_dinamica_direta(int chave, int op, char *salario){
+    system("clear||cls");
     FILE *arq;
 	Funcionario* novoFunc;
 	Funcionario* lista;
@@ -972,7 +922,9 @@ void lista_dinamica_direta(int chave, int op){
     }
 }
 
+// Função que exibe os funcionários com base na faixa etária selecionada etapa1.
 void lista_dinamica_direta2(int *vetor_data1){
+    system("clear||cls");
     FILE *arq;
 	Funcionario* novoFunc;
 	Funcionario* lista;
@@ -1006,6 +958,7 @@ void lista_dinamica_direta2(int *vetor_data1){
     lista_dmc_idade(cont1, novoFunc, lista, vetor_data1);
 }
 
+// Função que exibe os funcionários com base na faixa etária selecionada etapa2.
 void lista_dmc_idade(int cont1, Funcionario *novoFunc, Funcionario *lista, int *idade){
     if(cont1 != 0){
         novoFunc = lista;
@@ -1033,6 +986,9 @@ void lista_dmc_idade(int cont1, Funcionario *novoFunc, Funcionario *lista, int *
             lista = lista->prox;
             free(novoFunc);
             novoFunc = lista;
+        }
+        if(i == 0){
+            printf("\n\tNÃO EXISTE NENHUM FUNCIONÁRIO CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
         }
     }
     else{

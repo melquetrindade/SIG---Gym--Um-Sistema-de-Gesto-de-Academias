@@ -46,6 +46,6 @@ void rel_por_salario(char*, char*, char*);
 void relatorio_idade_func(char*, int*, char*);
 void lista_dinamica(int);
 void processo_lista_dmc(int, int, Funcionario*, Funcionario*);
-void lista_dinamica_direta(int, int);
+void lista_dinamica_direta(int, int, char*);
 void lista_dinamica_direta2(int*);
 void lista_dmc_idade(int, Funcionario*, Funcionario*, int*);
