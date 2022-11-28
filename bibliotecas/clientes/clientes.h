@@ -9,6 +9,7 @@ struct cliente{
     char plano[20];
     char status;
     int id[6];
+    Cliente *prox;
 };
 
 // Assinaturas
@@ -43,3 +44,7 @@ void exibe_clnt_cplt(const Cliente*, int*, int*, int*, int);
 void rel_por_plano(char*, char*, char*, char*);
 void relatorio_idade(char*, int*, char*, char*);
 void processo_relatorio(Cliente*, char*, char*, int*, int);
+void lista_dnmc_direta_clnt(int, int, char*);
+void processo_lista_dmc_clt(int, int, Cliente*, Cliente*);
+void lista_dmc_plano_clt(int, Cliente*, Cliente*, char*);
+void lista_dinamica_clnt(int);

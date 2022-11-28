@@ -226,6 +226,7 @@ Cliente* preenche_cliente(char *arquivo){
     loop_valor_cliente(cliente->plano);
     cliente->status = 'v';
     cliente->id[0]=0;cliente->id[1]=0;cliente->id[2]=0;cliente->id[3]=0;cliente->id[4]=0;cliente->id[5]=0;
+    cliente->prox = NULL;
     return cliente;
 }
 
@@ -597,7 +598,8 @@ void lista_plano(char *arquivo, int chave, char *arq_mensalidade, char *arq_regi
             ler_por_plano(arquivo,basico);
         }
         else{
-            rel_por_plano(arquivo, basico, arq_mensalidade, arq_registro);
+            int op = 2;
+            lista_dnmc_direta_clnt(chave, op, basico);
         }
     }
     else if(op1 == 2){
@@ -607,7 +609,8 @@ void lista_plano(char *arquivo, int chave, char *arq_mensalidade, char *arq_regi
             ler_por_plano(arquivo,medio);
         }
         else{
-            rel_por_plano(arquivo, medio, arq_mensalidade, arq_registro);
+            int op = 2;
+            lista_dnmc_direta_clnt(chave, op, medio);
         }
     }
     else{
@@ -617,7 +620,8 @@ void lista_plano(char *arquivo, int chave, char *arq_mensalidade, char *arq_regi
             ler_por_plano(arquivo,premium);
         }
         else{
-            rel_por_plano(arquivo, premium, arq_mensalidade, arq_registro);
+            int op = 2;
+            lista_dnmc_direta_clnt(chave, op, premium);
         }
     }
 }
@@ -664,22 +668,25 @@ void lista_clientes(char *arquivo, int chave, char *arq_mensalidade, char *arq_r
         printf("\n\t#   1- LISTAR TODOS                 #");
         printf("\n\t#   2- LISTAR POR FAIXA ETÁRIA      #");
         printf("\n\t#   3- LISTAR POR PLANOS            #");
+        printf("\n\t#   4- LISTAR POR ORDEM ALFABÉTICA  #");
         printf("\n\t#####################################");
         printf("\n\n\tSELECIONE O TIPO DE LISTAGEM QUE DESEJA >>> "); 
         fgets(op,15,stdin); fflush(stdin);
         op1 = atoi(op);
-        if(op1 < 1 || op1 > 3){
+        if(op1 < 1 || op1 > 4){
             system("clear||cls");
             printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!!");
 
         }
-    }while(op1 < 1 || op1 > 3);
+    }while(op1 < 1 || op1 > 4);
     if(op1 == 1){
         if(chave == 0){
             ler_arquivo_cliente(arquivo);
         }
         else{
-            relatorio_comple(arquivo, arq_mensalidade, arq_registro);
+            int op = 1;
+            char vazio[] = {""};
+            lista_dnmc_direta_clnt(chave, op, vazio);
         }
     }
     else if(op1 == 2){
@@ -692,8 +699,11 @@ void lista_clientes(char *arquivo, int chave, char *arq_mensalidade, char *arq_r
             relatorio_idade(arquivo, vetor_faixa, arq_mensalidade, arq_registro);
         }
     }
+    else if(op1 == 3){
+        lista_plano(arquivo_cliente, chave, arq_mensalidade, arq_registro);
+    }
     else{
-        lista_plano(arquivo, chave, arq_mensalidade, arq_registro);
+        lista_dinamica_clnt(chave);
     }
 }
 
@@ -855,4 +865,160 @@ void processo_relatorio(Cliente *cliente, char *arq_mensa, char *arq_freq, int *
     free(mensalidade);
     free(registro);
     taOK = 0;
+}
+
+// Função que cria as listas dinâmicas para os retórios de listar todos e listar por salários
+void lista_dnmc_direta_clnt(int chave, int op, char *plano){
+    system("clear||cls");
+    FILE *arq;
+	Cliente* novoCliente;
+	Cliente* lista;
+	Cliente* ultimo;
+
+	arq = fopen(arquivo_cliente,"rt");
+	if (arq == NULL){
+		printf("Erro na abertura do arquivo\n!");
+		exit(1);
+	}
+
+	lista = NULL;
+    int cont1 = 0;
+    while(!feof(arq)){
+        novoCliente = (Cliente*) malloc(sizeof(Cliente));
+        if(fread(novoCliente, sizeof(Cliente),1,arq)){
+            if(novoCliente->status != 'x'){
+                novoCliente->prox = NULL;
+                if(lista == NULL){
+                    lista = novoCliente;
+                }
+                else{
+                    ultimo->prox = novoCliente;
+                }
+                ultimo = novoCliente;
+            }
+            cont1 += 1;
+        }
+	}
+	fclose(arq);
+    if(op == 1){
+        processo_lista_dmc_clt(chave, cont1, novoCliente, lista);
+    }
+    else{
+        lista_dmc_plano_clt(cont1, novoCliente, lista, plano);
+    }
+}
+
+// Função que exibe e limpa as listas dinâmicas referente a listagem de ordem alfabética
+void processo_lista_dmc_clt(int chave, int cont1, Cliente *novoCliente, Cliente *lista){
+    if(chave == 1){
+        if(cont1 != 0){
+            novoCliente = lista;
+            int i = 0;
+            while(novoCliente != NULL){
+                processo_relatorio(novoCliente, arq_mensalidade1, arq_registro1, &i, i);
+                novoCliente = novoCliente->prox;
+            }
+            novoCliente = lista;
+            while(lista != NULL){
+                lista = lista->prox;
+                free(novoCliente);
+                novoCliente = lista;
+            }
+        }
+        else{
+            printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+        }
+    }
+    else{
+        if(cont1 != 0){
+            novoCliente = lista;
+            int i = 0;
+            while(novoCliente != NULL){
+                printf("\n\tCLIENTE %d:\n",i+1);
+                exibe_cliente(novoCliente);
+                printf("\n\t========================================\n");
+                novoCliente = novoCliente->prox;
+                i += 1;
+            }
+            novoCliente = lista;
+            while(lista != NULL){
+                lista = lista->prox;
+                free(novoCliente);
+                novoCliente = lista;
+            }
+        }
+        else{
+            printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+        }
+    }
+}
+
+// Função que exibe os funcionários com base na faixa de salário selecionada.
+void lista_dmc_plano_clt(int cont1, Cliente *novoCliente, Cliente *lista, char *plano){
+    if(cont1 != 0){
+        novoCliente = lista;
+        int i = 0;
+        while(novoCliente != NULL){
+            if((strcmp(novoCliente->plano,plano) == 0) && (novoCliente->status != 'x')){
+                processo_relatorio(novoCliente, arq_mensalidade1, arq_registro1, &i, i);
+            }
+            novoCliente = novoCliente->prox;
+        }
+        novoCliente = lista;
+        while(lista != NULL){
+            lista = lista->prox;
+            free(novoCliente);
+            novoCliente = lista;
+        }
+        if(i == 0){
+            printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
+        }
+    }
+    else{
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+    }
+}
+
+// Função que organiza a lista dinâmica em ordem alfabética
+void lista_dinamica_clnt(int chave){
+    system("clear||cls");
+    FILE *arq;
+	Cliente* novoCliente;
+	Cliente* lista;
+
+	arq = fopen(arquivo_cliente,"rb");
+	if(arq == NULL){
+		printf("Erro na abertura do arquivo\n!");
+		exit(1);
+	}
+    int cont1 = 0;
+	lista = NULL;
+	while(!feof(arq)){
+        novoCliente = (Cliente*) malloc(sizeof(Cliente));
+        if(fread(novoCliente, sizeof(Cliente),1,arq)){
+            if(novoCliente->status != 'x'){
+                if (lista == NULL){
+                lista = novoCliente;
+                novoCliente->prox = NULL;
+                }
+                else if(strcmp(novoCliente->nome,lista->nome) < 0){
+                    novoCliente->prox = lista;
+                    lista = novoCliente;
+                }
+                else{
+                    Cliente* anter = lista;
+                    Cliente* atual = lista->prox;
+                    while((atual != NULL) && strcmp(atual->nome,novoCliente->nome) < 0){
+                        anter = atual;
+                        atual = atual->prox;
+                    }
+                    anter->prox = novoCliente;
+                    novoCliente->prox = atual;
+                }
+            }
+            cont1 += 1;
+        }
+	}
+	fclose(arq);
+    processo_lista_dmc_clt(chave, cont1, novoCliente, lista);
 }
