@@ -696,7 +696,7 @@ void lista_clientes(char *arquivo, int chave, char *arq_mensalidade, char *arq_r
             lista_idade(arquivo, vetor_faixa);
         }
         else{
-            relatorio_idade(arquivo, vetor_faixa, arq_mensalidade, arq_registro);
+            lista_dnmc_direta2_clnt(vetor_faixa);
         }
     }
     else if(op1 == 3){
@@ -749,31 +749,7 @@ void lista_idade(char *arquivo, int *idade){
     free(cliente);
 }
 
-void relatorio_comple(char *arquivo, char *arq_mensa, char *arq_freq){
-    system("clear||cls");
-    FILE *arq;
-    arq = fopen(arquivo, "rb");
-    if (arq == NULL){
-        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-        exit(1);
-    }
-    Cliente *cliente;
-    cliente = (Cliente*) malloc(sizeof(Cliente));
-    int cont = 0;
-    while(!feof(arq)){
-        if(fread(cliente, sizeof(Cliente),1,arq)){
-            if(cliente->status == 'v'){
-                processo_relatorio(cliente, arq_mensa, arq_freq, &cont, cont);
-            }
-        }
-    }
-    if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
-    }
-    fclose(arq);
-    free(cliente);
-}
-
+// Função que exibe o relatório completo dos clientes
 void exibe_clnt_cplt(const Cliente *cliente, int *acesso, int *data_pg, int *prox_data, int cont1){
     printf("\n\tCLIENTE %d:\n",cont1+1);
     printf("\n\tCPF: %s", cliente->cpf);
@@ -788,64 +764,7 @@ void exibe_clnt_cplt(const Cliente *cliente, int *acesso, int *data_pg, int *pro
     printf("\n\t=====================================================\n");
 }
 
-void rel_por_plano(char *arquivo, char* plano, char *arq_mensa, char *arq_freq){
-    FILE *arq;
-    arq = fopen(arquivo, "rb");
-    if (arq == NULL){
-        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-        exit(1);
-    }
-    Cliente *cliente;
-    cliente = (Cliente*) malloc(sizeof(Cliente));
-    int cont = 0;
-    while(!feof(arq)){
-        if(fread(cliente, sizeof(Cliente),1,arq)){
-            if((strcmp(cliente->plano,plano) == 0) && (cliente->status != 'x')){
-                processo_relatorio(cliente, arq_mensa, arq_freq, &cont, cont);
-            }
-        }
-    }
-    if(cont == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTE PLANO!\n");
-    }
-    fclose(arq);
-    free(cliente);
-}
-
-// Função que exibe os clientes com base na faixa etária selecionada
-void relatorio_idade(char *arquivo, int *idade, char *arq_mensa, char *arq_relatorio){
-    system("clear||cls");
-    FILE *arq;
-    arq = fopen(arquivo, "rb");
-    if (arq == NULL){
-        printf("\n\tERRO NA ABERTURA DO ARQUIVO!\n");
-        exit(1);
-    }
-    Cliente *cliente;
-    cliente = (Cliente*) malloc(sizeof(Cliente));
-    int cont1 = 0;
-    int cont2 = 0;
-    while(!feof(arq)){
-        if(fread(cliente, sizeof(Cliente),1,arq)){
-            if(cliente->status == 'v'){
-                int idade_cal = calcula_idade(cliente->data_nas);
-                if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (cliente->status != 'x')){
-                    processo_relatorio(cliente, arq_mensa, arq_relatorio, &cont2, cont2);
-                }
-                cont1+=1;
-            }
-        }
-    }
-    if(cont1 == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
-    }
-    if(cont2 == 0){
-        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
-    }
-    fclose(arq);
-    free(cliente);
-}
-
+// Função que realiza o processo de buscar os dados dos arquivos de mensalidades e frequência
 void processo_relatorio(Cliente *cliente, char *arq_mensa, char *arq_freq, int *cont, int cont2){
     int taOK = 0;
     Mensalidade *mensalidade;
@@ -953,7 +872,7 @@ void processo_lista_dmc_clt(int chave, int cont1, Cliente *novoCliente, Cliente 
     }
 }
 
-// Função que exibe os funcionários com base na faixa de salário selecionada.
+// Função que exibe os clientes com base na faixa de salário selecionada.
 void lista_dmc_plano_clt(int cont1, Cliente *novoCliente, Cliente *lista, char *plano){
     if(cont1 != 0){
         novoCliente = lista;
@@ -1021,4 +940,67 @@ void lista_dinamica_clnt(int chave){
 	}
 	fclose(arq);
     processo_lista_dmc_clt(chave, cont1, novoCliente, lista);
+}
+
+// Função que exibe os clientes com base na faixa etária selecionada etapa1.
+void lista_dnmc_direta2_clnt(int *vetor_data1){
+    system("clear||cls");
+    FILE *arq;
+	Cliente* novoCliente;
+	Cliente* lista;
+	Cliente* ultimo;
+
+	arq = fopen(arquivo_cliente,"rt");
+	if (arq == NULL){
+		printf("Erro na abertura do arquivo\n!");
+		exit(1);
+	}
+
+	lista = NULL;
+    int cont1 = 0;
+    while(!feof(arq)){
+        novoCliente = (Cliente*) malloc(sizeof(Cliente));
+        if(fread(novoCliente, sizeof(Cliente),1,arq)){
+            if(novoCliente->status != 'x'){
+                novoCliente->prox = NULL;
+                if(lista == NULL){
+                    lista = novoCliente;
+                }
+                else{
+                    ultimo->prox = novoCliente;
+                }
+                ultimo = novoCliente;
+            }
+            cont1 += 1;
+        }
+	}
+	fclose(arq);
+    lista_dmc_idade_clnt(cont1, novoCliente, lista, vetor_data1);
+}
+
+// Função que exibe os clientes com base na faixa etária selecionada etapa2.
+void lista_dmc_idade_clnt(int cont1, Cliente *novoCliente, Cliente *lista, int *idade){
+    if(cont1 != 0){
+        novoCliente = lista;
+        int i = 0;
+        while(novoCliente != NULL){
+            int idade_cal = calcula_idade(novoCliente->data_nas);
+            if((idade[0] <= idade_cal) && (idade_cal <= idade[1]) && (novoCliente->status != 'x')){
+                processo_relatorio(novoCliente, arq_mensalidade1, arq_registro1, &i, i);
+            }
+            novoCliente = novoCliente->prox;
+        }
+        novoCliente = lista;
+        while(lista != NULL){
+            lista = lista->prox;
+            free(novoCliente);
+            novoCliente = lista;
+        }
+        if(i == 0){
+            printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA COM ESTA FAIXA ETÁRIA!\n");
+        }
+    }
+    else{
+        printf("\n\tNÃO EXISTE NENHUM CLIENTE CADASTRADO NO SISTEMA!\n");
+    }
 }

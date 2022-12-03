@@ -40,7 +40,6 @@ void ler_por_salario(char *, char*);
 void lista_funcionario(char *, int, char*);
 void lista_idade_func(char *, int *);
 void exibe_func_cplt(const Funcionario*, int*, int*, int);
-// void relatorio_comple_func(char*, char*);
 void processo_relatorio_func(Funcionario*, char*, int*, int);
 void rel_por_salario(char*, char*, char*);
 void relatorio_idade_func(char*, int*, char*);
