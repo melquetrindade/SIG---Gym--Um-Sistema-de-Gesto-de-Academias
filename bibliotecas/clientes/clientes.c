@@ -899,7 +899,7 @@ void lista_dmc_plano_clt(int cont1, Cliente *novoCliente, Cliente *lista, char *
 }
 
 // Função que organiza a lista dinâmica em ordem alfabética
-void lista_dinamica_clnt(int chave){
+void lista_dinamica_clnt(int chave){ // Adaptado de Flavius Gorgônio da Luz
     system("clear||cls");
     FILE *arq;
 	Cliente* novoCliente;
@@ -943,14 +943,14 @@ void lista_dinamica_clnt(int chave){
 }
 
 // Função que exibe os clientes com base na faixa etária selecionada etapa1.
-void lista_dnmc_direta2_clnt(int *vetor_data1){
+void lista_dnmc_direta2_clnt(int *vetor_data1){ // Adaptado de Flavius Gorgônio da Luz
     system("clear||cls");
     FILE *arq;
 	Cliente* novoCliente;
 	Cliente* lista;
 	Cliente* ultimo;
 
-	arq = fopen(arquivo_cliente,"rt");
+	arq = fopen(arquivo_cliente,"rb");
 	if (arq == NULL){
 		printf("Erro na abertura do arquivo\n!");
 		exit(1);
