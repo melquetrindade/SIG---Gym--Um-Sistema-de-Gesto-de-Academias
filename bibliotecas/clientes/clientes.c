@@ -917,8 +917,8 @@ void lista_dinamica_clnt(int chave){ // Adaptado de Flavius Gorgônio da Luz
         if(fread(novoCliente, sizeof(Cliente),1,arq)){
             if(novoCliente->status != 'x'){
                 if (lista == NULL){
-                lista = novoCliente;
-                novoCliente->prox = NULL;
+                    lista = novoCliente;
+                    novoCliente->prox = NULL;
                 }
                 else if(strcmp(novoCliente->nome,lista->nome) < 0){
                     novoCliente->prox = lista;
